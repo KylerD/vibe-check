@@ -1,0 +1,17 @@
+{
+  "description": "Ready Check secret scanner - prevents secrets from being written to .ready-check/ files",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/scan-secrets.js\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

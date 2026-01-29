@@ -1,0 +1,37 @@
+{
+  "name": "ready-check-cc",
+  "version": "1.0.0",
+  "description": "Production readiness assessment for Claude Code - identify gaps across security, infrastructure, and reliability",
+  "author": {
+    "name": "Kyle Davidson"
+  },
+  "license": "MIT",
+  "bin": {
+    "ready-check-cc": "./bin/install.js"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "production",
+    "readiness",
+    "security",
+    "infrastructure",
+    "devops",
+    "assessment"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kylerd/ready-check.git"
+  },
+  "files": [
+    "bin/",
+    "commands/",
+    "agents/",
+    "references/",
+    "templates/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

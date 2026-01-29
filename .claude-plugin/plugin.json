@@ -1,8 +1,0 @@
-{
-  "name": "ready-check",
-  "description": "Turn a vibe-coded app into a production-ready plan by identifying gaps and next steps across security, infra, and reliability.",
-  "version": "1.0.0",
-  "author": {
-    "name": "Kyle Davidson"
-  }
-}
