@@ -7,74 +7,143 @@
 
 ## Overview
 
-This plan prioritizes fixes based on risk severity and implementation complexity. Items marked as "Agent-Doable" can be implemented by an AI coding assistant.
+This plan prioritizes fixes based on risk severity and implementation complexity.
 
-## Short-term (0-2 weeks)
+```
+CHECKLIST SUMMARY
+─────────────────────────────────────────────────
 
-High-priority items that should be addressed immediately.
-
-| Task               | Checklist Item                             | Owner      | Agent-Doable |
-| ------------------ | ------------------------------------------ | ---------- | ------------ |
-| {Task description} | [item-NNN](./checklist/item-NNN-{slug}.md) | {TBD/Name} | {Yes/No}     |
-
-### Details
-
-#### {Task 1}
-
-- **Why:** {Brief explanation of urgency}
-- **Effort:** {Low/Medium/High}
-- **Checklist Item:** [item-NNN-{slug}](./checklist/item-NNN-{slug}.md)
-
-#### {Task 2}
-
-- **Why:** {Brief explanation of urgency}
-- **Effort:** {Low/Medium/High}
-- **Checklist Item:** [item-NNN-{slug}](./checklist/item-NNN-{slug}.md)
-
-## Mid-term (2-6 weeks)
-
-Important improvements that should be completed before significant scaling or after initial launch stabilizes.
-
-| Task               | Checklist Item                             | Owner      | Agent-Doable |
-| ------------------ | ------------------------------------------ | ---------- | ------------ |
-| {Task description} | [item-NNN](./checklist/item-NNN-{slug}.md) | {TBD/Name} | {Yes/No}     |
-
-### Details
-
-#### {Task 1}
-
-- **Why:** {Brief explanation}
-- **Effort:** {Low/Medium/High}
-- **Checklist Item:** [item-NNN-{slug}](./checklist/item-NNN-{slug}.md)
-
-## Long-term (6+ weeks)
-
-Strategic improvements for scale, compliance, or operational excellence.
-
-| Task               | Checklist Item                             | Owner      | Agent-Doable |
-| ------------------ | ------------------------------------------ | ---------- | ------------ |
-| {Task description} | [item-NNN](./checklist/item-NNN-{slug}.md) | {TBD/Name} | {Yes/No}     |
-
-### Details
-
-#### {Task 1}
-
-- **Why:** {Brief explanation}
-- **Effort:** {Low/Medium/High}
-- **Checklist Item:** [item-NNN-{slug}](./checklist/item-NNN-{slug}.md)
+  ✓ Pass     {N} items
+  ✗ Fail     {N} items    ← {agent-doable} agent-fixable
+  ? Unknown  {N} items
+```
 
 ---
 
-## Working with an AI Agent
-
-To fix an agent-doable item, tell your AI assistant:
+## Short-term (Critical + High Priority)
 
 ```
-Read .vibe-check/checklist/item-NNN-{slug}.md and fix it
+IMMEDIATE ACTION
+═══════════════════════════════════════════════
 ```
 
-The agent will read the item details and implement the code changes. You'll need to handle any human-required steps listed in the item.
+Items that should be addressed before launch or as soon as possible.
+
+### ◆ Critical
+
+| Item | Domain | Agent | Effort |
+|------|--------|-------|--------|
+| [{Title}](./checklist/item-NNN-{slug}.md) | {Domain} | {⚡/½/—} | {Low/Med/High} |
+
+### ● High
+
+| Item | Domain | Agent | Effort |
+|------|--------|-------|--------|
+| [{Title}](./checklist/item-NNN-{slug}.md) | {Domain} | {⚡/½/—} | {Low/Med/High} |
+| [{Title}](./checklist/item-NNN-{slug}.md) | {Domain} | {⚡/½/—} | {Low/Med/High} |
+
+---
+
+## Mid-term (Medium Priority)
+
+```
+BEFORE SCALING
+═══════════════════════════════════════════════
+```
+
+Important improvements to complete after initial launch stabilizes.
+
+### ◐ Medium
+
+| Item | Domain | Agent | Effort |
+|------|--------|-------|--------|
+| [{Title}](./checklist/item-NNN-{slug}.md) | {Domain} | {⚡/½/—} | {Low/Med/High} |
+| [{Title}](./checklist/item-NNN-{slug}.md) | {Domain} | {⚡/½/—} | {Low/Med/High} |
+
+---
+
+## Long-term (Low Priority)
+
+```
+NICE TO HAVE
+═══════════════════════════════════════════════
+```
+
+Strategic improvements for scale, compliance, or operational excellence.
+
+### ○ Low
+
+| Item | Domain | Agent | Effort |
+|------|--------|-------|--------|
+| [{Title}](./checklist/item-NNN-{slug}.md) | {Domain} | {⚡/½/—} | {Low/Med/High} |
+
+---
+
+## Agent-Fixable Items
+
+```
+QUICK WINS  ⚡
+═══════════════════════════════════════════════
+```
+
+These items can be fixed automatically by running `/vibe-check:fix`:
+
+| Item | Domain | Priority |
+|------|--------|----------|
+| ⚡ [{Title}](./checklist/item-NNN-{slug}.md) | {Domain} | {◆/●/◐/○} |
+| ⚡ [{Title}](./checklist/item-NNN-{slug}.md) | {Domain} | {◆/●/◐/○} |
+| ⚡ [{Title}](./checklist/item-NNN-{slug}.md) | {Domain} | {◆/●/◐/○} |
+
+To fix all agent-doable items:
+
+```
+/vibe-check:fix
+```
+
+To fix a specific item:
+
+```
+/vibe-check:fix item-NNN
+```
+
+---
+
+## Human-Required Items
+
+```
+┌─ WARNING ───────────────────────────────────┐
+│                                             │
+│  These items require human action:          │
+│                                             │
+│  — {Item} — {what you need to do}           │
+│  — {Item} — {what you need to do}           │
+│  — {Item} — {what you need to do}           │
+│                                             │
+└─────────────────────────────────────────────┘
+```
+
+---
 
 ## Progress Tracking
 
-Run `/vibe-check:refresh` to re-analyze your codebase and see updated scores after implementing fixes.
+After making fixes, run:
+
+```
+/vibe-check:refresh
+```
+
+This re-analyzes your codebase and shows what improved or regressed.
+
+---
+
+## Legend
+
+| Symbol | Meaning |
+|--------|---------|
+| ◆ | Critical — fix immediately |
+| ● | High — fix before launch |
+| ◐ | Medium — fix soon |
+| ○ | Low — when time allows |
+| ⚡ | Agent can fix completely |
+| ½ | Agent + human effort |
+| — | Human action required |

@@ -1,8 +1,18 @@
 # Vibe Check Summary
 
+```
+┌──────────────────────────────────────────────┐
+│                                              │
+│   VIBE CHECK                                 │
+│                                              │
+│   Score: {score}/100                         │
+│   {progress_bar}  {band}                     │
+│                                              │
+└──────────────────────────────────────────────┘
+```
+
 **Project:** {Project Name}
 **Analysis Date:** {YYYY-MM-DD}
-**Score:** {0-100}/100 ({Not Ready|Needs Work|Ready})
 
 ---
 
@@ -10,51 +20,97 @@
 
 {2-3 sentence summary of the project's production readiness state. Be direct about what's working and what's not.}
 
+---
+
 ## Top Risks
 
-1. **{Risk Title}** — {One-line description of impact}
-2. **{Risk Title}** — {One-line description of impact}
-3. **{Risk Title}** — {One-line description of impact}
+```
+TOP RISKS
+═══════════════════════════════════════════════
+```
 
-## Scores by Domain
+◆ **{Critical Risk}** — {One-line description of impact}
+● **{High Risk}** — {One-line description of impact}
+● **{High Risk}** — {One-line description of impact}
 
-| Domain | Score | Status |
-|--------|-------|--------|
-| Security | {N}/25 | {Pass/Fail/Mixed} |
-| Discoverability | {N}/20 | {Pass/Fail/Mixed} |
-| Analytics | {N}/15 | {Pass/Fail/Mixed} |
-| Platform | {N}/15 | {Pass/Fail/Mixed} |
-| Reliability | {N}/15 | {Pass/Fail/Mixed} |
-| Legal | {N}/10 | {Pass/Fail/Mixed} |
+---
+
+## Domain Scores
+
+```
+DOMAIN SCORES
+─────────────────────────────────────────────────
+```
+
+```
+Security         {bar}  {earned}/{max}  {pct}%  {status}
+Discoverability  {bar}  {earned}/{max}  {pct}%  {status}
+Analytics        {bar}  {earned}/{max}  {pct}%  {status}
+Platform         {bar}  {earned}/{max}  {pct}%  {status}
+Reliability      {bar}  {earned}/{max}  {pct}%  {status}
+Legal            {bar}  {earned}/{max}  {pct}%  {status}
+```
+
+---
 
 ## Checklist Summary
 
-| Status | Count |
-|--------|-------|
-| Pass | {N} |
-| Fail | {N} |
-| Unknown | {N} |
+```
+CHECKLIST
+─────────────────────────────────────────────────
+
+  ✓ Pass     {N} items
+  ✗ Fail     {N} items
+  ? Unknown  {N} items
+  ─────────────────────
+  Total      {N} items
+```
+
+---
 
 ## Quick Wins
 
+```
+QUICK WINS
+═══════════════════════════════════════════════
+```
+
 These items are agent-doable and high-impact:
 
-1. [{Item Title}](./checklist/item-NNN-{slug}.md) — {brief description}
-2. [{Item Title}](./checklist/item-NNN-{slug}.md) — {brief description}
-3. [{Item Title}](./checklist/item-NNN-{slug}.md) — {brief description}
+⚡ [{Item Title}](./checklist/item-NNN-{slug}.md) — {brief description}
+⚡ [{Item Title}](./checklist/item-NNN-{slug}.md) — {brief description}
+⚡ [{Item Title}](./checklist/item-NNN-{slug}.md) — {brief description}
+
+---
 
 ## Platform Compatibility
 
-You're using **{framework}**. Compatible hosting platforms:
-- {Platform 1}
-- {Platform 2}
-- {Platform 3}
+```
+┌─ INFO ──────────────────────────────────────┐
+│                                             │
+│  Your stack ({framework}) is compatible     │
+│  with these hosting platforms:              │
+│                                             │
+│  • {Platform 1}                             │
+│  • {Platform 2}                             │
+│  • {Platform 3}                             │
+│                                             │
+└─────────────────────────────────────────────┘
+```
+
+---
 
 ## Next Steps
 
-1. **Immediate:** {What to do right now}
-2. **This Week:** {Short-term priority}
-3. **Before Launch:** {Must-have before going live}
+```
+┌─ NEXT STEPS ────────────────────────────────┐
+│                                             │
+│  1. {Immediate action}                      │
+│  2. {This week priority}                    │
+│  3. {Before launch must-have}               │
+│                                             │
+└─────────────────────────────────────────────┘
+```
 
 ---
 

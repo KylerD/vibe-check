@@ -1,123 +1,224 @@
 # Production Readiness Report
 
+```
+┌──────────────────────────────────────────────┐
+│                                              │
+│   VIBE CHECK                                 │
+│                                              │
+│   Score: {score}/100                         │
+│   {progress_bar}  {band}                     │
+│                                              │
+└──────────────────────────────────────────────┘
+```
+
 **Project:** {Project Name}
 **Analysis Date:** {YYYY-MM-DD}
-**Score:** {0-100}/100
 
 ---
 
 ## Executive Summary
 
-- {Key finding 1}
-- {Key finding 2}
-- {Key finding 3}
-- {Key finding 4}
+{Paragraph overview of the assessment findings. Be direct about the current state, what's working, what's not, and what the path forward looks like.}
 
-## Readiness Score
+---
 
-**{Score}/100** — **{Not Ready|Needs Work|Ready}**
+## Domain Breakdown
 
-| Category | Score | Max | Notes |
-|----------|-------|-----|-------|
-| Security | {N} | 25 | {Brief note} |
-| Discoverability | {N} | 20 | {Brief note} |
-| Analytics | {N} | 15 | {Brief note} |
-| Platform | {N} | 15 | {Brief note} |
-| Reliability | {N} | 15 | {Brief note} |
-| Legal | {N} | 10 | {Brief note} |
+```
+DOMAIN SCORES
+═══════════════════════════════════════════════
+```
 
-### Score Bands
-- **0-39:** Not Ready — Critical gaps that must be addressed
-- **40-69:** Needs Work — Significant improvements needed
-- **70-100:** Ready — Production-ready with minor improvements
+### Security ({earned}/25)
 
-## Top Risks
+```
+{bar}  {pct}%  {status}
+```
 
-### 1. {Risk Title}
-**Severity:** {Critical|High|Medium|Low}
-**Impact:** {Description of what could go wrong}
+{Brief assessment of security posture}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| Secrets Management | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Authentication | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Input Validation | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Dependency Security | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| HTTPS | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+---
+
+### Discoverability ({earned}/20)
+
+```
+{bar}  {pct}%  {status}
+```
+
+{Brief assessment of SEO and social sharing setup}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| Meta Tags | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| OpenGraph Tags | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Twitter Cards | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Sitemap | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| robots.txt | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Semantic HTML | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+---
+
+### Analytics ({earned}/15)
+
+```
+{bar}  {pct}%  {status}
+```
+
+{Brief assessment of analytics and tracking setup}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| Visitor Tracking | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Error Tracking | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Conversion Tracking | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+---
+
+### Platform ({earned}/15)
+
+```
+{bar}  {pct}%  {status}
+```
+
+{Brief assessment of hosting and infrastructure}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| Hosting Compatibility | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Complexity Check | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Cost Signals | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Managed Services | ℹ | ○ | — |
+
+---
+
+### Reliability ({earned}/15)
+
+```
+{bar}  {pct}%  {status}
+```
+
+{Brief assessment of error handling and data safety}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| Backups | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Error Handling | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Database Connections | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Health Checks | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+---
+
+### Legal ({earned}/10)
+
+```
+{bar}  {pct}%  {status}
+```
+
+{Brief assessment of compliance and legal requirements}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| Privacy Policy | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Terms of Service | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Cookie Consent | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| User Data Deletion | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+---
+
+## Risk Assessment
+
+```
+TOP RISKS
+═══════════════════════════════════════════════
+```
+
+### ◆ {Critical Risk Title}
+
+**Impact:** {What could go wrong — business consequences}
+
 **Mitigation:** {How to address it}
 
-### 2. {Risk Title}
-**Severity:** {Critical|High|Medium|Low}
-**Impact:** {Description of what could go wrong}
+---
+
+### ● {High Risk Title}
+
+**Impact:** {What could go wrong — business consequences}
+
 **Mitigation:** {How to address it}
 
-### 3. {Risk Title}
-**Severity:** {Critical|High|Medium|Low}
-**Impact:** {Description of what could go wrong}
+---
+
+### ● {High Risk Title}
+
+**Impact:** {What could go wrong — business consequences}
+
 **Mitigation:** {How to address it}
+
+---
 
 ## Assessment Profile
 
-| Attribute | Value |
-|-----------|-------|
-| App Type | {type} |
-| Stack | {frameworks, runtime, databases} |
-| Hosting | {provider/platform or "Not determined"} |
-| Compatible Platforms | {list of compatible hosting options} |
+```
+┌─ PROFILE ───────────────────────────────────┐
+│                                             │
+│  App Type:    {type}                        │
+│  Stack:       {frameworks, runtime}         │
+│  Database:    {database or "None detected"} │
+│  Hosting:     {platform or "Not determined"}│
+│                                             │
+│  Compatible with:                           │
+│  • {Platform 1}                             │
+│  • {Platform 2}                             │
+│  • {Platform 3}                             │
+│                                             │
+└─────────────────────────────────────────────┘
+```
 
-## Checklist Overview
-
-### Security
-| Item | Status | Priority | Agent-Doable |
-|------|--------|----------|--------------|
-| Secrets Management | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Authentication | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Input Validation | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Dependency Security | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| HTTPS | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-
-### Discoverability
-| Item | Status | Priority | Agent-Doable |
-|------|--------|----------|--------------|
-| Meta Tags | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| OpenGraph Tags | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Twitter Cards | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Sitemap | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| robots.txt | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Semantic HTML | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-
-### Analytics
-| Item | Status | Priority | Agent-Doable |
-|------|--------|----------|--------------|
-| Visitor Tracking | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Error Tracking | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Conversion Tracking | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-
-### Platform
-| Item | Status | Priority | Agent-Doable |
-|------|--------|----------|--------------|
-| Hosting Compatibility | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Complexity Check | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Cost Signals | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Managed Services | Info | Low | - |
-
-### Reliability
-| Item | Status | Priority | Agent-Doable |
-|------|--------|----------|--------------|
-| Backups | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Error Handling | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Database Connections | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Health Checks | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-
-### Legal
-| Item | Status | Priority | Agent-Doable |
-|------|--------|----------|--------------|
-| Privacy Policy | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Terms of Service | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| Cookie Consent | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-| User Data Deletion | {Pass/Fail/Unknown} | {Priority} | {Yes/No/Partial} |
-
-See [checklist/index.md](./checklist/index.md) for details on each item.
+---
 
 ## Assumptions
 
-{List any assumptions made due to missing information}
+{If any information was unavailable, list assumptions made:}
 
 - {Assumption 1}
 - {Assumption 2}
 
 ---
 
+## Score Bands Reference
+
+| Score | Band | Meaning |
+|-------|------|---------|
+| 70-100 | ✓ Ready | Production-ready with minor improvements |
+| 40-69 | ◐ Needs Work | Significant improvements needed |
+| 0-39 | ✗ Not Ready | Critical gaps must be addressed |
+
+---
+
+## Legend
+
+| Symbol | Meaning |
+|--------|---------|
+| ✓ | Pass |
+| ✗ | Fail |
+| ? | Unknown |
+| ◆ | Critical priority |
+| ● | High priority |
+| ◐ | Medium priority |
+| ○ | Low priority |
+| ⚡ | Agent can fix |
+| ½ | Agent + human |
+| — | Human only |
+
+---
+
 See [action-plan.md](./action-plan.md) for prioritized next steps.
+See [checklist/](./checklist/) for detailed findings on each item.

@@ -30,10 +30,11 @@ Run a complete production readiness assessment and write all results to the `.vi
     ├── Phase 4: Domain Assessment
     │   └── Spawn: vibe-assessor agents (can be parallel)
     │       ├── security assessor
+    │       ├── discoverability assessor
+    │       ├── analytics assessor
+    │       ├── platform assessor
     │       ├── reliability assessor
-    │       ├── observability assessor
-    │       ├── deployability assessor
-    │       └── operations assessor
+    │       └── legal assessor
     │       └── Each writes: .vibe-check/checklist/item-*.md
     │       └── Each returns: score summary only
     │
@@ -60,8 +61,9 @@ Before running, internalize these:
 - `references/voice.md` — How to communicate
 - `references/domains.md` — What "good" looks like
 - `references/agent-classification.md` — Agent-doable criteria
+- `references/ui-brand.md` — Visual patterns for output formatting
 
-Pass references to agents so they maintain consistent voice.
+Pass references to agents so they maintain consistent voice and visual style.
 
 ## Process
 
@@ -226,40 +228,49 @@ Return score summary only.
 - Public app handling payments → strict on everything
 - Side project → focus on critical issues only
 
+**Discoverability Assessor:**
+
+```
+Task: Assess discoverability domain
+Domain assignment: discoverability
+Analysis files: discoverability.md, stack.md
+Evaluate: Meta Tags, OpenGraph Tags, Twitter Cards, Sitemap, robots.txt, Semantic HTML
+```
+
+**Analytics Assessor:**
+
+```
+Task: Assess analytics domain
+Domain assignment: analytics
+Analysis files: analytics.md, error-handling.md
+Evaluate: Visitor Tracking, Error Tracking, Conversion Tracking
+```
+
+**Platform Assessor:**
+
+```
+Task: Assess platform domain
+Domain assignment: platform
+Analysis files: stack.md, infrastructure.md, integrations.md, platform.md
+Evaluate: Hosting Compatibility, Complexity Check, Cost Signals, Managed Services
+```
+
 **Reliability Assessor:**
 
 ```
 Task: Assess reliability domain
 Domain assignment: reliability
 Analysis files: error-handling.md, data.md, integrations.md
-Evaluate: Backups & Recovery, Error Handling, Database Reliability
+Evaluate: Backups, Error Handling, Database Connections, Health Checks
 ```
 
-**Observability Assessor:**
+**Legal Assessor:**
 
 ```
-Task: Assess observability domain
-Domain assignment: observability
-Analysis files: logging.md, monitoring.md
-Evaluate: Logging, Monitoring & Alerting, Health Checks
-```
-
-**Deployability Assessor:**
-
-```
-Task: Assess deployability domain
-Domain assignment: deployability
-Analysis files: cicd.md, environments.md, infrastructure.md
-Evaluate: CI/CD, Environment Configuration, Infrastructure
-```
-
-**Operations Assessor:**
-
-```
-Task: Assess operations domain
-Domain assignment: operations
-Analysis files: integrations.md, data.md, stack.md
-Evaluate: Incident Response, Data Privacy
+Task: Assess legal domain
+Domain assignment: legal
+Analysis files: legal.md, data.md
+Evaluate: Privacy Policy, Terms of Service, Cookie Consent, User Data Deletion
 ```
 
 Collect score summaries from each assessor.
@@ -288,13 +299,12 @@ Calculate total score and write final files:
     "stakes": "{none|low|medium|high}"
   },
   "categories": {
-    "reliability": {"earned": N, "max": 20},
-    "security": {"earned": N, "max": 20},
-    "performance": {"earned": N, "max": 15},
-    "observability": {"earned": N, "max": 15},
-    "deployability": {"earned": N, "max": 15},
-    "operations": {"earned": N, "max": 10},
-    "compliance": {"earned": N, "max": 5}
+    "security": {"earned": N, "max": 25},
+    "discoverability": {"earned": N, "max": 20},
+    "analytics": {"earned": N, "max": 15},
+    "platform": {"earned": N, "max": 15},
+    "reliability": {"earned": N, "max": 15},
+    "legal": {"earned": N, "max": 10}
   },
   "checklist": {
     "pass": N,
@@ -349,24 +359,39 @@ Use `templates/vibe-check-readme.md` as reference.
 
 ### Phase 6: Terminal Output
 
-Display summary:
+Use the visual patterns from `references/ui-brand.md`. Display summary with the score banner:
 
 ```
-Vibe Check Complete
-
-Score: {score}/100 ({band})
+┌──────────────────────────────────────────────┐
+│                                              │
+│   VIBE CHECK COMPLETE                        │
+│                                              │
+│   Score: {score}/100                         │
+│   {progress_bar}  {band}                     │
+│                                              │
+└──────────────────────────────────────────────┘
 
 Created .vibe-check/ with {N} checklist items:
-  {pass} passing
-  {fail} failing
-  {unknown} unknown
+  ✓ {pass} passing
+  ✗ {fail} failing
+  ? {unknown} unknown
 
 {If agent-doable items exist:}
 {N} items are agent-doable. Top priorities:
-1. {title} — {one-line description}
-2. {title} — {one-line description}
-3. {title} — {one-line description}
+  ⚡ {title} — {one-line description}
+  ⚡ {title} — {one-line description}
+  ⚡ {title} — {one-line description}
+
+┌─ NEXT ──────────────────────────────────────┐
+│                                             │
+│  • Review: .vibe-check/summary.md           │
+│  • Fix:    /vibe-check:fix                  │
+│  • Discuss: /vibe-check:discuss             │
+│                                             │
+└─────────────────────────────────────────────┘
 ```
+
+Progress bar calculation (20 chars): `filled = round((score / 100) * 20)`
 
 ### Phase 7: Offer Discussion
 
@@ -383,13 +408,7 @@ Use AskUserQuestion with these options. Based on their choice:
 
 - **Discuss**: Load the report context and enter discussion mode (behave like `/vibe-check:discuss`)
 - **Start fixing**: Ask which item they want to tackle first, then help fix it
-- **Done**: End with a brief note about next steps:
-  ```
-  Sounds good. When you're ready:
-    Review: .vibe-check/summary.md
-    Discuss: /vibe-check:discuss
-    Re-check: /vibe-check:refresh
-  ```
+- **Done**: Already shown next steps in the terminal output above
 
 ## Score Bands
 

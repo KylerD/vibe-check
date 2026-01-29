@@ -146,29 +146,48 @@ For items marked as `failed`:
 
 ### Phase 5: Summary
 
-Display results:
+Use the visual patterns from `references/ui-brand.md`. Display results:
 
 ```
-Vibe Check Fix Complete
+┌──────────────────────────────────────────────┐
+│                                              │
+│   VIBE CHECK FIX COMPLETE                    │
+│                                              │
+│   ✓ {N} fixed  ✗ {N} failed  ○ {N} skipped   │
+│                                              │
+└──────────────────────────────────────────────┘
 
-Fixed: {N} items
-├── item-001: Secrets Management
-├── item-003: Input Validation
-└── item-012: Error Handling
+FIXED  ✓
+═══════════════════════════════════════════════
+✓  item-001: Secrets Management
+✓  item-003: Input Validation
+✓  item-012: Error Handling
 
-Failed: {N} items
-├── item-007: Authentication — {brief reason}
+FAILED  ✗
+═══════════════════════════════════════════════
+✗  item-007: Authentication — {brief reason}
 
-Skipped: {N} items (partial — needs human action)
-├── item-015: Error Tracking — You need to create a Sentry account
+SKIPPED  ○
+═══════════════════════════════════════════════
+○  item-015: Error Tracking — needs human action
 
-Run /vibe-check:refresh to update your score.
+┌─ NEXT ──────────────────────────────────────┐
+│                                             │
+│  Run /vibe-check:refresh to update score    │
+│                                             │
+└─────────────────────────────────────────────┘
 ```
 
 If all items fixed:
 
 ```
-All agent-doable items fixed!
+┌──────────────────────────────────────────────┐
+│                                              │
+│   VIBE CHECK FIX COMPLETE                    │
+│                                              │
+│   ✓ All agent-doable items fixed!            │
+│                                              │
+└──────────────────────────────────────────────┘
 
 Run /vibe-check:refresh to verify and update your score.
 ```
@@ -176,11 +195,22 @@ Run /vibe-check:refresh to verify and update your score.
 If nothing to fix:
 
 ```
-No agent-doable items to fix.
+┌──────────────────────────────────────────────┐
+│                                              │
+│   VIBE CHECK FIX                             │
+│                                              │
+│   No agent-doable items to fix.              │
+│                                              │
+└──────────────────────────────────────────────┘
 
-Your failing items require manual action:
-- item-023: Privacy Policy — You need to write and host a privacy policy
-- item-019: Backups — You need to enable backups in your database dashboard
+┌─ WARNING ───────────────────────────────────┐
+│                                             │
+│  Your failing items require manual action:  │
+│                                             │
+│  — Privacy Policy: write and host a policy  │
+│  — Backups: enable in database dashboard    │
+│                                             │
+└─────────────────────────────────────────────┘
 
 Run /vibe-check:discuss to get help with these.
 ```
@@ -195,11 +225,12 @@ For partial items:
 3. In the summary, list what the human still needs to do
 
 ```
-Partially fixed: {N} items
-├── item-015: Error Tracking
-│   ✓ Installed Sentry SDK
-│   ✓ Added error boundary
-│   → You need to: Create Sentry account and set DSN in env vars
+PARTIALLY FIXED  ½
+═══════════════════════════════════════════════
+½  item-015: Error Tracking
+   ✓ Installed Sentry SDK
+   ✓ Added error boundary
+   → You need to: Create Sentry account and set DSN in env vars
 ```
 
 ## Commit Message Format

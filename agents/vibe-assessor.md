@@ -41,7 +41,7 @@ You receive project context from the orchestrator. Use it to calibrate your asse
 - `high` → Strict assessment. Calibrate priority up for borderline items.
 
 **Combined examples:**
-- Personal + none + none → Only flag actual security risks (hardcoded secrets, no auth). Skip analytics, legal, most observability.
+- Personal + none + none → Only flag actual security risks (hardcoded secrets, no auth). Skip discoverability, analytics, legal.
 - Public + payments + high → Enterprise expectations. Everything that could go wrong is high priority.
 - Known + accounts + low → Standard baseline. Don't over-engineer recommendations.
 

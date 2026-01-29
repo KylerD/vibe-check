@@ -48,12 +48,13 @@ Run a complete fresh assessment and compare against the previous results. This i
 
 ## References
 
-Load these for consistent voice:
+Load these for consistent voice and visual style:
 
 - `references/persona.md` — Who you're talking to
 - `references/voice.md` — How to communicate
 - `references/domains.md` — What "good" looks like
 - `references/agent-classification.md` — Agent-doable criteria
+- `references/ui-brand.md` — Visual patterns for output formatting
 
 ## Prerequisites
 
@@ -131,7 +132,7 @@ Return score summary only.
 
 Use item numbers starting at 100+ for new items to avoid conflicts during comparison.
 
-Spawn all domain assessors (security, reliability, observability, deployability, operations).
+Spawn all domain assessors (security, discoverability, analytics, platform, reliability, legal).
 
 ### Phase 5: Compare & Reconcile
 
@@ -184,39 +185,58 @@ Rewrite all output files:
 
 ### Phase 7: Terminal Output & Discussion
 
-Display progress:
+Use the visual patterns from `references/ui-brand.md`. Display progress with comparison bars:
 
 ```
-Vibe Check Refresh Complete
+┌──────────────────────────────────────────────┐
+│                                              │
+│   VIBE CHECK REFRESH                         │
+│                                              │
+│   Score: {new_score}/100                     │
+│   {progress_bar}  {band}                     │
+│                                              │
+└──────────────────────────────────────────────┘
 
-Previous: {old score}/100 ({old date})
-Current:  {new score}/100 (today)
-Change:   {+/-delta} points
+PROGRESS
+═══════════════════════════════════════════════
 
-Progress:
-  {N} items fixed (removed from checklist)
-  {N} items unchanged
-  {N} items regressed
-  {N} new issues found
-  {N} false positives removed
+Previous:  {old_score}/100  {old_bar}  {old_band}
+Current:   {new_score}/100  {new_bar}  {new_band}
+                            ─────────────────────
+Change:                     {+/-delta} points  {▲/▼}
+
+SUMMARY
+─────────────────────────────────────────────────
+  ✓ {N} items fixed
+  ○ {N} items unchanged
+  ✗ {N} items regressed
+  + {N} new issues found
+  − {N} false positives removed
 
 {If fixed items:}
-Fixed:
-✓ {item title}
-✓ {item title}
+IMPROVEMENTS
+─────────────────────────────────────────────────
+✓  {item title}
+✓  {item title}
 
 {If regressions:}
-Regressions:
-✗ {item title}: was passing, now failing
-
-{If false positives removed:}
-Removed (false positives or N/A):
-- {item title}
+REGRESSIONS
+─────────────────────────────────────────────────
+✗  {item title} — was passing, now failing
 
 {If still failing:}
-Still needs attention ({N} items):
-1. {title} — {one-line description}
-2. {title} — {one-line description}
+STILL FAILING
+─────────────────────────────────────────────────
+●  {title} — {one-line description}
+●  {title} — {one-line description}
+
+┌─ NEXT ──────────────────────────────────────┐
+│                                             │
+│  • Review: .vibe-check/summary.md           │
+│  • Fix:    /vibe-check:fix                  │
+│  • Discuss: /vibe-check:discuss             │
+│                                             │
+└─────────────────────────────────────────────┘
 ```
 
 Then offer discussion (same as `/vibe-check:check`):

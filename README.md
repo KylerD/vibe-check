@@ -84,7 +84,7 @@ Each checklist item includes:
 The system:
 1. **Asks context** — What you're building, who it's for, what data you handle, what's at stake
 2. **Maps your codebase** — Spawns an agent to analyze secrets, auth, errors, dependencies, infrastructure
-3. **Assesses domains** — Parallel agents evaluate security, reliability, observability, deployability, operations (calibrated to your context)
+3. **Assesses domains** — Parallel agents evaluate security, discoverability, analytics, platform, reliability, legal (calibrated to your context)
 4. **Writes results** — Score, report, prioritized action plan
 
 You get a score out of 100 and a clear breakdown of what needs attention.
