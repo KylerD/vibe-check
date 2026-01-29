@@ -1,12 +1,12 @@
 ---
-description: Run full production readiness assessment and export to .ready-check/
+description: Run full production readiness assessment and export to .vibe-check/
 disable-model-invocation: false
 ---
 
-# Ready Check
+# Vibe Check
 
 <objective>
-Run a complete production readiness assessment and write all results to the `.ready-check/` directory. This is the primary command for evaluating a project's production readiness.
+Run a complete production readiness assessment and write all results to the `.vibe-check/` directory. This is the primary command for evaluating a project's production readiness.
 </objective>
 
 <architecture>
@@ -14,27 +14,27 @@ Run a complete production readiness assessment and write all results to the `.re
 **You are the orchestrator.** You delegate heavy work to specialized agents and stay lean.
 
 ```
-/ready-check:check (orchestrator)
+/vibe-check:check (orchestrator)
     │
     ├── Phase 1: Setup
-    │   └── Create .ready-check/ directory
+    │   └── Create .vibe-check/ directory
     │
     ├── Phase 2: User Input
     │   └── Ask 4 context questions (what, who, data, stakes)
     │
     ├── Phase 3: Codebase Mapping
-    │   └── Spawn: ready-mapper agent
-    │       └── Writes: .ready-check/analysis/*.md
+    │   └── Spawn: vibe-mapper agent
+    │       └── Writes: .vibe-check/analysis/*.md
     │       └── Returns: confirmation only
     │
     ├── Phase 4: Domain Assessment
-    │   └── Spawn: ready-assessor agents (can be parallel)
+    │   └── Spawn: vibe-assessor agents (can be parallel)
     │       ├── security assessor
     │       ├── reliability assessor
     │       ├── observability assessor
     │       ├── deployability assessor
     │       └── operations assessor
-    │       └── Each writes: .ready-check/checklist/item-*.md
+    │       └── Each writes: .vibe-check/checklist/item-*.md
     │       └── Each returns: score summary only
     │
     ├── Phase 5: Aggregate & Write
@@ -70,7 +70,7 @@ Pass references to agents so they maintain consistent voice.
 Create output directory:
 
 ```bash
-mkdir -p .ready-check/checklist
+mkdir -p .vibe-check/checklist
 ```
 
 ### Phase 2: User Input
@@ -169,15 +169,15 @@ Pass this context to assessors so they can calibrate scoring.
 
 ### Phase 3: Codebase Mapping
 
-Spawn the `ready-mapper` agent:
+Spawn the `vibe-mapper` agent:
 
 ```
 Task: Map codebase for readiness assessment
 
-Read agents/ready-mapper.md for your instructions.
+Read agents/vibe-mapper.md for your instructions.
 Read references/persona.md and references/voice.md for context.
 
-Explore this codebase and write analysis files to .ready-check/analysis/
+Explore this codebase and write analysis files to .vibe-check/analysis/
 
 Return confirmation only when complete.
 ```
@@ -188,14 +188,14 @@ Wait for confirmation. The mapper writes 12 analysis files covering stack, secre
 
 ### Phase 4: Domain Assessment
 
-Spawn `ready-assessor` agents for each domain group. These can run in parallel:
+Spawn `vibe-assessor` agents for each domain group. These can run in parallel:
 
 **Security Assessor:**
 
 ```
 Task: Assess security domain
 
-Read agents/ready-assessor.md for your instructions.
+Read agents/vibe-assessor.md for your instructions.
 Your domain assignment is: security
 
 Project context (calibrate your assessment accordingly):
@@ -205,9 +205,9 @@ Project context (calibrate your assessment accordingly):
 - Stakes: {none|low|medium|high}
 
 Load these analysis files:
-- .ready-check/analysis/secrets.md
-- .ready-check/analysis/auth.md
-- .ready-check/analysis/dependencies.md
+- .vibe-check/analysis/secrets.md
+- .vibe-check/analysis/auth.md
+- .vibe-check/analysis/dependencies.md
 
 Load references:
 - references/persona.md
@@ -217,7 +217,7 @@ Load references:
 
 Evaluate: Secrets Management, Authentication, Input Validation, Dependency Security, Rate Limiting
 
-Write failing/unknown items to .ready-check/checklist/
+Write failing/unknown items to .vibe-check/checklist/
 Return score summary only.
 ```
 
@@ -345,18 +345,18 @@ Use `templates/checklist-index.md` as reference. Include:
 
 #### README.md
 
-Use `templates/ready-check-readme.md` as reference.
+Use `templates/vibe-check-readme.md` as reference.
 
 ### Phase 6: Terminal Output
 
 Display summary:
 
 ```
-Ready Check Complete
+Vibe Check Complete
 
 Score: {score}/100 ({band})
 
-Created .ready-check/ with {N} checklist items:
+Created .vibe-check/ with {N} checklist items:
   {pass} passing
   {fail} failing
   {unknown} unknown
@@ -381,14 +381,14 @@ Would you like to:
 
 Use AskUserQuestion with these options. Based on their choice:
 
-- **Discuss**: Load the report context and enter discussion mode (behave like `/ready-check:discuss`)
+- **Discuss**: Load the report context and enter discussion mode (behave like `/vibe-check:discuss`)
 - **Start fixing**: Ask which item they want to tackle first, then help fix it
 - **Done**: End with a brief note about next steps:
   ```
   Sounds good. When you're ready:
-    Review: .ready-check/summary.md
-    Discuss: /ready-check:discuss
-    Re-check: /ready-check:refresh
+    Review: .vibe-check/summary.md
+    Discuss: /vibe-check:discuss
+    Re-check: /vibe-check:refresh
   ```
 
 ## Score Bands

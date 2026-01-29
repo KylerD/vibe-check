@@ -3,17 +3,17 @@ description: Auto-fix agent-doable checklist items with atomic commits
 disable-model-invocation: false
 ---
 
-# Ready Check Fix
+# Vibe Check Fix
 
 <objective>
-Automatically fix agent-doable checklist items from an existing ready-check assessment. Each fix is verified and committed atomically.
+Automatically fix agent-doable checklist items from an existing vibe-check assessment. Each fix is verified and committed atomically.
 </objective>
 
 <usage>
 
 ```
-/ready-check:fix              # Fix all agent-doable items
-/ready-check:fix item-003     # Fix specific item
+/vibe-check:fix              # Fix all agent-doable items
+/vibe-check:fix item-003     # Fix specific item
 ```
 
 </usage>
@@ -21,17 +21,17 @@ Automatically fix agent-doable checklist items from an existing ready-check asse
 <architecture>
 
 ```
-/ready-check:fix (orchestrator)
+/vibe-check:fix (orchestrator)
     │
     ├── Phase 1: Validate
-    │   └── Check .ready-check/ exists
+    │   └── Check .vibe-check/ exists
     │
     ├── Phase 2: Load Items
     │   └── Read checklist, filter to agent-doable
     │
     ├── Phase 3: Fix Loop (sequential)
     │   └── For each item:
-    │       ├── Spawn: ready-fixer agent (fresh context)
+    │       ├── Spawn: vibe-fixer agent (fresh context)
     │       ├── Agent: reads item, applies fix, verifies, commits
     │       └── Returns: fixed | failed | skipped
     │
@@ -48,22 +48,22 @@ Automatically fix agent-doable checklist items from an existing ready-check asse
 
 ## Prerequisites
 
-Requires existing `.ready-check/` directory with checklist items. If not found:
+Requires existing `.vibe-check/` directory with checklist items. If not found:
 
 ```
-No ready-check assessment found.
+No vibe-check assessment found.
 
-Run /ready-check:check first to identify issues, then come back to fix them.
+Run /vibe-check:check first to identify issues, then come back to fix them.
 ```
 
 ## Process
 
 ### Phase 1: Validate
 
-Check that `.ready-check/checklist/` exists and contains item files.
+Check that `.vibe-check/checklist/` exists and contains item files.
 
 ```bash
-ls .ready-check/checklist/item-*.md
+ls .vibe-check/checklist/item-*.md
 ```
 
 If no items exist:
@@ -73,7 +73,7 @@ No checklist items found. Either:
 - No issues were identified (congrats!)
 - Assessment hasn't been run yet
 
-Run /ready-check:check to generate an assessment.
+Run /vibe-check:check to generate an assessment.
 ```
 
 ### Phase 2: Load Items
@@ -84,7 +84,7 @@ Filter items to those where:
 - `Agent-Doable: Yes` or `Agent-Doable: Partial`
 - `Status: Fail` (don't fix Unknown or Pass)
 
-**If specific item requested** (e.g., `/ready-check:fix item-003`):
+**If specific item requested** (e.g., `/vibe-check:fix item-003`):
 - Parse the item ID from the argument
 - Filter to just that item
 - If not found or not agent-doable, explain why and suggest alternatives
@@ -95,14 +95,14 @@ Store the filtered list for the fix loop.
 
 ### Phase 3: Fix Loop
 
-For each item in the filtered list, spawn a `ready-fixer` agent:
+For each item in the filtered list, spawn a `vibe-fixer` agent:
 
 ```
 Task: Fix checklist item {item-id}
 
-Read agents/ready-fixer.md for your instructions.
+Read agents/vibe-fixer.md for your instructions.
 
-Item file: .ready-check/checklist/{item-filename}
+Item file: .vibe-check/checklist/{item-filename}
 
 Load references:
 - references/persona.md
@@ -134,7 +134,7 @@ For items marked as `fixed`:
 
 1. Read the checklist item file
 2. Update `Status: Fail` to `Status: Pass`
-3. Add a note at the top: `**Fixed:** {date} by ready-check:fix`
+3. Add a note at the top: `**Fixed:** {date} by vibe-check:fix`
 4. Write the updated file
 
 For items marked as `failed`:
@@ -149,7 +149,7 @@ For items marked as `failed`:
 Display results:
 
 ```
-Ready Check Fix Complete
+Vibe Check Fix Complete
 
 Fixed: {N} items
 ├── item-001: Secrets Management
@@ -162,7 +162,7 @@ Failed: {N} items
 Skipped: {N} items (partial — needs human action)
 ├── item-015: Error Tracking — You need to create a Sentry account
 
-Run /ready-check:refresh to update your score.
+Run /vibe-check:refresh to update your score.
 ```
 
 If all items fixed:
@@ -170,7 +170,7 @@ If all items fixed:
 ```
 All agent-doable items fixed!
 
-Run /ready-check:refresh to verify and update your score.
+Run /vibe-check:refresh to verify and update your score.
 ```
 
 If nothing to fix:
@@ -182,7 +182,7 @@ Your failing items require manual action:
 - item-023: Privacy Policy — You need to write and host a privacy policy
 - item-019: Backups — You need to enable backups in your database dashboard
 
-Run /ready-check:discuss to get help with these.
+Run /vibe-check:discuss to get help with these.
 ```
 
 ## Handling Partial Items
@@ -207,18 +207,18 @@ Partially fixed: {N} items
 Agents should commit with this format:
 
 ```
-fix(ready-check): {item-slug} - {brief description}
+fix(vibe-check): {item-slug} - {brief description}
 
-Fixes ready-check item {item-id}.
-See .ready-check/checklist/{item-filename} for details.
+Fixes vibe-check item {item-id}.
+See .vibe-check/checklist/{item-filename} for details.
 ```
 
 Example:
 ```
-fix(ready-check): secrets-management - move API keys to env vars
+fix(vibe-check): secrets-management - move API keys to env vars
 
-Fixes ready-check item item-001.
-See .ready-check/checklist/item-001-secrets-management.md for details.
+Fixes vibe-check item item-001.
+See .vibe-check/checklist/item-001-secrets-management.md for details.
 ```
 
 ## Error Handling

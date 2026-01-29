@@ -1,5 +1,5 @@
 {
-  "name": "ready-check-cc",
+  "name": "vibe-check-cc",
   "version": "1.0.0",
   "description": "Production readiness assessment for Claude Code - identify gaps across security, infrastructure, and reliability",
   "author": {
@@ -7,7 +7,7 @@
   },
   "license": "MIT",
   "bin": {
-    "ready-check-cc": "./bin/install.js"
+    "vibe-check-cc": "./bin/install.js"
   },
   "keywords": [
     "claude",
@@ -21,7 +21,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/kylerd/ready-check.git"
+    "url": "https://github.com/kylerd/vibe-check.git"
   },
   "files": [
     "bin/",

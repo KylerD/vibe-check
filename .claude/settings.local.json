@@ -5,8 +5,8 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(node scripts/scan-secrets.js:*)",
       "Bash(echo:*)",
-      "Bash(node -e \"const { execSync } = require\\(''child_process''\\); const input = JSON.stringify\\({tool_input: {file_path: ''.ready-check/test.md'', content: ''sk-ant-api03-abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnAA''}}\\); try { execSync\\(''node scripts/scan-secrets.js'', {input, stdio: [''pipe'', ''pipe'', ''pipe'']}\\); console.log\\(''ALLOWED''\\); } catch\\(e\\) { console.log\\(''BLOCKED:'', e.stderr.toString\\(\\)\\); }\")",
-      "Bash(node -e \"const { execSync } = require\\(''child_process''\\); const input = JSON.stringify\\({tool_input: {file_path: ''.ready-check/test.md'', content: ''GitHub token: ghp_abcdefghijklmnopqrstuvwxyz1234567890''}}\\); try { execSync\\(''node scripts/scan-secrets.js'', {input, stdio: [''pipe'', ''pipe'', ''pipe'']}\\); console.log\\(''ALLOWED''\\); } catch\\(e\\) { console.log\\(''BLOCKED:'', e.stderr.toString\\(\\)\\); }\")"
+      "Bash(node -e \"const { execSync } = require\\(''child_process''\\); const input = JSON.stringify\\({tool_input: {file_path: ''.vibe-check/test.md'', content: ''sk-ant-api03-abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnAA''}}\\); try { execSync\\(''node scripts/scan-secrets.js'', {input, stdio: [''pipe'', ''pipe'', ''pipe'']}\\); console.log\\(''ALLOWED''\\); } catch\\(e\\) { console.log\\(''BLOCKED:'', e.stderr.toString\\(\\)\\); }\")",
+      "Bash(node -e \"const { execSync } = require\\(''child_process''\\); const input = JSON.stringify\\({tool_input: {file_path: ''.vibe-check/test.md'', content: ''GitHub token: ghp_abcdefghijklmnopqrstuvwxyz1234567890''}}\\); try { execSync\\(''node scripts/scan-secrets.js'', {input, stdio: [''pipe'', ''pipe'', ''pipe'']}\\); console.log\\(''ALLOWED''\\); } catch\\(e\\) { console.log\\(''BLOCKED:'', e.stderr.toString\\(\\)\\); }\")"
     ]
   }
 }

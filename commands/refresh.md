@@ -1,9 +1,9 @@
 ---
-description: Re-run assessment on existing .ready-check/ and show progress
+description: Re-run assessment on existing .vibe-check/ and show progress
 disable-model-invocation: false
 ---
 
-# Ready Check Refresh
+# Vibe Check Refresh
 
 <objective>
 Run a complete fresh assessment and compare against the previous results. This is NOT a shallow re-check — it's a full re-analysis that catches new issues, validates fixes, and removes false positives.
@@ -11,10 +11,10 @@ Run a complete fresh assessment and compare against the previous results. This i
 
 <architecture>
 
-**You are the orchestrator.** Same as `/ready-check:check`, but you also track changes.
+**You are the orchestrator.** Same as `/vibe-check:check`, but you also track changes.
 
 ```
-/ready-check:refresh (orchestrator)
+/vibe-check:refresh (orchestrator)
     │
     ├── Phase 1: Load Previous State
     │   └── Read metadata.json, note old scores and items
@@ -23,11 +23,11 @@ Run a complete fresh assessment and compare against the previous results. This i
     │   └── Delete analysis/ folder contents
     │
     ├── Phase 3: Full Re-mapping
-    │   └── Spawn: ready-mapper agent (runs npm audit, etc.)
-    │       └── Writes: .ready-check/analysis/*.md
+    │   └── Spawn: vibe-mapper agent (runs npm audit, etc.)
+    │       └── Writes: .vibe-check/analysis/*.md
     │
     ├── Phase 4: Full Re-assessment
-    │   └── Spawn: ready-assessor agents (parallel)
+    │   └── Spawn: vibe-assessor agents (parallel)
     │       └── Each writes NEW checklist items
     │
     ├── Phase 5: Compare & Reconcile
@@ -57,18 +57,18 @@ Load these for consistent voice:
 
 ## Prerequisites
 
-Requires existing `.ready-check/metadata.json`. If not found:
+Requires existing `.vibe-check/metadata.json`. If not found:
 
 ```
 No existing assessment found.
-Run /ready-check:check first to create an initial assessment.
+Run /vibe-check:check first to create an initial assessment.
 ```
 
 ## Process
 
 ### Phase 1: Load Previous State
 
-Read `.ready-check/metadata.json` and note:
+Read `.vibe-check/metadata.json` and note:
 
 - Previous analysis date
 - Previous score
@@ -79,25 +79,25 @@ Store this for comparison later.
 
 ### Phase 2: Clear Analysis Folder
 
-Delete contents of `.ready-check/analysis/` to ensure fresh data:
+Delete contents of `.vibe-check/analysis/` to ensure fresh data:
 
 ```bash
-rm -rf .ready-check/analysis/*
+rm -rf .vibe-check/analysis/*
 ```
 
 **Do NOT delete checklist items yet** — you need them for comparison.
 
 ### Phase 3: Full Re-mapping
 
-Spawn the `ready-mapper` agent — exactly like `/ready-check:check`:
+Spawn the `vibe-mapper` agent — exactly like `/vibe-check:check`:
 
 ```
 Task: Map codebase for readiness assessment
 
-Read agents/ready-mapper.md for your instructions.
+Read agents/vibe-mapper.md for your instructions.
 Read references/persona.md and references/voice.md for context.
 
-Explore this codebase and write analysis files to .ready-check/analysis/
+Explore this codebase and write analysis files to .vibe-check/analysis/
 
 This is a REFRESH run. Be thorough — run all checks including npm audit.
 
@@ -111,20 +111,20 @@ Wait for confirmation. The mapper runs the full analysis including:
 
 ### Phase 4: Full Re-assessment
 
-Spawn `ready-assessor` agents for each domain — exactly like `/ready-check:check`:
+Spawn `vibe-assessor` agents for each domain — exactly like `/vibe-check:check`:
 
 **Security Assessor:**
 ```
 Task: Assess security domain
 
-Read agents/ready-assessor.md for your instructions.
+Read agents/vibe-assessor.md for your instructions.
 Your domain assignment is: security
 
-Load analysis files from .ready-check/analysis/
+Load analysis files from .vibe-check/analysis/
 Load references for voice and criteria.
 
 This is a REFRESH run. Evaluate fresh — ignore previous checklist items.
-Write NEW items to .ready-check/checklist/ with fresh item numbers starting at 100.
+Write NEW items to .vibe-check/checklist/ with fresh item numbers starting at 100.
 
 Return score summary only.
 ```
@@ -136,8 +136,8 @@ Spawn all domain assessors (security, reliability, observability, deployability,
 ### Phase 5: Compare & Reconcile
 
 Now you have:
-- **Old items:** `.ready-check/checklist/item-001-*.md` through `item-0XX-*.md`
-- **New items:** `.ready-check/checklist/item-100-*.md` through `item-1XX-*.md`
+- **Old items:** `.vibe-check/checklist/item-001-*.md` through `item-0XX-*.md`
+- **New items:** `.vibe-check/checklist/item-100-*.md` through `item-1XX-*.md`
 
 For each OLD item, check if a corresponding NEW item exists (match by slug/topic):
 
@@ -187,7 +187,7 @@ Rewrite all output files:
 Display progress:
 
 ```
-Ready Check Refresh Complete
+Vibe Check Refresh Complete
 
 Previous: {old score}/100 ({old date})
 Current:  {new score}/100 (today)
@@ -219,7 +219,7 @@ Still needs attention ({N} items):
 2. {title} — {one-line description}
 ```
 
-Then offer discussion (same as `/ready-check:check`):
+Then offer discussion (same as `/vibe-check:check`):
 
 ```
 Would you like to:

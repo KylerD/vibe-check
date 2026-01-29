@@ -20,7 +20,7 @@ const hasUninstall = args.includes('--uninstall') || args.includes('-u');
 const hasHelp = args.includes('--help') || args.includes('-h');
 
 const banner = `
-  ${cyan}Ready Check${reset} ${dim}v${pkg.version}${reset}
+  ${cyan}Vibe Check${reset} ${dim}v${pkg.version}${reset}
   Production readiness assessment for Claude Code
 `;
 
@@ -28,26 +28,26 @@ console.log(banner);
 
 // Show help
 if (hasHelp) {
-  console.log(`  ${yellow}Usage:${reset} npx ready-check-cc [options]
+  console.log(`  ${yellow}Usage:${reset} npx vibe-check-cc [options]
 
   ${yellow}Options:${reset}
     ${cyan}-g, --global${reset}      Install globally (to ~/.claude)
     ${cyan}-l, --local${reset}       Install locally (to ./.claude in current directory)
-    ${cyan}-u, --uninstall${reset}   Uninstall Ready Check
+    ${cyan}-u, --uninstall${reset}   Uninstall Vibe Check
     ${cyan}-h, --help${reset}        Show this help message
 
   ${yellow}Examples:${reset}
     ${dim}# Interactive install (prompts for location)${reset}
-    npx ready-check-cc
+    npx vibe-check-cc
 
     ${dim}# Install globally${reset}
-    npx ready-check-cc --global
+    npx vibe-check-cc --global
 
     ${dim}# Install to current project only${reset}
-    npx ready-check-cc --local
+    npx vibe-check-cc --local
 
     ${dim}# Uninstall from global${reset}
-    npx ready-check-cc --global --uninstall
+    npx vibe-check-cc --global --uninstall
 `);
   process.exit(0);
 }
@@ -81,15 +81,15 @@ function expandTilde(filePath) {
  */
 function replacePathRefs(content, pathPrefix) {
   // References directory
-  content = content.replace(/`references\//g, `\`${pathPrefix}ready-check/references/`);
-  content = content.replace(/- references\//g, `- ${pathPrefix}ready-check/references/`);
-  content = content.replace(/Read references\//g, `Read ${pathPrefix}ready-check/references/`);
-  content = content.replace(/Load references\//g, `Load ${pathPrefix}ready-check/references/`);
+  content = content.replace(/`references\//g, `\`${pathPrefix}vibe-check/references/`);
+  content = content.replace(/- references\//g, `- ${pathPrefix}vibe-check/references/`);
+  content = content.replace(/Read references\//g, `Read ${pathPrefix}vibe-check/references/`);
+  content = content.replace(/Load references\//g, `Load ${pathPrefix}vibe-check/references/`);
 
   // Templates directory
-  content = content.replace(/`templates\//g, `\`${pathPrefix}ready-check/templates/`);
-  content = content.replace(/- templates\//g, `- ${pathPrefix}ready-check/templates/`);
-  content = content.replace(/Use `templates\//g, `Use \`${pathPrefix}ready-check/templates/`);
+  content = content.replace(/`templates\//g, `\`${pathPrefix}vibe-check/templates/`);
+  content = content.replace(/- templates\//g, `- ${pathPrefix}vibe-check/templates/`);
+  content = content.replace(/Use `templates\//g, `Use \`${pathPrefix}vibe-check/templates/`);
 
   // Agents directory
   content = content.replace(/Read agents\//g, `Read ${pathPrefix}agents/`);
@@ -149,7 +149,7 @@ function copyAgents(srcDir, destDir, pathPrefix) {
 }
 
 /**
- * Uninstall Ready Check
+ * Uninstall Vibe Check
  */
 function uninstall(isGlobal) {
   const claudeDir = getClaudeDir(isGlobal);
@@ -164,26 +164,26 @@ function uninstall(isGlobal) {
 
   let removed = 0;
 
-  // Remove commands/ready-check/
-  const commandsDir = path.join(claudeDir, 'commands', 'ready-check');
+  // Remove commands/vibe-check/
+  const commandsDir = path.join(claudeDir, 'commands', 'vibe-check');
   if (fs.existsSync(commandsDir)) {
     fs.rmSync(commandsDir, { recursive: true });
     removed++;
-    console.log(`  ${green}✓${reset} Removed commands/ready-check/`);
+    console.log(`  ${green}✓${reset} Removed commands/vibe-check/`);
   }
 
-  // Remove ready-check/ (references, templates, scripts)
-  const readyCheckDir = path.join(claudeDir, 'ready-check');
-  if (fs.existsSync(readyCheckDir)) {
-    fs.rmSync(readyCheckDir, { recursive: true });
+  // Remove vibe-check/ (references, templates, scripts)
+  const vibeCheckDir = path.join(claudeDir, 'vibe-check');
+  if (fs.existsSync(vibeCheckDir)) {
+    fs.rmSync(vibeCheckDir, { recursive: true });
     removed++;
-    console.log(`  ${green}✓${reset} Removed ready-check/`);
+    console.log(`  ${green}✓${reset} Removed vibe-check/`);
   }
 
-  // Remove agents (ready-assessor.md, ready-mapper.md)
+  // Remove agents (vibe-assessor.md, vibe-mapper.md)
   const agentsDir = path.join(claudeDir, 'agents');
   if (fs.existsSync(agentsDir)) {
-    const agentFiles = ['ready-assessor.md', 'ready-mapper.md', 'ready-fixer.md'];
+    const agentFiles = ['vibe-assessor.md', 'vibe-mapper.md', 'vibe-fixer.md'];
     for (const file of agentFiles) {
       const agentPath = path.join(agentsDir, file);
       if (fs.existsSync(agentPath)) {
@@ -201,9 +201,9 @@ function uninstall(isGlobal) {
   }
 
   if (removed === 0) {
-    console.log(`  ${yellow}No Ready Check files found.${reset}\n`);
+    console.log(`  ${yellow}No Vibe Check files found.${reset}\n`);
   } else {
-    console.log(`\n  ${green}Done!${reset} Ready Check has been uninstalled.\n`);
+    console.log(`\n  ${green}Done!${reset} Vibe Check has been uninstalled.\n`);
   }
 }
 
@@ -256,7 +256,7 @@ function installHooks(claudeDir, pathPrefix) {
   }
 
   // Check if our hook is already installed
-  const hookCommand = `node "${pathPrefix}ready-check/scripts/scan-secrets.js"`;
+  const hookCommand = `node "${pathPrefix}vibe-check/scripts/scan-secrets.js"`;
   const existingHook = settings.hooks.PreToolUse.find(h =>
     h.hooks && h.hooks.some(hook => hook.command && hook.command.includes('scan-secrets.js'))
   );
@@ -317,7 +317,7 @@ function removeHooks(claudeDir) {
 }
 
 /**
- * Install Ready Check
+ * Install Vibe Check
  */
 function install(isGlobal) {
   const claudeDir = getClaudeDir(isGlobal);
@@ -332,26 +332,26 @@ function install(isGlobal) {
   // Create base directory
   fs.mkdirSync(claudeDir, { recursive: true });
 
-  // 1. Copy commands to commands/ready-check/
+  // 1. Copy commands to commands/vibe-check/
   const commandsSrc = path.join(src, 'commands');
-  const commandsDest = path.join(claudeDir, 'commands', 'ready-check');
+  const commandsDest = path.join(claudeDir, 'commands', 'vibe-check');
   copyWithPathReplacement(commandsSrc, commandsDest, pathPrefix);
-  console.log(`  ${green}✓${reset} Installed commands/ready-check/`);
+  console.log(`  ${green}✓${reset} Installed commands/vibe-check/`);
 
-  // 2. Copy references to ready-check/references/
+  // 2. Copy references to vibe-check/references/
   const refSrc = path.join(src, 'references');
-  const refDest = path.join(claudeDir, 'ready-check', 'references');
+  const refDest = path.join(claudeDir, 'vibe-check', 'references');
   if (fs.existsSync(refSrc)) {
     copyWithPathReplacement(refSrc, refDest, pathPrefix);
-    console.log(`  ${green}✓${reset} Installed ready-check/references/`);
+    console.log(`  ${green}✓${reset} Installed vibe-check/references/`);
   }
 
-  // 3. Copy templates to ready-check/templates/
+  // 3. Copy templates to vibe-check/templates/
   const tplSrc = path.join(src, 'templates');
-  const tplDest = path.join(claudeDir, 'ready-check', 'templates');
+  const tplDest = path.join(claudeDir, 'vibe-check', 'templates');
   if (fs.existsSync(tplSrc)) {
     copyWithPathReplacement(tplSrc, tplDest, pathPrefix);
-    console.log(`  ${green}✓${reset} Installed ready-check/templates/`);
+    console.log(`  ${green}✓${reset} Installed vibe-check/templates/`);
   }
 
   // 4. Copy agents to agents/
@@ -362,12 +362,12 @@ function install(isGlobal) {
     console.log(`  ${green}✓${reset} Installed agents/`);
   }
 
-  // 5. Copy scripts to ready-check/scripts/
+  // 5. Copy scripts to vibe-check/scripts/
   const scriptsSrc = path.join(src, 'scripts');
-  const scriptsDest = path.join(claudeDir, 'ready-check', 'scripts');
+  const scriptsDest = path.join(claudeDir, 'vibe-check', 'scripts');
   if (fs.existsSync(scriptsSrc)) {
     copyDirectory(scriptsSrc, scriptsDest);
-    console.log(`  ${green}✓${reset} Installed ready-check/scripts/`);
+    console.log(`  ${green}✓${reset} Installed vibe-check/scripts/`);
   }
 
   // 6. Install hooks into settings.json
@@ -375,18 +375,18 @@ function install(isGlobal) {
   console.log(`  ${green}✓${reset} Installed secret scanner hook`);
 
   console.log(`
-  ${green}Done!${reset} Launch Claude Code and run ${cyan}/ready-check:check${reset}
+  ${green}Done!${reset} Launch Claude Code and run ${cyan}/vibe-check:check${reset}
 
   ${yellow}Commands:${reset}
-    /ready-check:check        Run full assessment
-    /ready-check:fix          Auto-fix agent-doable items
-    /ready-check:refresh      Re-run and show progress
-    /ready-check:discuss      Ask questions about your report
-    /ready-check:help         Show command reference
+    /vibe-check:check        Run full assessment
+    /vibe-check:fix          Auto-fix agent-doable items
+    /vibe-check:refresh      Re-run and show progress
+    /vibe-check:discuss      Ask questions about your report
+    /vibe-check:help         Show command reference
 
   ${yellow}Security:${reset}
     Secret scanner hook installed - prevents secrets from being
-    written to .ready-check/ files (patterns from gitleaks)
+    written to .vibe-check/ files (patterns from gitleaks)
 `);
 }
 
@@ -436,7 +436,7 @@ if (hasGlobal && hasLocal) {
 } else if (hasUninstall) {
   if (!hasGlobal && !hasLocal) {
     console.error(`  ${yellow}--uninstall requires --global or --local${reset}`);
-    console.error(`  Example: npx ready-check-cc --global --uninstall\n`);
+    console.error(`  Example: npx vibe-check-cc --global --uninstall\n`);
     process.exit(1);
   }
   uninstall(hasGlobal);

@@ -69,5 +69,5 @@ These items can be fixed by an AI coding assistant:
 
 To fix an item, tell your AI assistant:
 ```
-Read .ready-check/checklist/item-NNN-{slug}.md and fix it
+Read .vibe-check/checklist/item-NNN-{slug}.md and fix it
 ```

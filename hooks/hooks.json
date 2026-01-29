@@ -1,5 +1,5 @@
 {
-  "description": "Ready Check secret scanner - prevents secrets from being written to .ready-check/ files",
+  "description": "Vibe Check secret scanner - prevents secrets from being written to .vibe-check/ files",
   "hooks": {
     "PreToolUse": [
       {

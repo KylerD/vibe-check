@@ -1,4 +1,4 @@
-# Ready Check Summary
+# Vibe Check Summary
 
 **Project:** {Project Name}
 **Analysis Date:** {YYYY-MM-DD}

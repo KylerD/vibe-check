@@ -1,17 +1,17 @@
 ---
-description: Discuss your ready-check report and get clarification on findings
+description: Discuss your vibe-check report and get clarification on findings
 disable-model-invocation: false
 ---
 
-# Discuss Ready Check Report
+# Discuss Vibe Check Report
 
 <objective>
-Have an interactive conversation about an existing ready-check assessment. Answer questions, clarify findings, dive deeper into specific items, and help the user understand their report.
+Have an interactive conversation about an existing vibe-check assessment. Answer questions, clarify findings, dive deeper into specific items, and help the user understand their report.
 </objective>
 
 ## Prerequisites
 
-This command requires an existing `.ready-check/` directory. If not found, suggest running `/ready-check:check` first.
+This command requires an existing `.vibe-check/` directory. If not found, suggest running `/vibe-check:check` first.
 
 ## Process
 
@@ -20,7 +20,7 @@ This command requires an existing `.ready-check/` directory. If not found, sugge
 Read the existing assessment files to understand the current state:
 
 ```
-.ready-check/
+.vibe-check/
 ├── summary.md          # Quick overview
 ├── report.md           # Full report with scores
 ├── metadata.json       # Structured data
@@ -125,12 +125,12 @@ Want me to proceed?"
 
 ## Handling Missing Reports
 
-If `.ready-check/` doesn't exist:
+If `.vibe-check/` doesn't exist:
 
 ```
-No ready-check report found in this project.
+No vibe-check report found in this project.
 
-Run /ready-check:check first to generate an assessment, then come back here to discuss it.
+Run /vibe-check:check first to generate an assessment, then come back here to discuss it.
 ```
 
 ## Handling Stale Reports
@@ -140,5 +140,5 @@ If the report is old (check `analysisDate` in metadata.json):
 ```
 Note: This report is from {date}. Your codebase may have changed since then.
 
-I can still discuss the findings, but consider running /ready-check:refresh for an updated assessment.
+I can still discuss the findings, but consider running /vibe-check:refresh for an updated assessment.
 ```

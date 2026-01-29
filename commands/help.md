@@ -17,22 +17,22 @@ Output ONLY the reference content below. Do NOT add:
   </objective>
 
 <reference>
-# Ready Check Command Reference
+# Vibe Check Command Reference
 
-**Ready Check** helps you assess production readiness and generate actionable outputs.
+**Vibe Check** helps you assess production readiness and generate actionable outputs.
 
 ## Quick Start
 
 ```
-/ready-check:check
+/vibe-check:check
 ```
 
-This single command analyzes your codebase, asks a few questions, and writes a complete assessment to `.ready-check/`.
+This single command analyzes your codebase, asks a few questions, and writes a complete assessment to `.vibe-check/`.
 
 ## Primary Commands
 
-**/ready-check:check**
-Full production readiness assessment. Analyzes codebase, collects inputs, and writes all results to `.ready-check/` directory including:
+**/vibe-check:check**
+Full production readiness assessment. Analyzes codebase, collects inputs, and writes all results to `.vibe-check/` directory including:
 
 - `summary.md` — Quick 1-page overview
 - `report.md` — Full readiness report with scores
@@ -40,42 +40,42 @@ Full production readiness assessment. Analyzes codebase, collects inputs, and wr
 - `checklist/` — Individual items with fix instructions
 - `metadata.json` — Machine-readable data
 
-**/ready-check:refresh**
-Re-runs assessment on existing `.ready-check/`. Shows what improved or regressed since last check. Use after fixing issues to track progress.
+**/vibe-check:refresh**
+Re-runs assessment on existing `.vibe-check/`. Shows what improved or regressed since last check. Use after fixing issues to track progress.
 
-**/ready-check:fix**
+**/vibe-check:fix**
 Auto-fix agent-doable checklist items. Each fix is verified and committed atomically.
 
 ```
-/ready-check:fix              # Fix all agent-doable items
-/ready-check:fix item-003     # Fix a specific item
+/vibe-check:fix              # Fix all agent-doable items
+/vibe-check:fix item-003     # Fix a specific item
 ```
 
-**/ready-check:discuss**
+**/vibe-check:discuss**
 Interactive conversation about your report. Ask questions, get clarification on findings, dive deeper into specific items, or get help fixing issues.
 
-**/ready-check:help**
+**/vibe-check:help**
 Show this command reference.
 
 ## Workflow
 
-1. Run `/ready-check:check` to generate initial assessment
-2. Review `.ready-check/summary.md` for overview
-3. Run `/ready-check:fix` to auto-fix agent-doable items
-4. Run `/ready-check:discuss` for items that need manual work
-5. Run `/ready-check:refresh` to see progress
+1. Run `/vibe-check:check` to generate initial assessment
+2. Review `.vibe-check/summary.md` for overview
+3. Run `/vibe-check:fix` to auto-fix agent-doable items
+4. Run `/vibe-check:discuss` for items that need manual work
+5. Run `/vibe-check:refresh` to see progress
 
 ## Utility Commands
 
-**/ready-check:map-codebase**
+**/vibe-check:map-codebase**
 Standalone codebase analysis (stack, architecture, structure, conventions, testing, integrations, concerns).
 
 ## Output Directory
 
-After running `/ready-check:check`, your project will have:
+After running `/vibe-check:check`, your project will have:
 
 ```
-.ready-check/
+.vibe-check/
 ├── README.md              # How to use this directory
 ├── summary.md             # Executive summary
 ├── report.md              # Full report
@@ -98,8 +98,8 @@ Each checklist item includes:
 Items marked "Agent-Doable: Yes" or "Partial" can be auto-fixed:
 
 ```
-/ready-check:fix              # Fix all agent-doable items
-/ready-check:fix item-003     # Fix a specific item
+/vibe-check:fix              # Fix all agent-doable items
+/vibe-check:fix item-003     # Fix a specific item
 ```
 
 Each fix is verified (lint, typecheck, tests) and committed atomically.

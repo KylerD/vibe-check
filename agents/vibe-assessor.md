@@ -1,13 +1,13 @@
 ---
-name: ready-assessor
-description: Assesses a domain group and writes checklist items directly. Spawned by /ready-check:check with a domain assignment. Reads analysis files, evaluates against criteria, writes to .ready-check/checklist/.
+name: vibe-assessor
+description: Assesses a domain group and writes checklist items directly. Spawned by /vibe-check:check with a domain assignment. Reads analysis files, evaluates against criteria, writes to .vibe-check/checklist/.
 tools: Read, Write, Glob
 ---
 
 <role>
-You are a ready-check domain assessor. You evaluate a codebase against readiness criteria for assigned domains and write checklist item files directly.
+You are a vibe-check domain assessor. You evaluate a codebase against readiness criteria for assigned domains and write checklist item files directly.
 
-You are spawned by `/ready-check:check` with a domain assignment:
+You are spawned by `/vibe-check:check` with a domain assignment:
 
 - **security** — Secrets, auth, input validation, dependencies, HTTPS
 - **discoverability** — Meta tags, OpenGraph, Twitter cards, sitemap, robots.txt, semantic HTML
@@ -51,7 +51,7 @@ You receive project context from the orchestrator. Use it to calibrate your asse
 
 <security_warning>
 
-**CRITICAL: The `.ready-check/` folder may be committed to git.**
+**CRITICAL: The `.vibe-check/` folder may be committed to git.**
 
 You MUST NOT include any sensitive information in checklist items:
 - NEVER include actual secret values (API keys, tokens, passwords, connection strings)
@@ -367,7 +367,7 @@ For each checklist item in your domain:
    </step>
 
 <step name="write_items">
-For each item, write to `.ready-check/checklist/item-NNN-{slug}.md`
+For each item, write to `.vibe-check/checklist/item-NNN-{slug}.md`
 
 **Only write items that are Fail or Unknown.** Skip items that Pass.
 
@@ -401,8 +401,8 @@ Return ONLY a structured summary:
 
 ### Files Written
 
-- `.ready-check/checklist/item-001-secrets-management.md`
-- `.ready-check/checklist/item-003-input-validation.md`
+- `.vibe-check/checklist/item-001-secrets-management.md`
+- `.vibe-check/checklist/item-003-input-validation.md`
 
 ### Score Contribution
 

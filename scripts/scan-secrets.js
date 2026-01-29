@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * Secret Scanner for Ready Check
+ * Secret Scanner for Vibe Check
  *
- * PreToolUse hook that scans content being written to .ready-check/
+ * PreToolUse hook that scans content being written to .vibe-check/
  * for secrets before the write happens. Uses patterns from gitleaks.
  *
  * Exit codes:
@@ -59,8 +59,8 @@ function scanForSecrets(hookInput) {
   const toolInput = hookInput.tool_input || {};
   const filePath = toolInput.file_path || '';
 
-  // Only scan writes to .ready-check/ directory
-  if (!filePath.includes('.ready-check')) {
+  // Only scan writes to .vibe-check/ directory
+  if (!filePath.includes('.vibe-check')) {
     return { blocked: false };
   }
 
@@ -119,7 +119,7 @@ function formatBlockMessage(filePath, findings) {
   }
 
   lines.push('');
-  lines.push('Ready Check files must not contain secrets. Please:');
+  lines.push('Vibe Check files must not contain secrets. Please:');
   lines.push('  1. Remove the actual secret values from the content');
   lines.push('  2. Report only the TYPE and LOCATION of secrets (e.g., "OpenAI API key found in config.js:15")');
   lines.push('  3. Never include the actual key/token/password values');

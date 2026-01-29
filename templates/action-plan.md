@@ -70,11 +70,11 @@ Strategic improvements for scale, compliance, or operational excellence.
 To fix an agent-doable item, tell your AI assistant:
 
 ```
-Read .ready-check/checklist/item-NNN-{slug}.md and fix it
+Read .vibe-check/checklist/item-NNN-{slug}.md and fix it
 ```
 
 The agent will read the item details and implement the code changes. You'll need to handle any human-required steps listed in the item.
 
 ## Progress Tracking
 
-Run `/ready-check:refresh` to re-analyze your codebase and see updated scores after implementing fixes.
+Run `/vibe-check:refresh` to re-analyze your codebase and see updated scores after implementing fixes.

@@ -1,18 +1,27 @@
 <div align="center">
 
-# READY CHECK
-
+```txt
+ __     __  ______  _______   ________         ______   __    __  ________   ______   __    __ 
+|  \   |  \|      \|       \ |        \       /      \ |  \  |  \|        \ /      \ |  \  /  \
+| $$   | $$ \$$$$$$| $$$$$$$\| $$$$$$$$      |  $$$$$$\| $$  | $$| $$$$$$$$|  $$$$$$\| $$ /  $$
+| $$   | $$  | $$  | $$__/ $$| $$__          | $$   \$$| $$__| $$| $$__    | $$   \$$| $$/  $$ 
+ \$$\ /  $$  | $$  | $$    $$| $$  \         | $$      | $$    $$| $$  \   | $$      | $$  $$  
+  \$$\  $$   | $$  | $$$$$$$\| $$$$$         | $$   __ | $$$$$$$$| $$$$$   | $$   __ | $$$$$\  
+   \$$ $$   _| $$_ | $$__/ $$| $$_____       | $$__/  \| $$  | $$| $$_____ | $$__/  \| $$ \$$\ 
+    \$$$   |   $$ \| $$    $$| $$     \       \$$    $$| $$  | $$| $$     \ \$$    $$| $$  \$$\
+     \$     \$$$$$$ \$$$$$$$  \$$$$$$$$        \$$$$$$  \$$   \$$ \$$$$$$$$  \$$$$$$  \$$   \$$
+```
 **You built something with AI. You can't read the code. Is it actually ready to ship?**
 
 **Get a structured assessment you can understand, discuss, and hand off.**
 
-[![npm version](https://img.shields.io/npm/v/ready-check-cc?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/ready-check-cc)
-[![npm downloads](https://img.shields.io/npm/dm/ready-check-cc?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/ready-check-cc)
-[![GitHub stars](https://img.shields.io/github/stars/KylerD/ready-check?style=for-the-badge&logo=github&color=181717)](https://github.com/KylerD/ready-check)
+[![npm version](https://img.shields.io/npm/v/vibe-check-cc?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/vibe-check-cc)
+[![npm downloads](https://img.shields.io/npm/dm/vibe-check-cc?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/vibe-check-cc)
+[![GitHub stars](https://img.shields.io/github/stars/KylerD/vibe-check?style=for-the-badge&logo=github&color=181717)](https://github.com/KylerD/vibe-check)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
 
 ```bash
-npx ready-check-cc
+npx vibe-check-cc
 ```
 
 Works on Mac, Windows, and Linux.
@@ -20,6 +29,7 @@ Works on Mac, Windows, and Linux.
 </div>
 
 ---
+
 
 ## Why I Built This
 
@@ -44,7 +54,7 @@ It's founder-focused. It knows the difference between "enterprise best practice"
 ## What You Get
 
 ```
-.ready-check/
+.vibe-check/
 ├── summary.md           # 1-page executive overview
 ├── report.md            # Full report with scores
 ├── action-plan.md       # Prioritized fix list
@@ -68,7 +78,7 @@ Each checklist item includes:
 ### 1. Run the Assessment
 
 ```
-/ready-check:check
+/vibe-check:check
 ```
 
 The system:
@@ -82,7 +92,7 @@ You get a score out of 100 and a clear breakdown of what needs attention.
 ### 2. Discuss the Findings
 
 ```
-/ready-check:discuss
+/vibe-check:discuss
 ```
 
 Ask questions about your report:
@@ -95,8 +105,8 @@ Ask questions about your report:
 Auto-fix agent-doable items with verified, atomic commits:
 
 ```
-/ready-check:fix              # Fix all agent-doable items
-/ready-check:fix item-003     # Fix a specific item
+/vibe-check:fix              # Fix all agent-doable items
+/vibe-check:fix item-003     # Fix a specific item
 ```
 
 Each fix is verified (lint, typecheck, tests as applicable) and committed individually.
@@ -104,14 +114,14 @@ Each fix is verified (lint, typecheck, tests as applicable) and committed indivi
 For items that need manual work, ask for help:
 
 ```
-/ready-check:discuss
+/vibe-check:discuss
 > "Help me with the privacy policy item"
 ```
 
 ### 4. Track Progress
 
 ```
-/ready-check:refresh
+/vibe-check:refresh
 ```
 
 Re-runs the assessment and shows what improved or regressed since last check.
@@ -122,12 +132,12 @@ Re-runs the assessment and shows what improved or regressed since last check.
 
 | Command | Description |
 |---------|-------------|
-| `/ready-check:check` | Full production readiness assessment |
-| `/ready-check:fix` | Auto-fix agent-doable items with atomic commits |
-| `/ready-check:refresh` | Re-run and compare with previous results |
-| `/ready-check:discuss` | Ask questions about your report |
-| `/ready-check:help` | Show command reference |
-| `/ready-check:map-codebase` | Standalone codebase analysis |
+| `/vibe-check:check` | Full production readiness assessment |
+| `/vibe-check:fix` | Auto-fix agent-doable items with atomic commits |
+| `/vibe-check:refresh` | Re-run and compare with previous results |
+| `/vibe-check:discuss` | Ask questions about your report |
+| `/vibe-check:help` | Show command reference |
+| `/vibe-check:map-codebase` | Standalone codebase analysis |
 
 ---
 
@@ -185,7 +195,7 @@ Re-runs the assessment and shows what improved or regressed since last check.
 ## Installation
 
 ```bash
-npx ready-check-cc
+npx vibe-check-cc
 ```
 
 The installer prompts you to choose:
@@ -196,24 +206,24 @@ The installer prompts you to choose:
 
 ```bash
 # Global install
-npx ready-check-cc --global
+npx vibe-check-cc --global
 
 # Local install
-npx ready-check-cc --local
+npx vibe-check-cc --local
 
 # Uninstall
-npx ready-check-cc --global --uninstall
+npx vibe-check-cc --global --uninstall
 ```
 
 ### Verify Installation
 
 ```
-/ready-check:help
+/vibe-check:help
 ```
 
 ### Recommended: Skip Permissions Mode
 
-Ready Check spawns multiple agents and runs various tools. For a frictionless experience, run Claude Code with:
+Vibe Check spawns multiple agents and runs various tools. For a frictionless experience, run Claude Code with:
 
 ```bash
 claude --dangerously-skip-permissions
@@ -224,7 +234,7 @@ claude --dangerously-skip-permissions
 ## Updating
 
 ```bash
-npx ready-check-cc@latest
+npx vibe-check-cc@latest
 ```
 
 ---
@@ -233,7 +243,7 @@ npx ready-check-cc@latest
 
 ### Multi-Agent Architecture
 
-Ready Check uses specialized agents to keep context focused:
+Vibe Check uses specialized agents to keep context focused:
 
 | Agent | Job |
 |-------|-----|
@@ -246,7 +256,7 @@ The orchestrator stays lean (under 30% context). Heavy exploration and evaluatio
 
 ### On Secrets
 
-The assessment output lives in `.ready-check/` which you might commit. Here's how we handle secrets:
+The assessment output lives in `.vibe-check/` which you might commit. Here's how we handle secrets:
 
 **What we do:**
 - Agents are instructed to never read `.env` files, only check if they exist
@@ -259,8 +269,8 @@ The assessment output lives in `.ready-check/` which you might commit. Here's ho
 - Novel secret formats or obfuscated values could slip through
 
 **What you should do:**
-- Review `.ready-check/` before committing
-- Keep `.ready-check/` in `.gitignore` if you're not sure
+- Review `.vibe-check/` before committing
+- Keep `.vibe-check/` in `.gitignore` if you're not sure
 - Run `git diff` before pushing
 
 ---
@@ -269,11 +279,11 @@ The assessment output lives in `.ready-check/` which you might commit. Here's ho
 
 **Commands not found?**
 - Restart Claude Code to reload commands
-- Verify files exist in `~/.claude/commands/ready-check/`
+- Verify files exist in `~/.claude/commands/vibe-check/`
 
 **Want to re-run?**
-- Delete `.ready-check/` and run `/ready-check:check` again
-- Or use `/ready-check:refresh` to update existing assessment
+- Delete `.vibe-check/` and run `/vibe-check:check` again
+- Or use `/vibe-check:refresh` to update existing assessment
 
 ---
 
@@ -285,4 +295,4 @@ MIT
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=KylerD/ready-check&type=date&legend=top-left)](https://www.star-history.com/#KylerD/ready-check&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=KylerD/vibe-check&type=date&legend=top-left)](https://www.star-history.com/#KylerD/vibe-check&type=date&legend=top-left)
