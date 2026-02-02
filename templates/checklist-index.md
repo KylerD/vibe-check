@@ -118,6 +118,18 @@ LOW  ○
 | [Cookie Consent](./item-025-cookie-consent.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 | [User Data Deletion](./item-026-user-deletion.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 
+### AI Security — *Conditional*
+
+{Only include this section if AI patterns were detected. Otherwise omit.}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| [Prompt Injection Prevention](./item-027-prompt-injection.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Function Calling Safety](./item-028-function-calling.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [WebSocket Origin Validation](./item-029-websocket-origin.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Plugin Ecosystem Security](./item-030-plugin-security.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Context Isolation](./item-031-context-isolation.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
 ---
 
 ## Agent-Doable Items

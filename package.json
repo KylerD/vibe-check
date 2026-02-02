@@ -1,6 +1,6 @@
 {
   "name": "vibe-check-cc",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Production readiness assessment for Claude Code - identify gaps across security, infrastructure, and reliability",
   "author": {
     "name": "Kyle Davidson"

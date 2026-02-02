@@ -15,6 +15,7 @@ You are spawned by `/vibe-check:check` with a domain assignment:
 - **platform** — Hosting compatibility, complexity check, cost signals, managed services
 - **reliability** — Backups, error handling, database connections, health checks
 - **legal** — Privacy policy, terms of service, cookie consent, user deletion
+- **ai-security** — Prompt injection, function calling safety, WebSocket origin, plugin security, context isolation (conditional: only if AI patterns detected)
 
 Your job: Read analysis files, evaluate against criteria, write checklist items, return summary only.
 </role>
@@ -74,6 +75,7 @@ Based on your domain assignment, load these analysis files:
 | platform        | stack.md, infrastructure.md, integrations.md, platform.md |
 | reliability     | error-handling.md, data.md, integrations.md               |
 | legal           | legal.md, data.md                                         |
+| ai-security     | ai-security.md, auth.md, integrations.md                  |
 
 Also load:
 
@@ -251,6 +253,47 @@ Evaluate and create items for:
     - Pass if: User deletion endpoint/function visible
     - Unknown if: Can't determine deletion capability
     - Fail if: User accounts exist but no deletion visible
+
+## AI Security Domain (Conditional)
+
+**Only evaluate if ai-security.md indicates AI patterns were detected.**
+
+If ai-security.md says "No AI/LLM patterns detected", skip this entire domain and return:
+```
+AI Security domain skipped — no AI patterns detected in codebase.
+```
+
+Evaluate and create items for:
+
+27. **Prompt Injection Prevention** (item-027-prompt-injection.md)
+    - Check: ai-security.md for system prompt patterns
+    - Pass if: Clear separation between system and user content, input sanitization
+    - Fail if: User input interpolated into system prompts, no sanitization
+    - Unknown if: Can't determine prompt construction patterns
+
+28. **Function Calling Safety** (item-028-function-calling.md)
+    - Check: ai-security.md for tool/function patterns
+    - Pass if: Tools explicitly whitelisted, parameters validated, no unrestricted exec/eval
+    - Fail if: Dynamic function execution, unrestricted shell access, no parameter validation
+    - Unknown if: Tool system exists but can't determine safety patterns
+
+29. **WebSocket Origin Validation** (item-029-websocket-origin.md)
+    - Check: ai-security.md for WebSocket patterns
+    - Pass if: Origin validation on WS connections, no URL from user input
+    - Fail if: No origin check, gateway URL from query params
+    - Unknown if: WebSocket used but can't determine origin handling
+
+30. **Plugin Ecosystem Security** (item-030-plugin-security.md)
+    - Check: ai-security.md for plugin/skill loading patterns
+    - Pass if: Plugins sandboxed, explicit permissions, verified sources
+    - Fail if: Dynamic require from user paths, eval of plugin code, no isolation
+    - Unknown if: Plugin system exists but sandboxing unclear
+
+31. **Context Isolation** (item-031-context-isolation.md)
+    - Check: ai-security.md for context/conversation handling
+    - Pass if: Session-based isolation, bounded history, no cross-user leakage
+    - Fail if: Global shared context, unbounded accumulation
+    - Unknown if: Can't determine context isolation strategy
 
 </checklist_items_by_domain>
 

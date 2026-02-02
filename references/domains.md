@@ -687,6 +687,285 @@ Minimum viable compliance.
 
 </domain>
 
+<domain name="ai-security">
+
+**Observability:** Mostly observable from code
+**Conditional:** Only assess if AI/LLM patterns detected in codebase
+
+This domain evaluates security considerations specific to AI-powered applications. It only appears in assessments for projects that use AI/LLM capabilities.
+
+**Detection triggers (any of these activates this domain):**
+- AI SDK packages in dependencies (openai, anthropic, @ai-sdk/*, @langchain/*, replicate, cohere, etc.)
+- System prompt patterns in code
+- Function calling / tool use patterns
+- WebSocket connections with auth patterns (common in AI agent architectures)
+
+## Prompt Injection Prevention
+
+**Observability:** Mostly observable from code
+
+**What you're looking for:**
+- User input sanitization before sending to LLM
+- System prompt isolation (not concatenated with user input)
+- Context boundary enforcement between system and user content
+- Input filtering for known injection patterns
+
+**Pass if:**
+- Clear separation between system prompts and user input
+- User input passed as dedicated user messages (not interpolated into system prompt)
+- Input validation or sanitization before LLM calls
+
+**Fail if:**
+- User input directly interpolated into system prompts
+- No sanitization of user input before LLM calls
+- System prompt exposed or modifiable by user input
+
+**Watch for:**
+```javascript
+// Bad - user input in system prompt
+const systemPrompt = `You are a helpful assistant. User context: ${userInput}`;
+
+// Bad - no separation
+const prompt = systemPrompt + userMessage;
+
+// Good - proper separation
+messages: [
+  { role: 'system', content: SYSTEM_PROMPT },
+  { role: 'user', content: sanitize(userInput) }
+]
+```
+
+## Function Calling Safety
+
+**Observability:** Mostly observable from code
+
+**What you're looking for:**
+- Explicit whitelist of allowed functions/tools
+- Parameter validation before function execution
+- Audit logging of function calls
+- Dangerous functions excluded or heavily restricted
+
+**Pass if:**
+- Functions/tools explicitly defined and limited
+- Parameters validated before execution
+- No unrestricted shell/eval access from AI
+- Audit trail for function invocations
+
+**Fail if:**
+- Dynamic function execution without validation
+- Unrestricted shell access (exec, spawn) callable by AI
+- No parameter validation on tool calls
+- File system operations without path restrictions
+
+**Watch for:**
+```javascript
+// Bad - unrestricted execution
+tools: [{ name: 'run_command', execute: (cmd) => exec(cmd) }]
+
+// Bad - no parameter validation
+tools: [{ name: 'read_file', execute: (path) => fs.readFileSync(path) }]
+
+// Good - restricted and validated
+tools: [{
+  name: 'read_file',
+  execute: (path) => {
+    if (!isAllowedPath(path)) throw new Error('Access denied');
+    return fs.readFileSync(path, 'utf8');
+  }
+}]
+```
+
+## WebSocket/API Origin Validation
+
+**Observability:** Mostly observable from code
+
+**What you're looking for:**
+- Origin header validation on WebSocket upgrade
+- CORS properly configured for API endpoints
+- No auto-connect from URL parameters (prevents SSRF-like attacks)
+- Rate limiting on WebSocket connections
+
+**Pass if:**
+- WebSocket upgrade validates origin
+- CORS configured with explicit allowed origins (not *)
+- Connection parameters don't come from untrusted sources
+
+**Fail if:**
+- No origin validation on WebSocket connections
+- CORS allows all origins (Access-Control-Allow-Origin: *)
+- Gateway URL or connection params taken from user input
+
+**Watch for:**
+```javascript
+// Bad - no origin check
+wss.on('connection', (ws, req) => { /* accepts all */ });
+
+// Bad - URL from query params
+const gatewayUrl = new URL(req.query.gateway);
+new WebSocket(gatewayUrl);
+
+// Good - origin validation
+wss.on('connection', (ws, req) => {
+  if (!ALLOWED_ORIGINS.includes(req.headers.origin)) {
+    ws.close(4001, 'Invalid origin');
+    return;
+  }
+});
+```
+
+## Plugin/Skill Ecosystem Security
+
+**Observability:** Mostly observable from code
+
+**What you're looking for:**
+- Plugin sandboxing mechanisms
+- Permission model for extensions
+- Supply chain verification for plugins
+- Code execution boundaries
+
+**Pass if:**
+- Plugins run in isolated context (VM, sandbox, separate process)
+- Explicit permission grants required
+- Plugin sources verified or restricted
+
+**Unknown if:**
+- Plugin system exists but sandboxing approach unclear
+
+**Fail if:**
+- Plugins execute with full application privileges
+- No isolation between plugins and core
+- Dynamic require/import from user-controlled paths
+
+**Watch for:**
+```javascript
+// Bad - dynamic require
+const skill = require(userProvidedPath);
+
+// Bad - eval
+eval(pluginCode);
+
+// Good - sandboxed execution
+const sandbox = new vm.createContext({ allowedAPIs });
+vm.runInContext(pluginCode, sandbox);
+```
+
+## Context Isolation
+
+**Observability:** Mostly observable from code
+
+**What you're looking for:**
+- User data not leaked in system prompts to other users
+- Conversation history properly bounded
+- Token limits to prevent data exfiltration
+- Multi-tenant isolation
+
+**Pass if:**
+- Each user/session has isolated context
+- Conversation history cleared between sessions or bounded
+- Token limits enforced
+- No cross-user data leakage patterns
+
+**Fail if:**
+- Shared conversation history across users
+- Unbounded context accumulation
+- User A's data could appear in User B's responses
+
+**Watch for:**
+```javascript
+// Bad - shared context
+const globalContext = [];
+function chat(msg) {
+  globalContext.push(msg);
+  return llm.complete({ messages: globalContext });
+}
+
+// Good - isolated context
+function chat(sessionId, msg) {
+  const context = getSessionContext(sessionId);
+  context.push(msg);
+  if (context.length > MAX_HISTORY) context.shift();
+  return llm.complete({ messages: context });
+}
+```
+
+</domain>
+
+<domain name="security-enhancements">
+
+**Note:** These items enhance the existing Security domain when detected.
+
+## CVE Cross-Reference
+
+**Observability:** Observable via GitHub Advisory API
+
+Beyond npm audit, cross-reference dependencies against the GitHub Advisory Database for known vulnerabilities.
+
+**Detection approach:**
+```bash
+# Extract package names and query GitHub Advisory Database
+for pkg in $(jq -r '.dependencies,.devDependencies | keys[]' package.json); do
+  gh api graphql -f query='
+    query($pkg: String!) {
+      securityVulnerabilities(first: 5, ecosystem: NPM, package: $pkg) {
+        nodes {
+          advisory { ghsaId severity summary }
+          vulnerableVersionRange
+          firstPatchedVersion { identifier }
+        }
+      }
+    }
+  ' -f pkg="$pkg" 2>/dev/null
+done
+```
+
+**Pass if:**
+- No GHSA advisories with severity HIGH or CRITICAL
+- Or all HIGH/CRITICAL have patches available and applied
+
+**Fail if:**
+- Unpatched HIGH/CRITICAL vulnerabilities
+- Dependencies with known RCE or auth bypass CVEs
+
+**Unknown if:**
+- GitHub API unavailable (offline mode)
+- Unable to determine vulnerable version ranges
+
+## Rate Limiting
+
+**Observability:** Observable from code
+
+**What you're looking for:**
+- Rate limit middleware on auth endpoints
+- Throttling on API routes
+- IP-based or token-based limiting
+
+**Pass if:**
+- Rate limiting detected on auth endpoints
+- Or: Using managed service with built-in protection (Auth0, Clerk, etc.)
+
+**Unknown if:**
+- Rate limiting might be handled at infrastructure layer (CDN, API gateway)
+
+**Fail if:**
+- Custom auth without any rate limiting
+- No throttling on sensitive endpoints (login, password reset, API keys)
+
+**Watch for:**
+```javascript
+// Good - rate limiting
+app.use('/auth', rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
+
+// Good - using managed auth (built-in protection)
+import { clerkMiddleware } from '@clerk/nextjs';
+
+// Bad - custom auth with no rate limiting
+app.post('/login', async (req, res) => {
+  // no throttling before password check
+});
+```
+
+</domain>
+
 <quick_reference>
 
 ## Observability by Domain
@@ -699,6 +978,7 @@ Minimum viable compliance.
 | Platform | ⚠️ Partial (config files) | Ask about hosting platform |
 | Reliability | ⚠️ Partial (backups need verification) | Ask user to verify dashboard |
 | Legal | ⚠️ Partial (file/route detection) | Ask about legal pages |
+| AI Security | ✅ Mostly (conditional) | Only if AI patterns detected |
 
 **When you can't verify something, mark Unknown and create a helpful checklist item that explains exactly what to check and where.**
 

@@ -40,6 +40,7 @@ Each assessor loads relevant analysis files when evaluating their domain:
 | Platform        | stack.md, infrastructure.md, integrations.md |
 | Reliability     | error-handling.md, data.md, integrations.md  |
 | Legal           | legal.md, data.md                            |
+| AI Security     | ai-security.md, auth.md, integrations.md     |
 
 **What this means for your output:**
 
@@ -87,7 +88,8 @@ Create `.vibe-check/analysis/` and write these files:
     ├── discoverability.md # Meta tags, OpenGraph, sitemap, robots.txt
     ├── analytics.md       # Visitor tracking, error tracking, conversion events
     ├── legal.md           # Privacy policy, terms, cookie consent, user deletion
-    └── platform.md        # Hosting compatibility, complexity, cost signals
+    ├── platform.md        # Hosting compatibility, complexity, cost signals
+    └── ai-security.md     # AI/LLM patterns, prompt injection, function calling
 ```
 
 </output_directory>
@@ -496,6 +498,59 @@ Write `platform.md`:
 - Managed services already in use
   </step>
 
+<step name="explore_ai_security">
+Detect AI/LLM patterns and security concerns:
+
+```bash
+# AI SDK detection in dependencies
+grep -r "openai\|anthropic\|@ai-sdk\|langchain\|@langchain\|replicate\|cohere\|ai/core" package.json 2>/dev/null
+
+# System prompt patterns
+grep -rn "system.*prompt\|systemPrompt\|SYSTEM_PROMPT\|role.*system" --include="*.ts" --include="*.js" --include="*.tsx" src/ app/ lib/ 2>/dev/null | head -30
+
+# Function calling / tool patterns
+grep -rn "function.?call\|tools.*\[\|tool_choice\|toolCall\|functionCall" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -30
+
+# WebSocket security patterns
+grep -rn "WebSocket\|wss://\|ws://" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -20
+grep -rn "origin\|Origin\|upgrade\|Upgrade" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -20
+
+# Gateway URL from user input (dangerous)
+grep -rn "gatewayUrl\|gateway.*url\|url.*gateway" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null | head -10
+grep -rn "query\.\|params\.\|searchParams" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null | grep -i "url\|gateway\|endpoint" | head -10
+
+# Plugin/extension/skill loading patterns
+find . -path "*plugin*" -o -path "*skill*" -o -path "*extension*" -not -path "*/node_modules/*" 2>/dev/null | head -20
+grep -rn "require\s*(\s*[^'\"]" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -10
+grep -rn "dynamic.*import\|import\s*(" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -10
+
+# Dangerous operations accessible from AI
+grep -rn "exec\|spawn\|child_process" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -20
+grep -rn "eval\s*(" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -10
+grep -rn "fs\.write\|writeFile\|unlink\|rmdir" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -20
+
+# Context/conversation handling
+grep -rn "conversation\|context\|history\|messages" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -30
+grep -rn "session\|userId\|user.*id" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -20
+
+# Rate limiting on AI endpoints
+grep -rn "rateLimit\|rate-limit\|throttle" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -10
+```
+
+Write `ai-security.md`:
+
+- AI SDK packages detected (list them)
+- System prompt patterns found (file:line)
+- Function calling / tool definitions (file:line, list tools if visible)
+- WebSocket usage (file:line, note if origin validation present)
+- Plugin/skill loading patterns (file:line, note if sandboxed)
+- Dangerous operations (exec, eval, fs.write) accessible from AI context
+- Context isolation patterns (session-based or global)
+- Rate limiting on AI endpoints
+
+**If no AI patterns detected:** Write a brief ai-security.md noting "No AI/LLM patterns detected in this codebase. AI Security domain will be skipped."
+  </step>
+
 <step name="return_confirmation">
 Return ONLY confirmation. DO NOT include analysis contents.
 
@@ -516,6 +571,9 @@ Return ONLY confirmation. DO NOT include analysis contents.
 - `.vibe-check/analysis/analytics.md`
 - `.vibe-check/analysis/legal.md`
 - `.vibe-check/analysis/platform.md`
+- `.vibe-check/analysis/ai-security.md`
+
+**AI patterns detected:** {Yes|No}
 
 Ready for domain assessment.
 ```

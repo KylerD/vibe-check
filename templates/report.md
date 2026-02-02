@@ -133,6 +133,26 @@ DOMAIN SCORES
 
 ---
 
+### AI Security ({earned}/20) — *Conditional*
+
+{Only include this section if AI patterns were detected in the codebase. If not detected, omit entirely or show "N/A - No AI patterns detected"}
+
+```
+{bar}  {pct}%  {status}
+```
+
+{Brief assessment of AI-specific security posture}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| Prompt Injection Prevention | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Function Calling Safety | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| WebSocket Origin Validation | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Plugin Ecosystem Security | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Context Isolation | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+---
+
 ## Risk Assessment
 
 ```

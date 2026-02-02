@@ -34,7 +34,8 @@ Run a complete production readiness assessment and write all results to the `.vi
     │       ├── analytics assessor
     │       ├── platform assessor
     │       ├── reliability assessor
-    │       └── legal assessor
+    │       ├── legal assessor
+    │       └── ai-security assessor (conditional: only if AI patterns detected)
     │       └── Each writes: .vibe-check/checklist/item-*.md
     │       └── Each returns: score summary only
     │
@@ -273,6 +274,41 @@ Analysis files: legal.md, data.md
 Evaluate: Privacy Policy, Terms of Service, Cookie Consent, User Data Deletion
 ```
 
+**AI Security Assessor (Conditional):**
+
+Only spawn this assessor if the mapper indicated AI patterns were detected. Check the mapper's confirmation message for "AI patterns detected: Yes".
+
+```
+Task: Assess AI security domain
+
+Read agents/vibe-assessor.md for your instructions.
+Your domain assignment is: ai-security
+
+Project context (calibrate your assessment accordingly):
+- Description: {description from user}
+- Audience: {personal|known|public}
+- Data sensitivity: {none|accounts|payments|sensitive}
+- Stakes: {none|low|medium|high}
+
+Load these analysis files:
+- .vibe-check/analysis/ai-security.md
+- .vibe-check/analysis/auth.md
+- .vibe-check/analysis/integrations.md
+
+Load references:
+- references/persona.md
+- references/voice.md
+- references/domains.md
+- references/agent-classification.md
+
+Evaluate: Prompt Injection Prevention, Function Calling Safety, WebSocket Origin Validation, Plugin Ecosystem Security, Context Isolation
+
+Write failing/unknown items to .vibe-check/checklist/
+Return score summary only.
+```
+
+If the mapper indicated "AI patterns detected: No", skip this assessor entirely and note in metadata that AI Security domain was not applicable.
+
 Collect score summaries from each assessor.
 
 ### Phase 5: Aggregate & Write
@@ -286,12 +322,27 @@ Calculate total score and write final files:
 
 #### metadata.json
 
+**Scoring with AI Security domain:**
+
+When AI patterns are detected, the total max points is 120 (100 base + 20 AI Security). Normalize the final score to 100:
+
+```
+rawScore = sum of all earned points
+maxPoints = 100 (no AI) or 120 (with AI)
+normalizedScore = round((rawScore / maxPoints) * 100)
+```
+
+This ensures projects with AI capabilities are assessed more rigorously while maintaining comparable scores.
+
 ```json
 {
   "project": "{from package.json name or directory}",
   "analysisDate": "{YYYY-MM-DD}",
-  "score": {total},
+  "score": {normalizedScore},
+  "rawScore": {rawScore},
+  "maxPoints": {100 or 120},
   "band": "{Not Ready|Needs Work|Ready}",
+  "aiDetected": {true|false},
   "context": {
     "description": "{what they said it does}",
     "audience": "{personal|known|public}",
@@ -304,7 +355,8 @@ Calculate total score and write final files:
     "analytics": {"earned": N, "max": 15},
     "platform": {"earned": N, "max": 15},
     "reliability": {"earned": N, "max": 15},
-    "legal": {"earned": N, "max": 10}
+    "legal": {"earned": N, "max": 10},
+    "ai-security": {"earned": N, "max": 20, "applicable": true|false}
   },
   "checklist": {
     "pass": N,
@@ -316,6 +368,8 @@ Calculate total score and write final files:
   ]
 }
 ```
+
+**Note:** When `ai-security.applicable` is false, the category is excluded from scoring calculations.
 
 #### summary.md
 
