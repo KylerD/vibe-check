@@ -21,7 +21,7 @@ const hasHelp = args.includes('--help') || args.includes('-h');
 
 const banner = `
   ${cyan}Vibe Check${reset} ${dim}v${pkg.version}${reset}
-  Production readiness assessment for Claude Code
+  Idea validation, project planning, and production readiness for Claude Code
 `;
 
 console.log(banner);
@@ -90,6 +90,11 @@ function replacePathRefs(content, pathPrefix) {
   content = content.replace(/`templates\//g, `\`${pathPrefix}vibe-check/templates/`);
   content = content.replace(/- templates\//g, `- ${pathPrefix}vibe-check/templates/`);
   content = content.replace(/Use `templates\//g, `Use \`${pathPrefix}vibe-check/templates/`);
+
+  // Skills directory
+  content = content.replace(/`skills\//g, `\`${pathPrefix}vibe-check/skills/`);
+  content = content.replace(/- skills\//g, `- ${pathPrefix}vibe-check/skills/`);
+  content = content.replace(/Load the `skills\//g, `Load the \`${pathPrefix}vibe-check/skills/`);
 
   // Agents directory
   content = content.replace(/Read agents\//g, `Read ${pathPrefix}agents/`);
@@ -362,7 +367,15 @@ function install(isGlobal) {
     console.log(`  ${green}✓${reset} Installed agents/`);
   }
 
-  // 5. Copy scripts to vibe-check/scripts/
+  // 5. Copy skills to vibe-check/skills/
+  const skillsSrc = path.join(src, 'skills');
+  const skillsDest = path.join(claudeDir, 'vibe-check', 'skills');
+  if (fs.existsSync(skillsSrc)) {
+    copyWithPathReplacement(skillsSrc, skillsDest, pathPrefix);
+    console.log(`  ${green}✓${reset} Installed vibe-check/skills/`);
+  }
+
+  // 6. Copy scripts to vibe-check/scripts/
   const scriptsSrc = path.join(src, 'scripts');
   const scriptsDest = path.join(claudeDir, 'vibe-check', 'scripts');
   if (fs.existsSync(scriptsSrc)) {
@@ -370,18 +383,20 @@ function install(isGlobal) {
     console.log(`  ${green}✓${reset} Installed vibe-check/scripts/`);
   }
 
-  // 6. Install hooks into settings.json
+  // 7. Install hooks into settings.json
   installHooks(claudeDir, pathPrefix);
   console.log(`  ${green}✓${reset} Installed secret scanner hook`);
 
   console.log(`
-  ${green}Done!${reset} Run ${cyan}/vibe-check:check${reset} to start.
+  ${green}Done!${reset} Vibe Check is ready.
 
   ${yellow}NOTE:${reset} If Claude Code is already running, ${cyan}restart your session${reset}
   for slash commands to register. New sessions pick them up automatically.
 
   ${yellow}Commands:${reset}
-    /vibe-check:check        Run full assessment
+    /vibe-check:idea         Validate your product idea
+    /vibe-check:plan         Plan the build — produces PROJECT-PLAN.md
+    /vibe-check:check        Run full production readiness assessment
     /vibe-check:fix          Auto-fix agent-doable items
     /vibe-check:refresh      Re-run and show progress
     /vibe-check:discuss      Ask questions about your report

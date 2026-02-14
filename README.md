@@ -11,9 +11,9 @@
     \$$$   |   $$ \| $$    $$| $$     \       \$$    $$| $$  | $$| $$     \ \$$    $$| $$  \$$\
      \$     \$$$$$$ \$$$$$$$  \$$$$$$$$        \$$$$$$  \$$   \$$ \$$$$$$$$  \$$$$$$  \$$   \$$
 ```
-**You built something with AI. You can't read the code. Is it actually ready to ship?**
+**Validate ideas. Plan the build. Ship with confidence.**
 
-**Get a structured assessment you can understand, discuss, and hand off.**
+**From "should I build this?" to "is it ready to ship?" — one toolkit for the entire vibe coder journey.**
 
 [![npm version](https://img.shields.io/npm/v/vibe-check-cc?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/vibe-check-cc)
 [![npm downloads](https://img.shields.io/npm/dm/vibe-check-cc?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/vibe-check-cc)
@@ -33,26 +33,109 @@ Works on Mac, Windows, and Linux.
 
 ## Why I Built This
 
-We're in the vibe coding era. People who can't read code are building real software - shipping apps, automating workflows, creating tools that actually work. The barrier to entry has dropped.
+We're in the vibe coding era. Building is cheap — AI collapsed the cost of shipping software from months to days. But the hard parts haven't changed: knowing *what* to build, and knowing when it's *ready* to ship.
 
-But there's a problem. You built something. It runs. **Is this production-ready?** You have no idea. You can't read the code. You're taking the AI's word for it.
+I keep running into founders who vibe-coded their way to a working prototype and hit two walls:
+1. **Before building:** They jumped straight to code without validating the idea or planning the scope
+2. **After building:** They have no idea if what they built is production-ready
 
-I've spent over a decade as a full-stack developer and enterprise architect. Now as a founder, I mostly orchestrate AI agents - and I keep running into non-technical founders who vibe-coded their way to a working prototype and hit a wall. They don't know what's broken. They don't know what's "good enough" to ship. They just know they can't read the code.
+Vibe Check covers the full journey:
 
-So I built this. One command gives you:
-
-- **A prioritized action plan** — What to fix first, what can wait, what's fine
-- **Plain-language findings** — What's actually wrong, with file paths you can point at
-- **Agent vs. human classification** — What your AI tool can auto-fix, what needs a human
-- **Handoff artifacts** — Documents you can give to a technical co-founder, a freelancer, or your next AI session
+- **`/vibe-check:idea`** — Validate your idea with an experienced founder perspective. Is this worth building?
+- **`/vibe-check:plan`** — Plan the build. Easy questions in, detailed spec out — optimized for AI coding tools.
+- **`/vibe-check:check`** — Assess production readiness. Prioritized findings with plain-language fix instructions.
+- **`/vibe-check:fix`** — Auto-fix agent-doable issues with verified, atomic commits.
 
 It's founder-focused. It knows the difference between "enterprise best practice" and "good enough to get in front of users."
 
 
 ---
 
+## How It Works
+
+### Starting Fresh? Validate → Plan → Build → Check
+
+#### 1. Validate Your Idea
+
+```
+/vibe-check:idea
+```
+
+Interactive conversation with an experienced founder perspective. Covers the questions that matter: Who has this problem? How will they find it? What stops someone from cloning it? Writes an idea brief to `.vibe-check/idea-brief.md`.
+
+#### 2. Plan the Build
+
+```
+/vibe-check:plan
+```
+
+Easy questions in, detailed spec out. Asks you what you're building and for whom, then produces a complete `PROJECT-PLAN.md` with tech stack, data model, pages, scope, and implementation order — optimized for AI coding tools. If you ran `/vibe-check:idea` first, it builds on that context.
+
+#### 3. Build Your App
+
+Use `PROJECT-PLAN.md` as context for Claude Code, Cursor, or your tool of choice.
+
+#### 4. Check Production Readiness
+
+```
+/vibe-check:check
+```
+
+The system:
+1. **Asks context** — What you're building, who it's for, what data you handle, what's at stake
+2. **Maps your codebase** — Spawns an agent to analyze secrets, auth, errors, dependencies, infrastructure, and detect capabilities (database, auth, analytics, etc.)
+3. **Assesses domains** — Parallel agents evaluate security, discoverability, analytics, platform, reliability, legal (calibrated to your context). Domains that don't apply are automatically skipped.
+4. **Writes results** — Score, report, prioritized action plan
+
+You get a score out of 100 and a clear breakdown of what needs attention. Small codebases (<50 files) get a fast-path mapper that cuts assessment time significantly.
+
+### Already Have Code? Check → Fix → Discuss → Refresh
+
+#### Discuss the Findings
+
+```
+/vibe-check:discuss
+```
+
+Ask questions about your report:
+- "Tell me more about the secrets management issue"
+- "What should I fix first?"
+- "Why is authentication marked as failing?"
+
+#### Fix Issues
+
+Auto-fix agent-doable items with verified, atomic commits:
+
+```
+/vibe-check:fix              # Fix all agent-doable items
+/vibe-check:fix item-003     # Fix a specific item
+```
+
+Each fix is verified (lint, typecheck, tests as applicable) and committed individually.
+
+#### Track Progress
+
+```
+/vibe-check:refresh
+```
+
+Re-runs the assessment and shows what improved or regressed since last check.
+
+---
+
 ## What You Get
 
+After `/vibe-check:idea`:
+```
+.vibe-check/idea-brief.md    # Structured idea assessment
+```
+
+After `/vibe-check:plan`:
+```
+PROJECT-PLAN.md              # Detailed build spec in project root
+```
+
+After `/vibe-check:check`:
 ```
 .vibe-check/
 ├── summary.md           # 1-page executive overview
@@ -73,65 +156,12 @@ Each checklist item includes:
 
 ---
 
-## How It Works
-
-### 1. Run the Assessment
-
-```
-/vibe-check:check
-```
-
-The system:
-1. **Asks context** — What you're building, who it's for, what data you handle, what's at stake
-2. **Maps your codebase** — Spawns an agent to analyze secrets, auth, errors, dependencies, infrastructure, and detect capabilities (database, auth, analytics, etc.)
-3. **Assesses domains** — Parallel agents evaluate security, discoverability, analytics, platform, reliability, legal (calibrated to your context). Domains that don't apply are automatically skipped.
-4. **Writes results** — Score, report, prioritized action plan
-
-You get a score out of 100 and a clear breakdown of what needs attention. Small codebases (<50 files) get a fast-path mapper that cuts assessment time significantly.
-
-### 2. Discuss the Findings
-
-```
-/vibe-check:discuss
-```
-
-Ask questions about your report:
-- "Tell me more about the secrets management issue"
-- "What should I fix first?"
-- "Why is authentication marked as failing?"
-
-### 3. Fix Issues
-
-Auto-fix agent-doable items with verified, atomic commits:
-
-```
-/vibe-check:fix              # Fix all agent-doable items
-/vibe-check:fix item-003     # Fix a specific item
-```
-
-Each fix is verified (lint, typecheck, tests as applicable) and committed individually.
-
-For items that need manual work, ask for help:
-
-```
-/vibe-check:discuss
-> "Help me with the privacy policy item"
-```
-
-### 4. Track Progress
-
-```
-/vibe-check:refresh
-```
-
-Re-runs the assessment and shows what improved or regressed since last check.
-
----
-
 ## Commands
 
 | Command | Description |
 |---------|-------------|
+| `/vibe-check:idea` | Validate your product idea with a founder perspective |
+| `/vibe-check:plan` | Plan your build — produces a detailed PROJECT-PLAN.md |
 | `/vibe-check:check` | Full production readiness assessment |
 | `/vibe-check:fix` | Auto-fix agent-doable items with atomic commits |
 | `/vibe-check:refresh` | Re-run and compare with previous results |
@@ -318,7 +348,7 @@ The perfect score comes from being appropriately minimal: zero dependencies (no 
 
 ## Acknowledgements
 
-The multi-agent architecturem, orchestration patterns and even this README in Vibe Check are heavily inspired by [GSD (Get Shit Done)](https://github.com/glittercowboy/get-shit-done) — a structured planning and execution framework for Claude Code. If you're building AI-assisted workflows with parallel agents and good context engineering principles, check out their approach.
+The multi-agent architecture, orchestration patterns and even this README in Vibe Check are heavily inspired by [GSD (Get Shit Done)](https://github.com/glittercowboy/get-shit-done) — a structured planning and execution framework for Claude Code. If you're building AI-assisted workflows with parallel agents and good context engineering principles, check out their approach.
 
 ---
 

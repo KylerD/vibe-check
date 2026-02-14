@@ -1,7 +1,7 @@
 {
   "name": "vibe-check-cc",
   "version": "1.2.0",
-  "description": "Production readiness assessment for Claude Code - identify gaps across security, infrastructure, and reliability",
+  "description": "Idea validation, project planning, and production readiness for vibe coders using Claude Code",
   "author": {
     "name": "Kyle Davidson"
   },
@@ -12,11 +12,11 @@
   "keywords": [
     "claude",
     "claude-code",
-    "production",
-    "readiness",
-    "security",
-    "infrastructure",
-    "devops",
+    "vibe-coding",
+    "idea-validation",
+    "project-planning",
+    "production-readiness",
+    "startup",
     "assessment"
   ],
   "repository": {
