@@ -1,6 +1,6 @@
 {
   "name": "vibe-check-cc",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Idea validation, project planning, and production readiness for vibe coders using Claude Code",
   "author": {
     "name": "Kyle Davidson"
