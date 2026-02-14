@@ -29,6 +29,7 @@
     "agents/",
     "references/",
     "templates/",
+    "skills/",
     "README.md"
   ],
   "engines": {
