@@ -116,7 +116,7 @@ Take everything from Phases 1-3 and synthesize a complete PROJECT-PLAN.md. You'r
 
 | Layer | Choice | Reasoning |
 |-------|--------|-----------|
-| Framework | {e.g., Next.js 15} | {why} |
+| Framework | {e.g., Next.js} | {why} |
 | Database | {e.g., Supabase Postgres} | {why} |
 | Auth | {e.g., Supabase Auth} | {why} |
 | Hosting | {e.g., Vercel} | {why} |
@@ -182,6 +182,7 @@ Take everything from Phases 1-3 and synthesize a complete PROJECT-PLAN.md. You'r
 ```
 
 **Guidelines for the spec:**
+- **Never pin specific version numbers** in the tech stack (e.g., "Next.js" not "Next.js 15"). AI models often install outdated versions from their training data. Always use the latest stable version of whatever technology you recommend — let the package manager resolve it.
 - Data model should include actual field names, types, and relationships
 - Pages should include actual routes, not placeholders
 - The "NOT building" list is as important as the "building" list
