@@ -3,6 +3,10 @@ import type { Feature } from '@/lib/types/game';
 const BASE_URL = 'https://vibe-check.cloud';
 const SITE_NAME = 'Vibe Check';
 
+export function safeJsonLd(data: Record<string, unknown>): string {
+  return JSON.stringify(data).replace(/</g, '\\u003c');
+}
+
 export function getWebsiteJsonLd() {
   return {
     '@context': 'https://schema.org',

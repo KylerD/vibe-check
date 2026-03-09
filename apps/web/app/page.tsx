@@ -6,6 +6,7 @@ import {
   getWebsiteJsonLd,
   getSoftwareApplicationJsonLd,
   getFaqJsonLd,
+  safeJsonLd,
   HOME_FAQS,
 } from '@/lib/seo';
 
@@ -15,19 +16,19 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(getWebsiteJsonLd()),
+          __html: safeJsonLd(getWebsiteJsonLd()),
         }}
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(getSoftwareApplicationJsonLd()),
+          __html: safeJsonLd(getSoftwareApplicationJsonLd()),
         }}
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(getFaqJsonLd(HOME_FAQS)),
+          __html: safeJsonLd(getFaqJsonLd(HOME_FAQS)),
         }}
       />
 

@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { ApproachContent } from '@/components/approach-content';
-import { getFeatureArticleJsonLd, getBreadcrumbJsonLd } from '@/lib/seo';
+import { getFeatureArticleJsonLd, getBreadcrumbJsonLd, safeJsonLd } from '@/lib/seo';
 
 export const dynamicParams = false;
 
@@ -88,13 +88,13 @@ export default async function FeaturePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(articleJsonLd),
+          __html: safeJsonLd(articleJsonLd),
         }}
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd),
+          __html: safeJsonLd(breadcrumbJsonLd),
         }}
       />
 
