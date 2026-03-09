@@ -25,6 +25,12 @@ export async function checkApp(
   try {
     const { features: matched } = await aiService.matchFeatures(trimmedDescription, validatedTools);
 
+    if (matched.length === 0) {
+      throw new Error(
+        'That doesn\'t look like an app description. Try something like "A marketplace for freelance designers with payments and messaging".'
+      );
+    }
+
     const featureMap = new Map(FEATURES.map((feature) => [feature.id, feature]));
 
     return matched
@@ -46,7 +52,10 @@ export async function checkApp(
         };
       })
       .filter((result): result is RecommendationResult => result !== null);
-  } catch {
+  } catch (error) {
+    if (error instanceof Error && error.message.includes('doesn\'t look like')) {
+      throw error;
+    }
     return getRecommendations(trimmedDescription);
   }
 }
