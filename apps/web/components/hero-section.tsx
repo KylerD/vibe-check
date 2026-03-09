@@ -47,9 +47,9 @@ export function HeroSection() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-          vibe-check scans AI-generated codebases for hidden production risks
+          <strong>vibe-check</strong> scans AI-generated codebases for hidden production risks
           across security, payments, auth, and more — then gives you the prompts
-          to fix them.
+          to fix them. Built for <em>vibe coders</em> using Cursor, Lovable, Bolt, v0, and Claude Code.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
