@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { FEATURES } from '@/lib/features';
 import { FEATURE_ICONS } from '@/lib/feature-icons';
 import { SiteHeader } from '@/components/game/game-header';
+import { SiteFooter } from '@/components/site-footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getBreadcrumbJsonLd, getCollectionPageJsonLd, safeJsonLd } from '@/lib/seo';
 
@@ -68,7 +69,7 @@ export default function FeaturesPage() {
 
       <SiteHeader backHref="/" backLabel="Home" />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <section className="mx-auto max-w-4xl px-6 py-10">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-1.5 text-sm text-muted-foreground">
@@ -97,7 +98,7 @@ export default function FeaturesPage() {
             {FEATURES.map((feature) => {
               const icon = FEATURE_ICONS[feature.id] ?? '📦';
               return (
-                <Link key={feature.id} href={`/features/${feature.id}`}>
+                <Link key={feature.id} href={`/features/${feature.id}`} className="rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2">
                   <Card className="h-full transition-colors hover:bg-muted/50">
                     <CardHeader className="pb-2">
                       <span className="text-2xl">{icon}</span>
@@ -115,6 +116,8 @@ export default function FeaturesPage() {
           </div>
         </section>
       </main>
+
+      <SiteFooter />
     </div>
   );
 }

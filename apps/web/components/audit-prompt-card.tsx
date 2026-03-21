@@ -41,7 +41,7 @@ export function AuditPromptCard({
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="relative">
-          <pre className="whitespace-pre-wrap rounded-md bg-muted p-4 font-mono text-sm">
+          <pre className="whitespace-pre-wrap rounded-md bg-muted p-4 pr-20 font-mono text-sm">
             {prompt}
           </pre>
           <Button
@@ -50,7 +50,7 @@ export function AuditPromptCard({
             className="absolute right-2 top-2"
             onClick={handleCopy}
           >
-            {copied ? 'Copied!' : 'Copy'}
+            <span aria-live="polite">{copied ? 'Copied!' : 'Copy'}</span>
           </Button>
         </div>
         <p className="text-sm text-muted-foreground">{whyItMatters}</p>

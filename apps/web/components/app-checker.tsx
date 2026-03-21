@@ -95,24 +95,25 @@ export function AppChecker() {
               id="app-description"
               rows={4}
               maxLength={1000}
-              className="w-full rounded-md border border-border bg-background px-4 py-3 text-sm placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
+              className="w-full rounded-md border border-input bg-background px-4 py-3 text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/50"
               placeholder="e.g. A marketplace for freelance designers with payments, messaging, and user profiles"
               value={description}
               onChange={(event) => setDescription(event.target.value)}
             />
           </div>
 
-          <div>
-            <label className="mb-2 block text-sm font-medium">
+          <fieldset>
+            <legend className="mb-2 block text-sm font-medium">
               What tools are you using?
-            </label>
-            <div className="flex flex-wrap gap-2">
+            </legend>
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Select tools">
               {TOOLS.map((tool) => (
                 <button
                   key={tool.id}
                   type="button"
+                  aria-pressed={selectedTools.has(tool.id)}
                   onClick={() => toggleTool(tool.id)}
-                  className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${
+                  className={`rounded-full border px-4 py-2 text-sm transition-colors ${
                     selectedTools.has(tool.id)
                       ? 'border-primary bg-primary text-primary-foreground'
                       : 'border-border bg-background text-foreground hover:bg-muted'
@@ -122,7 +123,7 @@ export function AppChecker() {
                 </button>
               ))}
             </div>
-          </div>
+          </fieldset>
 
           <Button
             size="lg"
@@ -137,6 +138,25 @@ export function AppChecker() {
             <p className="text-sm text-center text-destructive">{error}</p>
           )}
         </div>
+
+        {isPending && !visibleResults && (
+          <div className="mt-12">
+            <div className="mb-6 mx-auto h-5 w-48 animate-pulse rounded bg-muted" />
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="rounded-lg border border-border p-6 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="h-8 w-8 animate-pulse rounded bg-muted" />
+                    <div className="h-5 w-16 animate-pulse rounded-full bg-muted" />
+                  </div>
+                  <div className="h-4 w-3/4 animate-pulse rounded bg-muted" />
+                  <div className="h-3 w-full animate-pulse rounded bg-muted" />
+                  <div className="h-3 w-2/3 animate-pulse rounded bg-muted" />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {visibleResults && (
           <div className="mt-12">
@@ -155,7 +175,7 @@ export function AppChecker() {
                   : `/features/${result.featureId}`;
 
                 return (
-                  <Link key={result.featureId} href={href}>
+                  <Link key={result.featureId} href={href} className="rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2">
                     <Card className="h-full transition-colors hover:bg-muted/50">
                       <CardHeader className="pb-2">
                         <div className="flex items-center justify-between">

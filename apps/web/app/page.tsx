@@ -1,9 +1,16 @@
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { SiteHeader } from '@/components/game/game-header';
+import { SiteFooter } from '@/components/site-footer';
 import { HeroSection } from '@/components/hero-section';
-import { AppChecker } from '@/components/app-checker';
-import { FaqSection } from '@/components/faq-section';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+const AppChecker = dynamic(() =>
+  import('@/components/app-checker').then((mod) => mod.AppChecker)
+);
+const FaqSection = dynamic(() =>
+  import('@/components/faq-section').then((mod) => mod.FaqSection)
+);
 import {
   getWebsiteJsonLd,
   getSoftwareApplicationJsonLd,
@@ -36,7 +43,7 @@ export default function Home() {
 
       <SiteHeader />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <HeroSection />
         <AppChecker />
 
@@ -45,7 +52,7 @@ export default function Home() {
             Guides for Vibe Coders
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Link href="/guides/vibe-coding-security">
+            <Link href="/guides/vibe-coding-security" className="rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2">
               <Card className="h-full transition-colors hover:bg-muted/50">
                 <CardHeader>
                   <CardTitle className="text-base">Vibe Coding Security Guide</CardTitle>
@@ -58,7 +65,7 @@ export default function Home() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guides/cursor-production-ready">
+            <Link href="/guides/cursor-production-ready" className="rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2">
               <Card className="h-full transition-colors hover:bg-muted/50">
                 <CardHeader>
                   <CardTitle className="text-base">Cursor Production Ready Checklist</CardTitle>
@@ -77,28 +84,7 @@ export default function Home() {
         <FaqSection faqs={HOME_FAQS} />
       </main>
 
-      <footer className="border-t border-border px-6 py-8">
-        <div className="mx-auto flex max-w-4xl flex-col items-center gap-3 text-center">
-          <p className="text-sm text-muted-foreground">
-            <Link
-              href="/features"
-              className="underline underline-offset-4 transition-colors hover:text-foreground"
-            >
-              All checklists
-            </Link>
-            {' · '}
-            Free and open source.{' '}
-            <a
-              href="https://github.com/KylerD/vibe-check"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-4 transition-colors hover:text-foreground"
-            >
-              View on GitHub
-            </a>
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

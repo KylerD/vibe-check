@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { ApproachContent } from '@/components/approach-content';
+import { SiteFooter } from '@/components/site-footer';
 import { getFeatureArticleJsonLd, getBreadcrumbJsonLd, safeJsonLd } from '@/lib/seo';
 import { getRelatedFeatures } from '@/lib/feature-relations';
 
@@ -102,7 +103,7 @@ export default async function FeaturePage({
 
       <SiteHeader backHref="/" backLabel="All features" />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <article className="mx-auto max-w-3xl px-6 py-10">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-1.5 text-sm text-muted-foreground">
@@ -170,6 +171,8 @@ export default async function FeaturePage({
           <RelatedChecksSection featureId={id} />
         </article>
       </main>
+
+      <SiteFooter />
     </div>
   );
 }
@@ -314,7 +317,7 @@ function RelatedChecksSection({ featureId }: { featureId: string }) {
             <Link
               key={relatedFeature.id}
               href={`/features/${relatedFeature.id}`}
-              className="group rounded-lg border border-border p-4 transition-colors hover:bg-muted/50"
+              className="group rounded-lg border border-border p-4 transition-colors hover:bg-muted/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
             >
               <div className="flex items-center gap-2">
                 <span role="img" aria-label={relatedFeature.name}>

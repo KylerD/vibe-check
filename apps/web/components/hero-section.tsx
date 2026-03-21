@@ -60,7 +60,7 @@ export function HeroSection() {
               rel="noopener noreferrer"
             >
               Install the CLI
-              <svg className="ml-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg aria-hidden="true" className="ml-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
               </svg>
             </a>
@@ -68,7 +68,7 @@ export function HeroSection() {
           <Button variant="outline" size="lg" asChild>
             <a href="#check-your-app">
               Try the web version
-              <svg className="ml-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg aria-hidden="true" className="ml-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
               </svg>
             </a>
@@ -83,56 +83,56 @@ export function HeroSection() {
           ))}
         </div>
 
-        <div className="mt-12 w-full max-w-2xl overflow-hidden rounded-lg border border-border bg-zinc-950 text-left shadow-2xl">
-          <div className="flex items-center gap-2 border-b border-zinc-800 px-4 py-3">
-            <div className="h-3 w-3 rounded-full bg-zinc-700" />
-            <div className="h-3 w-3 rounded-full bg-zinc-700" />
-            <div className="h-3 w-3 rounded-full bg-zinc-700" />
-            <span className="ml-2 text-xs text-zinc-500">terminal</span>
+        <div className="mt-12 w-full max-w-2xl overflow-hidden rounded-lg border border-border bg-card text-left shadow-2xl dark:bg-[oklch(0.16_0.02_260)]" role="img" aria-label="Terminal showing vibe-check scan output with security and reliability findings">
+          <div className="flex items-center gap-2 border-b border-border px-4 py-3">
+            <div className="h-3 w-3 rounded-full bg-muted-foreground/30" />
+            <div className="h-3 w-3 rounded-full bg-muted-foreground/30" />
+            <div className="h-3 w-3 rounded-full bg-muted-foreground/30" />
+            <span className="ml-2 text-xs text-muted-foreground">terminal</span>
           </div>
-          <div className="p-4 font-mono text-sm leading-relaxed">
+          <div className="overflow-x-auto p-4 font-mono text-xs leading-relaxed sm:text-sm">
             {TERMINAL_LINES.map((line, index) => {
               if (line.type === 'blank') {
                 return <div key={index} className="h-4" />;
               }
               if (line.type === 'command') {
                 return (
-                  <div key={index} className="text-zinc-300">
+                  <div key={index} className="text-foreground">
                     {line.text}
                   </div>
                 );
               }
               if (line.type === 'info') {
                 return (
-                  <div key={index} className="text-zinc-500">
+                  <div key={index} className="text-muted-foreground">
                     {line.text}
                   </div>
                 );
               }
               if (line.type === 'header') {
                 return (
-                  <div key={index} className="font-semibold text-zinc-200">
+                  <div key={index} className="font-semibold text-foreground">
                     {line.text}
                   </div>
                 );
               }
               if (line.type === 'critical') {
                 return (
-                  <div key={index} className="text-red-400">
+                  <div key={index} className="text-destructive">
                     {line.text}
                   </div>
                 );
               }
               if (line.type === 'high') {
                 return (
-                  <div key={index} className="text-yellow-400">
+                  <div key={index} className="text-amber-600 dark:text-amber-400">
                     {line.text}
                   </div>
                 );
               }
               if (line.type === 'summary') {
                 return (
-                  <div key={index} className="text-zinc-400">
+                  <div key={index} className="text-muted-foreground">
                     {line.text}
                   </div>
                 );

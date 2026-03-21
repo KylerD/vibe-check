@@ -18,39 +18,50 @@ export function FaqSection({ faqs }: FaqSectionProps) {
       </h2>
 
       <div className="divide-y divide-border rounded-lg border border-border">
-        {faqs.map((faq, index) => (
-          <div key={index}>
-            <button
-              onClick={() =>
-                setOpenIndex(openIndex === index ? null : index)
-              }
-              className="flex w-full items-center justify-between gap-4 px-6 py-4 text-left transition-colors hover:bg-muted/50"
-              aria-expanded={openIndex === index}
-            >
-              <span className="text-sm font-medium">{faq.question}</span>
-              <ChevronDown
+        {faqs.map((faq, index) => {
+          const isOpen = openIndex === index;
+          const panelId = `faq-panel-${index}`;
+          const buttonId = `faq-button-${index}`;
+          return (
+            <div key={index}>
+              <button
+                id={buttonId}
+                onClick={() =>
+                  setOpenIndex(isOpen ? null : index)
+                }
+                className="flex w-full items-center justify-between gap-4 px-6 py-4 text-left transition-colors hover:bg-muted/50"
+                aria-expanded={isOpen}
+                aria-controls={panelId}
+              >
+                <span className="text-sm font-medium">{faq.question}</span>
+                <ChevronDown
+                  aria-hidden="true"
+                  className={cn(
+                    'h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200',
+                    isOpen && 'rotate-180'
+                  )}
+                />
+              </button>
+              <div
+                id={panelId}
+                role="region"
+                aria-labelledby={buttonId}
                 className={cn(
-                  'h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200',
-                  openIndex === index && 'rotate-180'
+                  'grid transition-all duration-200',
+                  isOpen
+                    ? 'grid-rows-[1fr] opacity-100'
+                    : 'grid-rows-[0fr] opacity-0'
                 )}
-              />
-            </button>
-            <div
-              className={cn(
-                'grid transition-all duration-200',
-                openIndex === index
-                  ? 'grid-rows-[1fr] opacity-100'
-                  : 'grid-rows-[0fr] opacity-0'
-              )}
-            >
-              <div className="overflow-hidden">
-                <p className="px-6 pb-4 text-sm text-muted-foreground">
-                  {faq.answer}
-                </p>
+              >
+                <div className="overflow-hidden">
+                  <p className="px-6 pb-4 text-sm text-muted-foreground">
+                    {faq.answer}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

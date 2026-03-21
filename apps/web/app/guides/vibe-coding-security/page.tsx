@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { SiteFooter } from '@/components/site-footer';
 import { getGuideArticleJsonLd, getBreadcrumbJsonLd, safeJsonLd } from '@/lib/seo';
 
 const BASE_URL = 'https://vibe-check.cloud';
@@ -84,7 +85,7 @@ export default function VibeCodingSecurityGuide() {
 
       <SiteHeader backHref="/" backLabel="Home" />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <article className="mx-auto max-w-3xl px-6 py-10">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-1.5 text-sm text-muted-foreground">
@@ -92,10 +93,6 @@ export default function VibeCodingSecurityGuide() {
                 <Link href="/" className="transition-colors hover:text-foreground">
                   Vibe Check
                 </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <span className="transition-colors">Guides</span>
               </li>
               <li aria-hidden="true">/</li>
               <li className="text-foreground font-medium" aria-current="page">
@@ -388,7 +385,7 @@ export default function VibeCodingSecurityGuide() {
 
             <section>
               <h2 className="mb-4 text-xl font-semibold">Related Guides</h2>
-              <Link href="/guides/cursor-production-ready">
+              <Link href="/guides/cursor-production-ready" className="rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2">
                 <Card className="transition-colors hover:bg-muted/50">
                   <CardHeader>
                     <CardTitle className="text-base">
@@ -407,6 +404,8 @@ export default function VibeCodingSecurityGuide() {
           </div>
         </article>
       </main>
+
+      <SiteFooter />
     </div>
   );
 }
