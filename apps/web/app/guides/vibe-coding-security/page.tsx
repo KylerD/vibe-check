@@ -383,6 +383,27 @@ export default function VibeCodingSecurityGuide() {
                 </Button>
               </div>
             </section>
+
+            <Separator className="my-10" />
+
+            <section>
+              <h2 className="mb-4 text-xl font-semibold">Related Guides</h2>
+              <Link href="/guides/cursor-production-ready">
+                <Card className="transition-colors hover:bg-muted/50">
+                  <CardHeader>
+                    <CardTitle className="text-base">
+                      Is Your Cursor App Production Ready?
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      The complete production readiness checklist for apps built with
+                      Cursor and other AI coding tools.
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+            </section>
           </div>
         </article>
       </main>

@@ -381,6 +381,27 @@ export default function CursorProductionReadyGuide() {
                 </Button>
               </div>
             </section>
+
+            <Separator className="my-10" />
+
+            <section>
+              <h2 className="mb-4 text-xl font-semibold">Related Guides</h2>
+              <Link href="/guides/vibe-coding-security">
+                <Card className="transition-colors hover:bg-muted/50">
+                  <CardHeader>
+                    <CardTitle className="text-base">
+                      Vibe Coding Security Guide
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      The top security risks in AI-generated code and how to fix them
+                      before you ship.
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+            </section>
           </div>
         </article>
       </main>
