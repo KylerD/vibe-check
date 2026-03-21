@@ -29,7 +29,7 @@ DOMAIN SCORES
 ═══════════════════════════════════════════════
 ```
 
-### Security ({earned}/25)
+### Security ({earned}/15)
 
 ```
 {bar}  {pct}%  {status}
@@ -44,10 +44,101 @@ DOMAIN SCORES
 | Input Validation | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 | Dependency Security | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 | HTTPS | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Security Headers | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| CORS Configuration | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Rate Limiting | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| CSRF Protection | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 
 ---
 
-### Discoverability ({earned}/20)
+### Performance ({earned}/12)
+
+```
+{bar}  {pct}%  {status}
+```
+
+{Brief assessment of performance and loading characteristics}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| Image Optimization | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Code Splitting & Lazy Loading | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Data Fetching & Caching Strategy | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Font Optimization | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Database Query Performance | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+---
+
+### Accessibility ({earned}/12)
+
+```
+{bar}  {pct}%  {status}
+```
+
+{Brief assessment of accessibility posture}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| Image Alt Text | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Form Label Association | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Keyboard Navigation & Focus Management | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| ARIA & Semantic HTML | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Motion & Animation Accessibility | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+---
+
+### Testing ({earned}/10)
+
+```
+{bar}  {pct}%  {status}
+```
+
+{Brief assessment of test coverage and strategy}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| Test Runner Configured | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Test Files Exist | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| E2E Testing Setup | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Tests Run in CI | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+---
+
+### Monitoring ({earned}/10)
+
+```
+{bar}  {pct}%  {status}
+```
+
+{Brief assessment of observability and monitoring}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| Error Tracking | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Structured Logging | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Health Check Endpoint | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Application Performance Monitoring | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+---
+
+### CI/CD ({earned}/10)
+
+```
+{bar}  {pct}%  {status}
+```
+
+{Brief assessment of CI/CD pipeline and deployment practices}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| CI Pipeline Exists | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Build Verification in CI | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Database Migration Strategy | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Environment Separation | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+---
+
+### Discoverability ({earned}/10)
 
 ```
 {bar}  {pct}%  {status}
@@ -66,7 +157,7 @@ DOMAIN SCORES
 
 ---
 
-### Analytics ({earned}/15)
+### Analytics ({earned}/8)
 
 ```
 {bar}  {pct}%  {status}
@@ -77,29 +168,11 @@ DOMAIN SCORES
 | Item | Status | Priority | Agent |
 |------|--------|----------|-------|
 | Visitor Tracking | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| Error Tracking | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 | Conversion Tracking | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 
 ---
 
-### Platform ({earned}/15)
-
-```
-{bar}  {pct}%  {status}
-```
-
-{Brief assessment of hosting and infrastructure}
-
-| Item | Status | Priority | Agent |
-|------|--------|----------|-------|
-| Hosting Compatibility | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| Complexity Check | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| Cost Signals | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| Managed Services | ℹ | ○ | — |
-
----
-
-### Reliability ({earned}/15)
+### Reliability ({earned}/8)
 
 ```
 {bar}  {pct}%  {status}
@@ -111,12 +184,11 @@ DOMAIN SCORES
 |------|--------|----------|-------|
 | Backups | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 | Error Handling | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| Database Connections | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| Health Checks | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| Database Connection Handling | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 
 ---
 
-### Legal ({earned}/10)
+### Legal ({earned}/5)
 
 ```
 {bar}  {pct}%  {status}
@@ -133,7 +205,20 @@ DOMAIN SCORES
 
 ---
 
-### AI Security ({earned}/20) — *Conditional*
+### Platform — Unscored — advisory only
+
+{Brief assessment of hosting and infrastructure}
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| Hosting Compatibility | ℹ | — | — |
+| Complexity Check | ℹ | — | — |
+| Cost Signals | ℹ | — | — |
+| Managed Services | ℹ | — | — |
+
+---
+
+### AI Security ({earned}/12) — *Conditional*
 
 {Only include this section if AI patterns were detected in the codebase. If not detected, omit entirely or show "N/A - No AI patterns detected"}
 
@@ -252,9 +337,10 @@ TOP RISKS
 
 | Score | Band | Meaning |
 |-------|------|---------|
-| 70-100 | ✓ Ready | Production-ready with minor improvements |
-| 40-69 | ◐ Needs Work | Significant improvements needed |
-| 0-39 | ✗ Not Ready | Critical gaps must be addressed |
+| 90-100 | ✓ Production Ready | Exceeds launch requirements |
+| 75-89 | ◑ Launch Ready | Ready to ship with minor gaps |
+| 60-74 | ◐ Needs Work | Significant improvements needed |
+| 0-59 | ✗ Early Stage | Critical gaps must be addressed |
 
 **Note:** N/A items are excluded from the scoring pool. Critical-priority failures cap the band at "Needs Work" regardless of score.
 
@@ -268,6 +354,7 @@ TOP RISKS
 | ✗ | Fail |
 | ? | Unknown |
 | ○ | N/A — not applicable (in Status column) |
+| ℹ | Informational — advisory only |
 | ◆ | Critical priority |
 | ● | High priority |
 | ◐ | Medium priority |

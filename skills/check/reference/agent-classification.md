@@ -34,6 +34,15 @@ ALL of these must be true:
 - Fix SQL injection by using parameterized queries (code change)
 - Add HTTPS redirect middleware (code change)
 - Configure CORS properly (code change)
+- Add security headers via helmet middleware (code change)
+- Replace `<img>` with `<Image>` from `next/image` (code change)
+- Add `loading="lazy"` to images (code change)
+- Add `alt=""` to decorative images (code change)
+- Install and configure vitest/jest test runner (code + config)
+- Add test step to GitHub Actions workflow (config change)
+- Create health check endpoint (code change)
+- Add `@media (prefers-reduced-motion: reduce)` blocks (CSS change)
+- Create `.env.example` from detected env vars (config change)
 
 ## Human-Required (No)
 
@@ -66,6 +75,12 @@ Agent does the code work, human completes setup:
 - Database backups: Agent adds backup script, human configures cloud storage
 - Monitoring: Agent adds health endpoint, human configures uptime monitor
 - Rate limiting: Agent adds middleware, human may need to configure Redis if stateful
+- Data caching: Agent adds React Query setup, human migrates existing fetch calls
+- E2E testing: Agent installs Playwright and creates config, human writes meaningful tests
+- Structured logging: Agent installs pino and replaces console.log, human configures log aggregation
+- APM: Agent installs OpenTelemetry SDK, human configures backend and sampling rates
+- DB migrations: Agent sets up migration tooling, human verifies schema changes
+- Alt text: Agent adds `alt=""` for decorative images, human writes meaningful alt for content images
 
 </classification_criteria>
 
@@ -165,6 +180,12 @@ This requires configuration in your hosting platform's dashboard.
 **Writing tests** -- Agent-doable.
 
 **Updating dependencies** -- Agent-doable for code changes. Human verifies nothing broke.
+
+**Adding security headers** — Agent-doable. Install helmet or add headers() to next.config.
+**Configuring CORS** — Agent-doable. Restrict origins to explicit allowlist in code.
+**Creating CI pipeline** — Agent-doable. Can create .github/workflows/ci.yml with build + test.
+**Writing unit tests** — Partial. Agent generates test stubs, human adds meaningful assertions.
+**Fixing accessibility** — Mixed. Mechanical fixes (alt="", labels) are agent-doable. Semantic ARIA decisions need human.
 
 </edge_cases>
 

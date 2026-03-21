@@ -45,13 +45,16 @@ After making fixes, re-run the check to see updated scores.
 SCORE BANDS
 ─────────────────────────────────────────────────
 
-70-100  ████████████████████  ✓ Ready
-        Production-ready with minor improvements
+90-100  ████████████████████  ✓ Production Ready
+        Exceeds launch requirements
 
-40-69   ████████████░░░░░░░░  ◐ Needs Work
+75-89   ███████████████░░░░░  ◑ Launch Ready
+        Ready to ship with minor gaps
+
+60-74   ████████████░░░░░░░░  ◐ Needs Work
         Significant improvements needed
 
-0-39    ████░░░░░░░░░░░░░░░░  ✗ Not Ready
+0-59    ████████░░░░░░░░░░░░  ✗ Early Stage
         Critical gaps must be addressed
 ```
 
@@ -67,6 +70,7 @@ Items marked N/A are excluded from the scoring pool. If any Critical-priority it
 | ✗ | Fail — action required |
 | ? | Unknown — insufficient data |
 | ○ | N/A — not applicable (in Status column) |
+| ℹ | Informational — advisory only |
 | ◆ | Critical priority |
 | ● | High priority |
 | ◐ | Medium priority |

@@ -72,52 +72,101 @@ LOW  ○
 | [Input Validation](./item-003-input-validation.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 | [Dependency Security](./item-004-dependency-security.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 | [HTTPS](./item-005-https.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Security Headers](./item-006-security-headers.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [CORS Configuration](./item-007-cors-configuration.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Rate Limiting](./item-008-rate-limiting.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [CSRF Protection](./item-009-csrf-protection.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 
 ### Discoverability
 
 | Item | Status | Priority | Agent |
 |------|--------|----------|-------|
-| [Meta Tags](./item-006-meta-tags.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [OpenGraph Tags](./item-007-opengraph.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Twitter Cards](./item-008-twitter-cards.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Sitemap](./item-009-sitemap.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [robots.txt](./item-010-robots-txt.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Semantic HTML](./item-011-semantic-html.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Meta Tags](./item-010-meta-tags.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [OpenGraph Tags](./item-011-opengraph.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Twitter Cards](./item-012-twitter-cards.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Sitemap](./item-013-sitemap.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [robots.txt](./item-014-robots-txt.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Semantic HTML](./item-015-semantic-html.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+### Performance
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| [Image Optimization](./item-016-image-optimization.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Code Splitting & Lazy Loading](./item-017-code-splitting.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Data Fetching & Caching Strategy](./item-018-data-fetching.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Font Optimization](./item-019-font-optimization.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Database Query Performance](./item-020-db-query-performance.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+### Accessibility
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| [Image Alt Text](./item-021-image-alt-text.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Form Label Association](./item-022-form-labels.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Keyboard Navigation & Focus Management](./item-023-keyboard-navigation.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [ARIA & Semantic HTML](./item-024-aria-semantic-html.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Motion & Animation Accessibility](./item-025-motion-accessibility.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+### Testing
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| [Test Runner Configured](./item-026-test-runner.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Test Files Exist](./item-027-test-files.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [E2E Testing Setup](./item-028-e2e-testing.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Tests Run in CI](./item-029-tests-in-ci.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+### Monitoring
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| [Error Tracking](./item-030-error-tracking.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Structured Logging](./item-031-structured-logging.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Health Check Endpoint](./item-032-health-checks.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Application Performance Monitoring](./item-033-apm.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+
+### CI/CD
+
+| Item | Status | Priority | Agent |
+|------|--------|----------|-------|
+| [CI Pipeline Exists](./item-034-ci-pipeline.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Build Verification in CI](./item-035-build-verification.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Database Migration Strategy](./item-036-db-migrations.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Environment Separation](./item-037-environment-separation.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 
 ### Analytics
 
 | Item | Status | Priority | Agent |
 |------|--------|----------|-------|
-| [Visitor Tracking](./item-012-visitor-tracking.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Error Tracking](./item-013-error-tracking.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Conversion Tracking](./item-014-conversion-tracking.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Visitor Tracking](./item-038-visitor-tracking.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Conversion Tracking](./item-039-conversion-tracking.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 
-### Platform
+### Platform — ℹ (informational)
 
 | Item | Status | Priority | Agent |
 |------|--------|----------|-------|
-| [Hosting Compatibility](./item-015-hosting-compatibility.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Complexity Check](./item-016-complexity.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Cost Signals](./item-017-cost-signals.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Managed Services](./item-018-managed-services.md) | ℹ | ○ | — |
+| [Hosting Compatibility](./item-040-hosting-compatibility.md) | ℹ | — | — |
+| [Complexity Check](./item-041-complexity.md) | ℹ | — | — |
+| [Cost Signals](./item-042-cost-signals.md) | ℹ | — | — |
+| [Managed Services](./item-043-managed-services.md) | ℹ | — | — |
 
 ### Reliability
 
 | Item | Status | Priority | Agent |
 |------|--------|----------|-------|
-| [Backups](./item-019-backups.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Error Handling](./item-020-error-handling.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Database Connections](./item-021-database-connections.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Health Checks](./item-022-health-checks.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Backups](./item-044-backups.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Error Handling](./item-045-error-handling.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Database Connection Handling](./item-046-database-connections.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 
 ### Legal
 
 | Item | Status | Priority | Agent |
 |------|--------|----------|-------|
-| [Privacy Policy](./item-023-privacy-policy.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Terms of Service](./item-024-terms-of-service.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Cookie Consent](./item-025-cookie-consent.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [User Data Deletion](./item-026-user-deletion.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Privacy Policy](./item-047-privacy-policy.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Terms of Service](./item-048-terms-of-service.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Cookie Consent](./item-049-cookie-consent.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [User Data Deletion](./item-050-user-deletion.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 
 ### AI Security — *Conditional*
 
@@ -125,11 +174,11 @@ LOW  ○
 
 | Item | Status | Priority | Agent |
 |------|--------|----------|-------|
-| [Prompt Injection Prevention](./item-027-prompt-injection.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Function Calling Safety](./item-028-function-calling.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [WebSocket Origin Validation](./item-029-websocket-origin.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Plugin Ecosystem Security](./item-030-plugin-security.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
-| [Context Isolation](./item-031-context-isolation.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Prompt Injection Prevention](./item-051-prompt-injection.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Function Calling Safety](./item-052-function-calling.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [WebSocket Origin Validation](./item-053-websocket-origin.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Plugin Ecosystem Security](./item-054-plugin-security.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
+| [Context Isolation](./item-055-context-isolation.md) | {✓/✗/?} | {◆/●/◐/○} | {⚡/½/—} |
 
 ### N/A Domains
 
@@ -173,7 +222,7 @@ Read .vibe-check/checklist/item-NNN-{slug}.md and fix it
 | ✗ | Fail — action required |
 | ? | Unknown — insufficient data |
 | ○ | N/A — not applicable to this project (in Status column) |
-| ℹ | Info — informational only |
+| ℹ | Informational — advisory only |
 | ◆ | Critical priority |
 | ● | High priority |
 | ◐ | Medium priority |

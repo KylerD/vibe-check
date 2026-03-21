@@ -58,19 +58,29 @@ For domain criteria, read `../check/reference/domains.md` if available in a sibl
 
 <domain_summary>
 
-**Security (max 25):** Secrets management, authentication, input validation, dependency security, HTTPS.
+**Security (max 15):** Secrets, auth, input validation, dependencies, HTTPS, security headers, CORS, rate limiting, CSRF.
 
-**Discoverability (max 20):** Meta tags, OpenGraph, Twitter cards, sitemap, robots.txt, semantic HTML.
+**Performance (max 12):** Image optimization, code splitting, data fetching & caching, font optimization, DB query performance.
 
-**Analytics (max 15):** Visitor tracking, error tracking, conversion tracking.
+**Accessibility (max 12):** Image alt text, form labels, keyboard navigation, ARIA & semantic HTML, motion accessibility.
 
-**Platform (max 15):** Hosting compatibility, complexity check, cost signals, managed services.
+**Testing (max 10):** Test runner configured, test files exist, E2E testing, tests in CI.
 
-**Reliability (max 15):** Backups, error handling, database connections, health checks.
+**Monitoring (max 10):** Error tracking, structured logging, health checks, APM.
 
-**Legal (max 10):** Privacy policy, terms of service, cookie consent, user data deletion.
+**CI/CD (max 10):** CI pipeline, build verification, DB migrations, environment separation.
 
-**AI Security (max 20, conditional):** Prompt injection, function calling safety, WebSocket origin, plugin security, context isolation.
+**Discoverability (max 10):** Meta tags, OpenGraph, Twitter cards, sitemap, robots.txt, semantic HTML.
+
+**Analytics (max 8):** Visitor tracking, conversion tracking.
+
+**Reliability (max 8):** Backups, error handling, database connections.
+
+**Legal (max 5):** Privacy policy, terms, cookie consent, user deletion.
+
+**Platform (informational):** Hosting compatibility, complexity, cost signals, managed services. Unscored.
+
+**AI Security (max 12, conditional):** Prompt injection, function calling, WebSocket origin, plugin security, context isolation.
 
 </domain_summary>
 
@@ -125,7 +135,7 @@ Return confirmation only when complete.
 **If subagent spawning is NOT available**, perform the mapping yourself:
 1. Read `agents/mapper.md` for the exploration process
 2. Follow compact mode or standard mode steps depending on codebase size
-3. Write all 13 analysis files to `.vibe-check/analysis/`
+3. Write all 17 analysis files to `.vibe-check/analysis/`
 4. Continue to Phase 4
 
 Wait for confirmation. The mapper runs the full analysis including:
@@ -157,7 +167,7 @@ Return score summary only.
 
 **If subagent spawning is NOT available**, assess each domain yourself using the criteria in `agents/assessor.md`.
 
-Spawn all domain assessors (security, discoverability, analytics, platform, reliability, legal). Spawn AI security assessor only if mapper indicated AI patterns detected.
+Spawn all domain assessors (security, performance, accessibility, testing, monitoring, ci-cd, discoverability, analytics, platform, reliability, legal). Spawn AI security assessor only if mapper indicated AI patterns detected.
 
 ### Phase 5: Compare & Reconcile
 
@@ -183,6 +193,28 @@ For each OLD item, check if a corresponding NEW item exists (match by slug/topic
 For NEW items with no OLD match:
 - **New issue discovered** — keep with renumbered ID
 
+#### Scoring Version Migration
+
+If the previous assessment used v1.2 scoring (check `metadata.json` for absence of `scoringVersion` field or `scoringVersion: "v1.2"`):
+
+**Item migration mapping:**
+- Old Analytics item-013 (Error Tracking) → New Monitoring item-030
+- Old Reliability item-022 (Health Checks) → New Monitoring item-032
+- Match migrated items by slug, not by item ID
+
+**Band shift handling:**
+- If the score would have been "Ready" under v1.2 bands (70-100) but is now "Needs Work" (60-74) or "Launch Ready" (75-89) under v2 bands, note this in the progress output:
+
+```
+NOTE: Scoring bands updated from v1.2 to v2.
+Your band shifted from "Ready" to "{new band}" due to revised thresholds,
+not due to regressions. See .vibe-check/README.md for band definitions.
+```
+
+**Platform domain:**
+- Old Platform items (015-018) were scored. New Platform items (040-043) are informational.
+- If old assessment had Platform contributing to score, note that Platform is now unscored.
+
 After reconciliation:
 1. Delete all `item-100+` temporary files
 2. Renumber remaining items sequentially
@@ -197,6 +229,7 @@ Rewrite all output files:
 {
   "analysisDate": "{today}",
   "score": {new score},
+  "scoringVersion": "v2",
   "previousAnalysis": {
     "date": "{old date}",
     "score": {old score}

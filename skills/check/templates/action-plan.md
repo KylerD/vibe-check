@@ -132,6 +132,7 @@ After making fixes, re-run the check to see updated scores.
 | ● | High — fix before launch |
 | ◐ | Medium — fix soon |
 | ○ | Low — when time allows |
+| ℹ | Informational — advisory only |
 | ⚡ | Agent can fix completely |
 | ½ | Agent + human effort |
 | — | Human action required |

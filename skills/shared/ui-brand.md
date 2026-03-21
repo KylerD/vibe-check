@@ -29,11 +29,12 @@ empty = bar_length - filled
 
 ### Band Indicators
 
-| Score   | Band       | Display                    |
-|---------|------------|----------------------------|
-| 70-100  | Ready      | `✓ Ready`                  |
-| 40-69   | Needs Work | `◐ Needs Work`             |
-| 0-39    | Not Ready  | `✗ Not Ready`              |
+| Score   | Band            | Display                          |
+|---------|-----------------|----------------------------------|
+| 90-100  | Production Ready | `✓ Production Ready`            |
+| 75-89   | Launch Ready    | `◑ Launch Ready`                 |
+| 60-74   | Needs Work      | `◐ Needs Work`                   |
+| 0-59    | Early Stage     | `✗ Early Stage`                  |
 
 ---
 
@@ -47,7 +48,7 @@ The primary score display at the top of summary and report files:
 │   VIBE CHECK                                 │
 │                                              │
 │   Score: 67/100                              │
-│   ██████████████░░░░░░  Needs Work           │
+│   ██████████████░░░░░░  ◐ Needs Work         │
 │                                              │
 └──────────────────────────────────────────────┘
 ```
@@ -59,8 +60,8 @@ For different bands:
 │                                              │
 │   VIBE CHECK                                 │
 │                                              │
-│   Score: 84/100                              │
-│   █████████████████░░░  ✓ Ready              │
+│   Score: 94/100                              │
+│   ███████████████████░  ✓ Production Ready   │
 │                                              │
 └──────────────────────────────────────────────┘
 ```
@@ -70,8 +71,19 @@ For different bands:
 │                                              │
 │   VIBE CHECK                                 │
 │                                              │
-│   Score: 28/100                              │
-│   ██████░░░░░░░░░░░░░░  ✗ Not Ready          │
+│   Score: 82/100                              │
+│   █████████████████░░░  ◑ Launch Ready       │
+│                                              │
+└──────────────────────────────────────────────┘
+```
+
+```
+┌──────────────────────────────────────────────┐
+│                                              │
+│   VIBE CHECK                                 │
+│                                              │
+│   Score: 42/100                              │
+│   █████████░░░░░░░░░░░  ✗ Early Stage        │
 │                                              │
 └──────────────────────────────────────────────┘
 ```
@@ -86,11 +98,16 @@ Display each domain with inline progress bar:
 DOMAIN SCORES
 ─────────────────────────────────────────────────
 
-Security         ████████████████░░░░  20/25   80%
-Discoverability  ████████████████████  20/20  100%  ✓
+Security         ████████████████░░░░  12/15   80%
+Performance      ████████████░░░░░░░░   7/12   58%
+Accessibility    ████████████████████  12/12  100%  ✓
+Testing          ████████████████░░░░   8/10   80%
+Monitoring       ████████░░░░░░░░░░░░   4/10   40%
+CI/CD            ████████████████████  10/10  100%  ✓
+Discoverability  ████████████████████  10/10  100%  ✓
 Analytics        ○ N/A — not applicable
-Platform         ████████████░░░░░░░░   9/15   60%
-Reliability      ████████████████████  10/10  100%  ✓
+Platform         ℹ Advisory — informational only
+Reliability      ████████████████████   8/8   100%  ✓
 Legal            ○ N/A — not applicable
 ```
 
@@ -162,12 +179,12 @@ These items are agent-doable and high-impact:
 CHECKLIST
 ─────────────────────────────────────────────────
 
-  ✓ Pass     12 items
-  ✗ Fail      8 items
-  ? Unknown   2 items
-  ○ N/A       4 items
+  ✓ Pass     28 items
+  ✗ Fail      9 items
+  ? Unknown   3 items
+  ○ N/A      10 items
   ─────────────────────
-  Total      26 items
+  Total      50 items
 ```
 
 ### Item Lists by Priority
@@ -180,7 +197,7 @@ CRITICAL  ◆
 
 HIGH  ●
 ─────────────────────────────────────────────────
-✗  Error Tracking          Analytics     ½ Partial
+✗  Error Tracking          Monitoring    ½ Partial
 ✗  Input Validation        Security      ⚡ Agent
 ✗  Backups                 Reliability   — Human
 
@@ -200,8 +217,8 @@ When showing before/after comparison:
 PROGRESS
 ═══════════════════════════════════════════════
 
-Previous:  52/100  ████████████░░░░░░░░  Needs Work
-Current:   71/100  ██████████████░░░░░░  ✓ Ready
+Previous:  52/100  ████████████░░░░░░░░  ✗ Early Stage
+Current:   76/100  ████████████████░░░░  ◑ Launch Ready
                    ─────────────────────
 Change:           +19 points  ▲
 
@@ -258,14 +275,14 @@ When Critical-priority items are failing, show this warning after the score bann
 ```
 ┌─ WARNING ───────────────────────────────────┐
 │                                             │
-│  ⚠ Critical issues prevent Ready status:    │
+│  ⚠ Critical issues prevent Production Ready / Launch Ready status: │
 │  • Secrets Management                       │
 │  • Authentication                           │
 │                                             │
 └─────────────────────────────────────────────┘
 ```
 
-This appears when `criticalGate = true`. The band is capped at "Needs Work" regardless of score.
+This appears when `criticalGate = true`. The band is capped at "Needs Work" regardless of score. Critical issues prevent Production Ready / Launch Ready status.
 
 ### Next Steps Box
 
@@ -291,15 +308,15 @@ When displaying results in the terminal (not written to files):
 │   VIBE CHECK COMPLETE                        │
 │                                              │
 │   Score: 82/100                              │
-│   █████████████████░░░  ✓ Ready              │
+│   █████████████████░░░  ◑ Launch Ready       │
 │                                              │
 └──────────────────────────────────────────────┘
 
-Created .vibe-check/ with 26 checklist items:
-  ✓ 14 passing
-  ✗  5 failing
-  ?  2 unknown
-  ○  5 not applicable
+Created .vibe-check/ with 50 checklist items:
+  ✓ 28 passing
+  ✗  9 failing
+  ?  3 unknown
+  ○ 10 not applicable
 
 3 items are agent-doable. Top priorities:
   ⚡ Meta Tags — add title and description
@@ -324,8 +341,8 @@ If terminal colors are added later:
 | Element        | Color   | ANSI Code |
 |----------------|---------|-----------|
 | Score bar fill | Cyan    | `\x1b[36m` |
-| Pass/Ready     | Green   | `\x1b[32m` |
-| Fail/Not Ready | Red     | `\x1b[31m` |
+| Pass/Production Ready | Green   | `\x1b[32m` |
+| Fail/Early Stage     | Red     | `\x1b[31m` |
 | Warning        | Yellow  | `\x1b[33m` |
 | Muted text     | Dim     | `\x1b[2m`  |
 | Headers        | Bold    | `\x1b[1m`  |

@@ -32,15 +32,20 @@ Violating this rule could expose user credentials in their repository.
 
 Each assessor loads relevant analysis files when evaluating their domain:
 
-| Assessor Domain | Analysis Files Loaded                        |
-| --------------- | -------------------------------------------- |
-| Security        | secrets.md, auth.md, dependencies.md         |
-| Discoverability | discoverability.md, stack.md                 |
-| Analytics       | analytics.md, error-handling.md              |
-| Platform        | stack.md, infrastructure.md, integrations.md |
-| Reliability     | error-handling.md, data.md, integrations.md  |
-| Legal           | legal.md, data.md                            |
-| AI Security     | ai-security.md, auth.md, integrations.md     |
+| Assessor Domain | Analysis Files Loaded                            |
+| --------------- | ------------------------------------------------ |
+| Security        | secrets.md, auth.md, dependencies.md             |
+| Discoverability | discoverability.md, stack.md                     |
+| Analytics       | analytics.md                                     |
+| Platform        | stack.md, infrastructure.md, integrations.md, platform.md |
+| Reliability     | error-handling.md, data.md, integrations.md      |
+| Legal           | legal.md, data.md                                |
+| AI Security     | ai-security.md, auth.md, integrations.md         |
+| Performance     | performance.md, stack.md, data.md                |
+| Accessibility   | accessibility.md, stack.md                       |
+| Testing         | testing.md, stack.md                             |
+| Monitoring      | infrastructure.md, error-handling.md, analytics.md |
+| CI/CD           | ci-cd.md, infrastructure.md, data.md             |
 
 **What this means for your output:**
 
@@ -86,10 +91,14 @@ Create `.vibe-check/analysis/` and write these files:
     +-- infrastructure.md  # IaC, hosting, platform
     +-- data.md            # Database, backups, migrations
     +-- discoverability.md # Meta tags, OpenGraph, sitemap, robots.txt
-    +-- analytics.md       # Visitor tracking, error tracking, conversion events
+    +-- analytics.md       # Visitor tracking, conversion events
     +-- legal.md           # Privacy policy, terms, cookie consent, user deletion
     +-- platform.md        # Hosting compatibility, complexity, cost signals
     +-- ai-security.md     # AI/LLM patterns, prompt injection, function calling
+    +-- performance.md     # Image patterns, code splitting, caching, fonts, DB queries
+    +-- accessibility.md   # Alt text, labels, keyboard, ARIA, focus, motion
+    +-- testing.md         # Test runner, test files, E2E, CI integration
+    +-- ci-cd.md           # CI config, build/test/deploy, migrations, env separation
 ```
 
 </output_directory>
@@ -123,7 +132,7 @@ Report the chosen mode in your return confirmation.
 
 **Use this mode when the codebase has fewer than 50 source files.**
 
-Instead of 13 sequential exploration steps, consolidate into three phases:
+Instead of 17 sequential exploration steps, consolidate into three phases:
 
 ### Phase A: Single Consolidated Sweep
 
@@ -181,8 +190,8 @@ ls -la sitemap.xml public/sitemap.xml robots.txt public/robots.txt 2>/dev/null
 
 # === ANALYTICS ===
 echo "=== ANALYTICS ==="
-grep -r "gtag\|google-analytics\|@vercel/analytics\|plausible\|posthog\|mixpanel\|amplitude\|segment\|sentry\|bugsnag\|rollbar\|logrocket\|datadog" package.json 2>/dev/null
-grep -rn "gtag\|GoogleAnalytics\|analytics\.\|posthog\|Sentry\|@sentry\|bugsnag" --include="*.ts" --include="*.tsx" --include="*.js" --include="*.jsx" src/ app/ 2>/dev/null | head -20
+grep -r "gtag\|google-analytics\|@vercel/analytics\|plausible\|posthog\|mixpanel\|amplitude\|segment" package.json 2>/dev/null
+grep -rn "gtag\|GoogleAnalytics\|analytics\.\|posthog\|mixpanel\|analytics\.track" --include="*.ts" --include="*.tsx" --include="*.js" --include="*.jsx" src/ app/ 2>/dev/null | head -20
 
 # === LEGAL ===
 echo "=== LEGAL ==="
@@ -199,6 +208,46 @@ grep -rn "multer\|formidable\|busboy\|upload\|sharp\|jimp\|imagemin" --include="
 echo "=== AI SECURITY ==="
 grep -r "openai\|anthropic\|@ai-sdk\|langchain\|@langchain\|replicate\|cohere\|ai/core" package.json 2>/dev/null
 grep -rn "system.*prompt\|systemPrompt\|SYSTEM_PROMPT\|function.?call\|tools.*\[" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -20
+
+# === PERFORMANCE ===
+echo "=== PERFORMANCE ==="
+grep -rn "<img " --include="*.tsx" --include="*.jsx" --include="*.html" src/ app/ 2>/dev/null | head -20
+grep -r "next/image\|@next/image" package.json 2>/dev/null
+grep -rn "React.lazy\|lazy(\|dynamic(\|import(" --include="*.ts" --include="*.tsx" --include="*.js" src/ app/ 2>/dev/null | head -10
+grep -r "@tanstack/react-query\|swr\|apollo-client\|urql" package.json 2>/dev/null
+grep -rn "@font-face\|font-display\|next/font" --include="*.css" --include="*.scss" --include="*.ts" --include="*.tsx" src/ app/ 2>/dev/null | head -10
+grep -rn "findMany\|find(\|SELECT \*" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null | head -10
+
+# === ACCESSIBILITY ===
+echo "=== ACCESSIBILITY ==="
+grep -rn "<img " --include="*.tsx" --include="*.jsx" --include="*.html" src/ app/ 2>/dev/null | grep -v "alt=" | head -10
+grep -rn "<input\|<select\|<textarea" --include="*.tsx" --include="*.jsx" src/ app/ 2>/dev/null | grep -v "aria-label\|htmlFor\|<label" | head -10
+grep -rn "onClick=" --include="*.tsx" --include="*.jsx" src/ app/ 2>/dev/null | grep -E "<div|<span|<li" | head -10
+grep -rn "outline:\s*none\|outline:\s*0" --include="*.css" --include="*.scss" src/ app/ 2>/dev/null | head -5
+grep -rn "prefers-reduced-motion" --include="*.css" --include="*.scss" --include="*.tsx" src/ app/ 2>/dev/null | head -5
+grep -rn "<html" --include="*.html" --include="*.tsx" src/ app/ pages/ 2>/dev/null | grep -i "lang=" | head -5
+
+# === TESTING ===
+echo "=== TESTING ==="
+grep -r "jest\|vitest\|mocha\|ava\|cypress\|@playwright" package.json 2>/dev/null
+ls jest.config.* vitest.config.* cypress.config.* playwright.config.* 2>/dev/null
+git ls-files | grep -E "\.(test|spec)\.(ts|tsx|js|jsx)$" | wc -l
+grep '"test"' package.json 2>/dev/null
+
+# === CI/CD ===
+echo "=== CI/CD ==="
+ls -la .github/workflows/*.yml .gitlab-ci.yml Jenkinsfile bitbucket-pipelines.yml .circleci/config.yml .travis.yml 2>/dev/null
+grep -l "build\|test\|deploy" .github/workflows/*.yml 2>/dev/null | head -5
+ls -la prisma/migrations/ alembic/versions/ drizzle/ db/migrate/ 2>/dev/null
+ls -la .env.example .env.local.example 2>/dev/null
+grep -r "@t3-oss/env\|envalid" package.json 2>/dev/null
+
+# === MONITORING ===
+echo "=== MONITORING ==="
+grep -r "winston\|pino\|bunyan\|tslog" package.json 2>/dev/null
+grep -rn "logger\.\|console\.log" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null | head -10
+grep -r "@sentry/tracing\|dd-trace\|@opentelemetry\|newrelic\|elastic-apm" package.json 2>/dev/null
+grep -rn "health\|healthz\|ready\|liveness" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null | head -5
 ```
 
 ### Phase B: Direct Reads
@@ -207,7 +256,7 @@ Read up to 10 key source files identified from the sweep (config files, main ent
 
 ### Phase C: Write All Analysis Files
 
-Write all 13 analysis files from the combined results. Apply the same quality standards — file paths, line numbers, code snippets, evidence over judgment.
+Write all 17 analysis files from the combined results. Apply the same quality standards — file paths, line numbers, code snippets, evidence over judgment.
 
 **The output must be identical in quality and structure to standard mode.** Assessors cannot tell which mode was used.
 
@@ -266,6 +315,15 @@ grep -n "\.env" .gitignore 2>/dev/null
 
 # Check if .env files are in .gitignore
 git check-ignore -v .env .env.local .env.production 2>/dev/null
+
+# Security hardening signals
+grep -r "helmet\|@fastify/helmet" package.json 2>/dev/null
+grep -rn "helmet()\|app\.use.*helmet" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null | head -10
+grep -r "cors\|@fastify/cors" package.json 2>/dev/null
+grep -rn "cors(\|enableCors\|Access-Control" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null | head -10
+grep -r "express-rate-limit\|@fastify/rate-limit\|rate-limiter-flexible" package.json 2>/dev/null
+grep -rn "rateLimit\|rateLimiter\|RateLimiter" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null | head -10
+grep -rn "csrf\|csurf\|SameSite\|sameSite\|__Host-\|__Secure-" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null | head -10
 ```
 
 **CRITICAL - DO NOT:**
@@ -280,6 +338,7 @@ Write `secrets.md`:
 - .gitignore patterns for .env files
 - Hardcoded secrets in source code (file:line, describe TYPE of secret, NEVER the value)
 - Environment variable usage patterns
+- Security hardening signals: helmet, CORS config, rate limiting, CSRF/SameSite patterns
 </step>
 
 <step name="explore_auth">
@@ -329,6 +388,10 @@ grep -rn "catch.*{.*}" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null |
 
 # Error responses in APIs
 grep -rn "res\.status\|throw new\|raise\|HttpException" --include="*.ts" --include="*.js" --include="*.py" src/ app/ 2>/dev/null | head -30
+
+# Error tracking SDKs (feeds Monitoring assessor)
+grep -r "sentry\|bugsnag\|rollbar\|logrocket\|datadog" package.json 2>/dev/null
+grep -rn "Sentry\.init\|Bugsnag\.start\|Rollbar\|LogRocket\.init" --include="*.ts" --include="*.tsx" --include="*.js" src/ app/ 2>/dev/null | head -20
 ```
 
 Write `error-handling.md`:
@@ -338,6 +401,7 @@ Write `error-handling.md`:
 - API error response patterns
 - Empty catch blocks (problematic)
 - Error boundary usage
+- Error tracking SDK initialization (Sentry, Bugsnag, etc.) — note: this data feeds the Monitoring assessor
 </step>
 
 <step name="explore_dependencies">
@@ -419,6 +483,13 @@ cat Dockerfile 2>/dev/null | head -30
 
 # Hosting config
 ls -la vercel.json netlify.toml render.yaml fly.toml railway.json 2>/dev/null
+
+# Structured logging libraries (feeds Monitoring assessor)
+grep -r "winston\|pino\|bunyan\|tslog\|log4js" package.json requirements.txt 2>/dev/null
+grep -rn "logger\.\|createLogger\|pino(\|winston\.create" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -10
+
+# APM/tracing SDKs (feeds Monitoring assessor)
+grep -r "@opentelemetry\|dd-trace\|@sentry/tracing\|newrelic\|elastic-apm" package.json requirements.txt 2>/dev/null
 ```
 
 Write `infrastructure.md`:
@@ -427,6 +498,8 @@ Write `infrastructure.md`:
 - Container setup
 - Hosting platform
 - Platform configuration
+- Structured logging libraries detected (feeds Monitoring assessor)
+- APM/tracing SDKs detected (feeds Monitoring assessor)
 </step>
 
 <step name="explore_data">
@@ -500,7 +573,7 @@ Write `discoverability.md`:
 </step>
 
 <step name="explore_analytics">
-Find analytics and tracking setup:
+Find visitor and conversion tracking setup:
 
 ```bash
 # Analytics libraries in dependencies
@@ -511,10 +584,6 @@ grep -rn "gtag\|GoogleAnalytics\|Analytics\|posthog\|mixpanel\|analytics\.track\
 
 # Google Analytics script tags
 grep -rn "googletagmanager\|GA_MEASUREMENT_ID\|gtag/js" --include="*.html" --include="*.tsx" --include="*.jsx" src/ app/ pages/ 2>/dev/null | head -20
-
-# Error tracking (Sentry, Bugsnag, etc.)
-grep -r "sentry\|bugsnag\|rollbar\|logrocket\|datadog" package.json 2>/dev/null
-grep -rn "Sentry\|@sentry\|bugsnag\|Rollbar\|LogRocket" --include="*.ts" --include="*.tsx" --include="*.js" src/ app/ 2>/dev/null | head -20
 
 # Custom event tracking
 grep -rn "track\s*(\|analytics\.track\|gtag\s*(\s*'event'\|posthog\.capture" --include="*.ts" --include="*.tsx" --include="*.js" src/ app/ 2>/dev/null | head -20
@@ -527,7 +596,6 @@ Write `analytics.md`:
 
 - Visitor tracking SDK(s) installed
 - Analytics initialization (file:line)
-- Error tracking service and setup
 - Custom event tracking patterns
 - Conversion events found
 </step>
@@ -663,6 +731,197 @@ Write `ai-security.md`:
 **If no AI patterns detected:** Write a brief ai-security.md noting "No AI/LLM patterns detected in this codebase. AI Security domain will be skipped."
 </step>
 
+<step name="explore_performance">
+Find performance patterns:
+
+```bash
+# Image usage patterns
+grep -rn "<img " --include="*.tsx" --include="*.jsx" --include="*.html" src/ app/ 2>/dev/null | head -20
+
+# Optimized image components
+grep -r "next/image\|@next/image" package.json 2>/dev/null
+grep -rn "next/image\|Image.*from" --include="*.tsx" --include="*.jsx" src/ app/ 2>/dev/null | head -10
+
+# Code splitting / lazy loading
+grep -rn "React.lazy\|lazy(\|dynamic(\|import(" --include="*.ts" --include="*.tsx" --include="*.js" src/ app/ 2>/dev/null | head -20
+
+# Data fetching / caching libraries
+grep -r "@tanstack/react-query\|swr\|apollo-client\|urql" package.json 2>/dev/null
+
+# Font loading patterns
+grep -rn "@font-face\|font-display\|next/font" --include="*.css" --include="*.scss" --include="*.ts" --include="*.tsx" src/ app/ 2>/dev/null | head -10
+
+# Database query patterns (N+1, SELECT *)
+grep -rn "findMany\|find(\|SELECT \*\|\.query(" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null | head -20
+
+# Bundle analysis tools
+grep -r "@next/bundle-analyzer\|webpack-bundle-analyzer\|source-map-explorer" package.json 2>/dev/null
+```
+
+Write `performance.md`:
+
+- Image tag usage vs optimized components (file:line)
+- Code splitting / lazy loading patterns
+- Data fetching and caching approach
+- Font loading strategy
+- Database query patterns (potential N+1, unbounded queries)
+- Bundle analysis tooling
+</step>
+
+<step name="explore_accessibility">
+Find accessibility patterns:
+
+```bash
+# Images missing alt text
+grep -rn "<img " --include="*.tsx" --include="*.jsx" --include="*.html" src/ app/ 2>/dev/null | grep -v "alt=" | head -20
+
+# Form inputs without labels
+grep -rn "<input\|<select\|<textarea" --include="*.tsx" --include="*.jsx" src/ app/ 2>/dev/null | grep -v "aria-label\|htmlFor\|<label" | head -20
+
+# Click handlers on non-interactive elements
+grep -rn "onClick=" --include="*.tsx" --include="*.jsx" src/ app/ 2>/dev/null | grep -E "<div|<span|<li" | head -20
+
+# Focus style removal (anti-pattern)
+grep -rn "outline:\s*none\|outline:\s*0" --include="*.css" --include="*.scss" src/ app/ 2>/dev/null | head -10
+
+# Reduced motion support
+grep -rn "prefers-reduced-motion" --include="*.css" --include="*.scss" --include="*.tsx" src/ app/ 2>/dev/null | head -10
+
+# HTML lang attribute
+grep -rn "<html" --include="*.html" --include="*.tsx" src/ app/ pages/ 2>/dev/null | grep -i "lang=" | head -5
+
+# ARIA landmarks and roles
+grep -rn "role=\|aria-\|<nav\|<main\|<header\|<footer\|<aside" --include="*.tsx" --include="*.jsx" --include="*.html" src/ app/ 2>/dev/null | head -20
+
+# Skip navigation links
+grep -rn "skip.*nav\|skip.*main\|skip.*content" --include="*.tsx" --include="*.jsx" --include="*.html" src/ app/ 2>/dev/null | head -5
+
+# Keyboard event handlers
+grep -rn "onKeyDown\|onKeyUp\|onKeyPress\|tabIndex" --include="*.tsx" --include="*.jsx" src/ app/ 2>/dev/null | head -10
+```
+
+Write `accessibility.md`:
+
+- Images without alt text (file:line)
+- Form inputs without labels (file:line)
+- Click handlers on non-interactive elements (file:line)
+- Focus style removal patterns (file:line)
+- Reduced motion support presence
+- HTML lang attribute presence
+- ARIA landmarks and roles usage
+- Skip navigation links
+- Keyboard event handling patterns
+</step>
+
+<step name="explore_testing">
+Find testing setup and coverage:
+
+```bash
+# Test runner in dependencies
+grep -r "jest\|vitest\|mocha\|ava\|@jest\|@testing-library" package.json 2>/dev/null
+
+# E2E test frameworks
+grep -r "cypress\|@playwright\|playwright\|@cypress\|puppeteer\|webdriverio" package.json 2>/dev/null
+
+# Test config files
+ls jest.config.* vitest.config.* cypress.config.* playwright.config.* .mocharc.* 2>/dev/null
+
+# Count test files
+git ls-files | grep -E "\.(test|spec)\.(ts|tsx|js|jsx)$" | wc -l
+
+# List test file locations
+git ls-files | grep -E "\.(test|spec)\.(ts|tsx|js|jsx)$" | head -20
+
+# E2E test files
+git ls-files | grep -E "(e2e|cypress|playwright)" | head -10
+
+# Test scripts in package.json
+grep -E '"test"|"test:"|"e2e"|"cy:"' package.json 2>/dev/null
+
+# Coverage configuration
+grep -rn "coverage\|collectCoverage\|c8\|istanbul\|nyc" package.json jest.config.* vitest.config.* 2>/dev/null | head -10
+```
+
+Write `testing.md`:
+
+- Test runner(s) installed
+- Test config file locations
+- Test file count and locations
+- E2E framework and test files
+- Test scripts in package.json
+- Coverage configuration
+</step>
+
+<step name="explore_ci_cd">
+Find CI/CD configuration:
+
+```bash
+# CI config files
+ls -la .github/workflows/*.yml .github/workflows/*.yaml 2>/dev/null
+ls -la .gitlab-ci.yml Jenkinsfile bitbucket-pipelines.yml .circleci/config.yml .travis.yml 2>/dev/null
+
+# Read CI workflow contents
+cat .github/workflows/*.yml 2>/dev/null | head -100
+cat .gitlab-ci.yml 2>/dev/null | head -50
+
+# CI steps: build, test, deploy
+grep -l "build\|test\|deploy\|lint" .github/workflows/*.yml 2>/dev/null | head -5
+grep -rn "npm test\|yarn test\|pnpm test\|pytest\|go test" .github/workflows/ .gitlab-ci.yml 2>/dev/null | head -10
+grep -rn "deploy\|publish\|release" .github/workflows/ .gitlab-ci.yml 2>/dev/null | head -10
+
+# Migration directories
+ls -la prisma/migrations/ alembic/versions/ drizzle/ db/migrate/ 2>/dev/null
+
+# Environment separation files
+ls -la .env.example .env.local.example .env.development .env.staging .env.production 2>/dev/null
+grep -r "@t3-oss/env\|envalid\|dotenv-safe" package.json 2>/dev/null
+
+# Deployment config
+ls -la vercel.json netlify.toml fly.toml render.yaml railway.json Procfile 2>/dev/null
+```
+
+Write `ci-cd.md`:
+
+- CI platform detected (GitHub Actions, GitLab CI, etc.)
+- CI config file locations
+- Build, test, lint, deploy steps present
+- Migration directory and structure
+- Environment file separation (.env.example, etc.)
+- Environment validation libraries
+- Deployment configuration
+</step>
+
+<step name="explore_monitoring">
+Find monitoring, logging, and observability setup:
+
+```bash
+# Structured logging libraries
+grep -r "winston\|pino\|bunyan\|tslog\|log4js" package.json requirements.txt 2>/dev/null
+grep -rn "logger\.\|createLogger\|pino(\|winston\.create" --include="*.ts" --include="*.js" src/ app/ lib/ 2>/dev/null | head -20
+
+# Console.log usage (unstructured logging signal)
+grep -rn "console\.log\|console\.error\|console\.warn" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null | wc -l
+
+# APM/tracing SDKs
+grep -r "@sentry/tracing\|dd-trace\|@opentelemetry\|newrelic\|elastic-apm\|@datadog" package.json 2>/dev/null
+
+# Error tracking SDK initialization
+grep -r "sentry\|bugsnag\|rollbar\|logrocket\|datadog" package.json 2>/dev/null
+grep -rn "Sentry\.init\|Bugsnag\.start\|Rollbar\|LogRocket\.init\|datadogRum\.init" --include="*.ts" --include="*.tsx" --include="*.js" src/ app/ 2>/dev/null | head -20
+
+# Health check endpoints
+grep -rn "health\|healthz\|ready\|readiness\|liveness\|/status" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null | head -15
+
+# Uptime monitoring config
+ls -la .uptimerobot* betteruptime* 2>/dev/null
+grep -rn "cron\|schedule\|heartbeat" --include="*.ts" --include="*.js" src/ app/ 2>/dev/null | head -10
+```
+
+Write combined monitoring findings to `error-handling.md` (append error tracking SDK data) and `infrastructure.md` (append logging/APM data). The Monitoring assessor reads `infrastructure.md`, `error-handling.md`, and `analytics.md`.
+
+Note: There is no separate `monitoring.md` file. Monitoring data is distributed across existing analysis files that the Monitoring assessor loads.
+</step>
+
 </standard_mode>
 
 <step name="return_confirmation">
@@ -688,6 +947,10 @@ Return ONLY confirmation. DO NOT include analysis contents.
 - `.vibe-check/analysis/legal.md`
 - `.vibe-check/analysis/platform.md`
 - `.vibe-check/analysis/ai-security.md`
+- `.vibe-check/analysis/performance.md`
+- `.vibe-check/analysis/accessibility.md`
+- `.vibe-check/analysis/testing.md`
+- `.vibe-check/analysis/ci-cd.md`
 
 **AI patterns detected:** {Yes|No}
 
@@ -697,6 +960,9 @@ Return ONLY confirmation. DO NOT include analysis contents.
 - Server/Backend: {Yes|No}
 - Analytics SDK: {Yes|No}
 - AI patterns: {Yes|No}
+- UI/Frontend: {Yes|No}
+- CI Pipeline: {Yes|No}
+- Test Runner: {Yes|No}
 
 Ready for domain assessment.
 ```
