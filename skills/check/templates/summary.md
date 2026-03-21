@@ -55,15 +55,21 @@ DOMAIN SCORES
 ```
 
 ```
-Security         {bar}  {earned}/{effectiveMax}  {pct}%  {status}
-Discoverability  {bar}  {earned}/{effectiveMax}  {pct}%  {status}
-Analytics        ○ N/A — not applicable
-Platform         {bar}  {earned}/{effectiveMax}  {pct}%  {status}
-Reliability      {bar}  {earned}/{effectiveMax}  {pct}%  {status}
-Legal            ○ N/A — not applicable
+Security         {bar}  {earned}/15   {pct}%  {status}
+Performance      {bar}  {earned}/12   {pct}%  {status}
+Accessibility    {bar}  {earned}/12   {pct}%  {status}
+Testing          {bar}  {earned}/10   {pct}%  {status}
+Monitoring       {bar}  {earned}/10   {pct}%  {status}
+CI/CD            {bar}  {earned}/10   {pct}%  {status}
+Discoverability  {bar}  {earned}/10   {pct}%  {status}
+Analytics        {bar}  {earned}/8    {pct}%  {status}
+Reliability      {bar}  {earned}/8    {pct}%  {status}
+Legal            {bar}  {earned}/5    {pct}%  {status}
+Platform         ℹ      —             —       Advisory
+AI Security      {bar or ○ N/A}
 ```
 
-{Show N/A domains with `○` and no bar. Show applicable domains with their effectiveMax (which accounts for any individual N/A items within the domain).}
+{Show N/A domains with `○` and no bar. Show applicable domains with their effectiveMax (which accounts for any individual N/A items within the domain). Platform is always shown as informational advisory.}
 
 ---
 
