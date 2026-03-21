@@ -180,4 +180,29 @@ export const HOME_FAQS = [
     answer:
       'Use the web app at vibe-check.cloud when planning your app or exploring what features you need — it gives personalized risk assessments and recommendations without requiring any code. Use the CLI plugin when you have an existing codebase and want a deep scan with specific, actionable findings tied to your actual code.',
   },
+  {
+    question: 'Is vibe coded software safe for production?',
+    answer:
+      'Vibe coded software can be production-ready, but it requires a systematic review first. AI coding tools like Cursor, Lovable, and Claude Code generate code that works in development but often misses security hardening, error handling, rate limiting, and compliance requirements. Vibe Check scans for these gaps automatically.',
+  },
+  {
+    question: 'What security risks does AI-generated code have?',
+    answer:
+      'Common security gaps in AI-generated code include missing rate limiting on login attempts, non-expiring session tokens, predictable password reset links, unvalidated file uploads, exposed API keys, and missing input sanitization. These are exactly the patterns that Vibe Check scans for across your codebase.',
+  },
+  {
+    question: 'Can I use Cursor or Lovable to build a production app?',
+    answer:
+      'Yes — Cursor, Lovable, Bolt, v0, and Claude Code can all produce production-quality code, but the output needs review before shipping. AI tools optimize for making things work, not for making things safe and scalable. Use Vibe Check to identify the gaps between "it works" and "it\'s production ready."',
+  },
+  {
+    question: 'What does production readiness mean for AI-built apps?',
+    answer:
+      'Production readiness means your app handles real-world conditions: authentication is secure, payments process correctly, errors are tracked, data is backed up, and you comply with privacy regulations. Vibe Check evaluates these across 6 domains — Security, Discoverability, Analytics, Platform, Reliability, and Legal.',
+  },
+  {
+    question: 'How do I know if my vibe coded app is ready to launch?',
+    answer:
+      'Run the Vibe Check CLI plugin with "/vibe-check:check" in Claude Code for a full codebase scan, or use the web app at vibe-check.cloud to get a feature-by-feature risk assessment. Both will identify critical issues that need fixing before you go live.',
+  },
 ];
