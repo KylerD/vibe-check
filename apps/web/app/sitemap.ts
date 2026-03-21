@@ -33,6 +33,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/guides/cursor-production-ready`,
+      lastModified: contentDate,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
     ...featurePages,
   ];
 }
