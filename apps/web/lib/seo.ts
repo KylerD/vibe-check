@@ -124,6 +124,39 @@ export function getFeatureArticleJsonLd(feature: Feature, featureContent?: {
   return jsonLd;
 }
 
+export function getGuideArticleJsonLd(
+  headline: string,
+  description: string,
+  url: string
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline,
+    description,
+    url,
+    image: `${BASE_URL}/vibe-check-og.png`,
+    author: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: BASE_URL,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: BASE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${BASE_URL}/vibe-check-og.png`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
+    },
+  };
+}
+
 export function getBreadcrumbJsonLd(
   items: Array<{ name: string; url: string }>
 ) {
