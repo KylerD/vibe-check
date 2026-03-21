@@ -1,10 +1,10 @@
 ---
 name: check
-description: Run full production readiness assessment. Use when the user wants to evaluate if their app is ready for real users — checks security, SEO, analytics, reliability, legal, and platform concerns.
+description: Run full production readiness assessment. Use when the user wants to evaluate if their app is ready for real users — checks security, performance, accessibility, testing, monitoring, CI/CD, discoverability, analytics, reliability, legal, and platform concerns.
 user-invocable: true
 args:
   - name: focus
-    description: Optional domain to focus on (security, discoverability, analytics, platform, reliability, legal)
+    description: Optional domain to focus on (security, performance, accessibility, testing, monitoring, ci-cd, discoverability, analytics, platform, reliability, legal)
     required: false
 hooks:
   PreToolUse:
@@ -51,9 +51,14 @@ check (orchestrator)
     +-- Phase 4: Domain Assessment
     |   +-- Spawn: assessor agents (can be parallel)
     |       +-- security assessor
+    |       +-- performance assessor
+    |       +-- accessibility assessor
+    |       +-- testing assessor
+    |       +-- monitoring assessor
+    |       +-- ci-cd assessor
     |       +-- discoverability assessor
     |       +-- analytics assessor
-    |       +-- platform assessor
+    |       +-- platform assessor (informational-only)
     |       +-- reliability assessor
     |       +-- legal assessor
     |       +-- ai-security assessor (conditional: only if AI patterns detected)
@@ -206,13 +211,13 @@ Return confirmation only when complete.
 **If subagent spawning is NOT available**, perform the mapping yourself:
 1. Read `agents/mapper.md` for the exploration process
 2. Follow the compact mode or standard mode steps depending on codebase size
-3. Write all 13 analysis files to `.vibe-check/analysis/`
+3. Write all 17 analysis files to `.vibe-check/analysis/`
 4. Continue to Phase 4
 
-Wait for confirmation. The mapper writes 13 analysis files and returns:
+Wait for confirmation. The mapper writes 17 analysis files and returns:
 - **Mode** (Compact or Standard)
 - **AI patterns detected** (Yes/No)
-- **Capabilities detected** (Database, Auth, Server/Backend, Analytics SDK, AI patterns)
+- **Capabilities detected** (Database, Auth, Server/Backend, Analytics SDK, AI patterns, UI/Frontend, CI Pipeline, Test Runner)
 
 **Do not read the analysis files.** The assessors will read them. Use the capabilities summary to decide which assessors to skip (Phase 4).
 
@@ -226,9 +231,11 @@ Use the mapper's capabilities summary to skip entire assessor domains when the d
 
 | Condition | Skip |
 |-----------|------|
-| AI patterns: No | AI Security domain (existing behavior) |
-| stakes=none + Analytics SDK: No | Analytics domain -> mark all items N/A |
-| audience=personal + data=none | Legal domain -> mark all items N/A |
+| AI patterns: No | AI Security domain |
+| stakes=none + Analytics SDK: No | Analytics domain |
+| audience=personal + data=none | Legal domain |
+| No UI/Frontend detected | Accessibility domain -> mark all N/A |
+| No UI/Frontend + No Server/Backend | Performance domain -> mark all N/A |
 
 When a domain is skipped:
 - Do NOT spawn the assessor
@@ -259,6 +266,9 @@ Mapper capabilities:
 - Server/Backend: {Yes|No}
 - Analytics SDK: {Yes|No}
 - AI patterns: {Yes|No}
+- UI/Frontend: {Yes|No}
+- CI Pipeline: {Yes|No}
+- Test Runner: {Yes|No}
 
 Load these analysis files:
 - .vibe-check/analysis/secrets.md
@@ -268,7 +278,7 @@ Load these analysis files:
 Read reference/domains.md for evaluation criteria.
 Read reference/agent-classification.md for agent-doable classification.
 
-Evaluate: Secrets Management, Authentication, Input Validation, Dependency Security, HTTPS
+Evaluate: Secrets Management, Authentication, Input Validation, Dependency Security, HTTPS, Security Headers, CORS Configuration, Rate Limiting, CSRF Protection
 
 Write failing/unknown items to .vibe-check/checklist/
 Return score summary only.
@@ -299,8 +309,8 @@ Evaluate: Meta Tags, OpenGraph Tags, Twitter Cards, Sitemap, robots.txt, Semanti
 ```
 Task: Assess analytics domain
 Domain assignment: analytics
-Analysis files: analytics.md, error-handling.md
-Evaluate: Visitor Tracking, Error Tracking, Conversion Tracking
+Analysis files: analytics.md
+Evaluate: Visitor Tracking, Conversion Tracking
 ```
 
 **Platform Assessor:**
@@ -308,6 +318,7 @@ Evaluate: Visitor Tracking, Error Tracking, Conversion Tracking
 ```
 Task: Assess platform domain
 Domain assignment: platform
+Note: This domain is informational-only. Assess items but report earned=0, max=0.
 Analysis files: stack.md, infrastructure.md, integrations.md, platform.md
 Evaluate: Hosting Compatibility, Complexity Check, Cost Signals, Managed Services
 ```
@@ -318,7 +329,7 @@ Evaluate: Hosting Compatibility, Complexity Check, Cost Signals, Managed Service
 Task: Assess reliability domain
 Domain assignment: reliability
 Analysis files: error-handling.md, data.md, integrations.md
-Evaluate: Backups, Error Handling, Database Connections, Health Checks
+Evaluate: Backups, Error Handling, Database Connections
 ```
 
 **Legal Assessor:**
@@ -328,6 +339,51 @@ Task: Assess legal domain
 Domain assignment: legal
 Analysis files: legal.md, data.md
 Evaluate: Privacy Policy, Terms of Service, Cookie Consent, User Data Deletion
+```
+
+**Performance Assessor:**
+
+```
+Task: Assess performance domain
+Domain assignment: performance
+Analysis files: performance.md, stack.md, data.md
+Evaluate: Image Optimization, Code Splitting, Data Fetching & Caching, Font Optimization, DB Query Performance
+```
+
+**Accessibility Assessor:**
+
+```
+Task: Assess accessibility domain
+Domain assignment: accessibility
+Analysis files: accessibility.md, stack.md
+Evaluate: Image Alt Text, Form Label Association, Keyboard Navigation, ARIA & Semantic HTML, Motion Accessibility
+```
+
+**Testing Assessor:**
+
+```
+Task: Assess testing domain
+Domain assignment: testing
+Analysis files: testing.md, stack.md
+Evaluate: Test Runner Configured, Test Files Exist, E2E Testing Setup, Tests Run in CI
+```
+
+**Monitoring Assessor:**
+
+```
+Task: Assess monitoring domain
+Domain assignment: monitoring
+Analysis files: infrastructure.md, error-handling.md, analytics.md
+Evaluate: Error Tracking, Structured Logging, Health Check Endpoint, APM
+```
+
+**CI/CD Assessor:**
+
+```
+Task: Assess ci-cd domain
+Domain assignment: ci-cd
+Analysis files: ci-cd.md, infrastructure.md, data.md
+Evaluate: CI Pipeline Exists, Build Verification, DB Migration Strategy, Environment Separation
 ```
 
 **AI Security Assessor (Conditional):**
@@ -352,6 +408,9 @@ Mapper capabilities:
 - Server/Backend: {Yes|No}
 - Analytics SDK: {Yes|No}
 - AI patterns: {Yes|No}
+- UI/Frontend: {Yes|No}
+- CI Pipeline: {Yes|No}
+- Test Runner: {Yes|No}
 
 Load these analysis files:
 - .vibe-check/analysis/ai-security.md
@@ -390,7 +449,8 @@ Calculate total score and write final files. Read `reference/scoring.md` for the
   "score": "{normalizedScore}",
   "adjustedEarned": "{adjustedEarned}",
   "adjustedMax": "{adjustedMax}",
-  "band": "{Not Ready|Needs Work|Ready}",
+  "scoringVersion": "v2",
+  "band": "{Early Stage|Needs Work|Launch Ready|Production Ready}",
   "criticalGate": "{true|false}",
   "criticalItems": ["{item-NNN title}", "..."],
   "aiDetected": "{true|false}",
@@ -404,13 +464,18 @@ Calculate total score and write final files. Read `reference/scoring.md` for the
     "stakes": "{none|low|medium|high}"
   },
   "categories": {
-    "security": {"earned": "N", "max": 25, "effectiveMax": "N", "na": "N", "applicable": true},
-    "discoverability": {"earned": "N", "max": 20, "effectiveMax": "N", "na": "N", "applicable": true},
-    "analytics": {"earned": "N", "max": 15, "effectiveMax": "N", "na": "N", "applicable": "true|false"},
-    "platform": {"earned": "N", "max": 15, "effectiveMax": "N", "na": "N", "applicable": true},
-    "reliability": {"earned": "N", "max": 15, "effectiveMax": "N", "na": "N", "applicable": true},
-    "legal": {"earned": "N", "max": 10, "effectiveMax": "N", "na": "N", "applicable": "true|false"},
-    "ai-security": {"earned": "N", "max": 20, "effectiveMax": "N", "na": "N", "applicable": "true|false"}
+    "security": {"earned": "N", "max": 15, "effectiveMax": "N", "na": "N", "applicable": true},
+    "performance": {"earned": "N", "max": 12, "effectiveMax": "N", "na": "N", "applicable": true},
+    "accessibility": {"earned": "N", "max": 12, "effectiveMax": "N", "na": "N", "applicable": true},
+    "testing": {"earned": "N", "max": 10, "effectiveMax": "N", "na": "N", "applicable": true},
+    "monitoring": {"earned": "N", "max": 10, "effectiveMax": "N", "na": "N", "applicable": true},
+    "ci-cd": {"earned": "N", "max": 10, "effectiveMax": "N", "na": "N", "applicable": true},
+    "discoverability": {"earned": "N", "max": 10, "effectiveMax": "N", "na": "N", "applicable": true},
+    "analytics": {"earned": "N", "max": 8, "effectiveMax": "N", "na": "N", "applicable": "true|false"},
+    "platform": {"earned": 0, "max": 0, "effectiveMax": 0, "na": "N", "applicable": true, "informational": true},
+    "reliability": {"earned": "N", "max": 8, "effectiveMax": "N", "na": "N", "applicable": true},
+    "legal": {"earned": "N", "max": 5, "effectiveMax": "N", "na": "N", "applicable": "true|false"},
+    "ai-security": {"earned": "N", "max": 12, "effectiveMax": "N", "na": "N", "applicable": "true|false"}
   },
   "checklist": {
     "pass": "N",
@@ -488,7 +553,7 @@ Display summary with the score banner:
 {If criticalGate is true:}
 +-- WARNING -----------------------------------+
 |                                             |
-|  ! Critical issues prevent Ready status:    |
+|  ! Critical issues prevent Production Ready / Launch Ready status: |
 |  * {critical item title}                    |
 |  * {critical item title}                    |
 |                                             |
@@ -536,13 +601,14 @@ Based on their choice:
 
 ## Score Bands
 
-- **0-39:** Not Ready -- Critical gaps that must be addressed
-- **40-69:** Needs Work -- Significant improvements needed
-- **70-100:** Ready -- Production-ready with minor improvements
+- **90-100:** Production Ready -- Ship confidently
+- **75-89:** Launch Ready -- Safe for early users
+- **60-74:** Needs Work -- Gaps that will bite you
+- **0-59:** Early Stage -- Not safe for real users
 
 **N/A items are excluded from the scoring pool.** A project with 4 N/A items is scored against the remaining applicable items only.
 
-**Critical gate:** If any item has status=Fail and priority=Critical, the band is capped at "Needs Work" regardless of score.
+**Critical gate:** If any item has status=Fail and priority=Critical, the band is capped at "Needs Work" regardless of score. Critical issues prevent Production Ready / Launch Ready status.
 
 ## Orchestrator Rules
 
@@ -598,5 +664,5 @@ Use consistent visual patterns for output:
 - Status: Pass, Fail, Unknown, N/A
 - Priority: Critical, High, Medium, Low
 - Agent-doable: Yes, Partial, No
-- Score bands: 0-39 Not Ready, 40-69 Needs Work, 70-100 Ready
+- Score bands: 0-59 Early Stage, 60-74 Needs Work, 75-89 Launch Ready, 90-100 Production Ready
 - Box styles for INFO, WARNING, NEXT STEPS callouts
