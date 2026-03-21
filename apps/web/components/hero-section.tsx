@@ -27,7 +27,7 @@ const TERMINAL_LINES = [
   { type: 'high', text: '  WARN  No health check endpoint' },
   { type: 'blank', text: '' },
   { type: 'summary', text: 'Score: 34/100 — Critical issues blocking deployment' },
-  { type: 'info', text: 'Run /fix to review and apply 4 fixable items' },
+  { type: 'action', text: 'Run /fix to review and apply 4 fixable items' },
 ] as const;
 
 export function HeroSection() {
@@ -129,6 +129,13 @@ export function HeroSection() {
               if (line.type === 'summary') {
                 return (
                   <div key={index} className="text-muted-foreground">
+                    {line.text}
+                  </div>
+                );
+              }
+              if (line.type === 'action') {
+                return (
+                  <div key={index} className="font-medium text-primary">
                     {line.text}
                   </div>
                 );

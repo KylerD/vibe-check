@@ -25,7 +25,7 @@ export function CommandsCheatsheet() {
             key={skill.name}
             className="flex items-start gap-4 rounded-lg border border-border bg-card p-4"
           >
-            <code className="shrink-0 rounded bg-muted px-2 py-1 font-mono text-xs font-semibold text-foreground">
+            <code className="shrink-0 rounded bg-primary/10 px-2 py-1 font-mono text-xs font-semibold text-primary">
               {skill.name}
             </code>
             <p className="text-sm text-muted-foreground">{skill.description}</p>
