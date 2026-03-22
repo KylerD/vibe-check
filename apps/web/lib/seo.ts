@@ -200,7 +200,7 @@ export const HOME_FAQS = [
   {
     question: 'What is Vibe Check?',
     answer:
-      'Vibe Check is a free, open-source toolkit for catching hidden production risks in AI-generated codebases. The CLI plugin for Claude Code scans your actual code across security, payments, authentication, and 16 other critical domains — then gives you the exact prompts to fix issues. The web app at vibe-check.cloud helps you explore what features your app needs and understand the risks involved before you start building.',
+      'Vibe Check is a free, open-source toolkit for catching hidden production risks in AI-generated codebases. It works with 9 major AI coding tools — Claude Code, Cursor, Gemini CLI, Codex CLI, VS Code Copilot, Kiro, OpenCode, Antigravity, and Pi. It scans your actual code across 12 production domains including security, performance, accessibility, testing, and monitoring — then gives you prioritized findings with plain-language fix instructions. The web app at vibe-check.cloud helps you explore what features your app needs and understand the risks involved before you start building.',
   },
   {
     question: 'What is vibe coding?',
@@ -208,44 +208,44 @@ export const HOME_FAQS = [
       'Vibe coding is the practice of building software primarily using AI coding assistants like Claude Code, Cursor, Lovable, Bolt, and v0. While these tools dramatically speed up development, they can miss critical production requirements around security, reliability, and compliance that experienced developers would catch.',
   },
   {
-    question: 'How do I install the CLI plugin?',
+    question: 'How do I install Vibe Check?',
     answer:
-      'Install the Vibe Check CLI plugin by running "npx vibe-check-cc" in your terminal. This installs it as a Claude Code plugin. Then use "/vibe-check:check" within Claude Code to scan your codebase for production risks. No installation is needed for the web app — just visit vibe-check.cloud.',
+      'Run "npx skills add kylerd/vibe-check" in your terminal. It auto-detects your AI coding tool and installs the right skill files. Then use "/check" to scan your codebase for production risks. You can also download the universal ZIP from GitHub releases for manual installation. No installation is needed for the web app — just visit vibe-check.cloud.',
   },
   {
     question: 'What does Vibe Check scan for?',
     answer:
-      'The CLI plugin scans your codebase across 6 key domains: Security (authentication, authorization, data protection), Discoverability (SEO, metadata), Analytics (tracking, monitoring), Platform (infrastructure, deployment), Reliability (error handling, performance), and Legal (privacy, compliance). It covers 19 specific feature areas including auth, payments, file uploads, email, real-time features, and more. The web app covers the same domains through guided feature recommendations rather than code analysis.',
+      'Vibe Check assesses your codebase across 12 domains: Security (secrets, auth, input validation, headers, CORS, rate limiting), Performance (images, code splitting, caching, fonts, database queries), Accessibility (alt text, form labels, keyboard navigation, ARIA, motion), Testing (test runner, test files, E2E, CI integration), Monitoring (error tracking, structured logging, health checks, APM), CI/CD (pipeline, build verification, migrations, environments), Discoverability (meta tags, OpenGraph, sitemap, robots.txt), Analytics (visitor tracking, conversions), Reliability (backups, error handling, database connections), and Legal (privacy policy, terms, cookie consent, data deletion). It also checks Platform compatibility and AI Security when applicable. The web app covers the same domains through guided feature recommendations.',
   },
   {
     question: 'Is Vibe Check free?',
     answer:
-      'Yes, Vibe Check is completely free and open source. Both the CLI plugin and the web app are available at no cost. You can view the full source code on GitHub.',
+      'Yes, Vibe Check is completely free and open source. Both the skills toolkit and the web app are available at no cost. You can view the full source code on GitHub.',
   },
   {
     question: 'What AI coding tools does Vibe Check support?',
     answer:
-      'The CLI plugin runs inside Claude Code and can scan any AI-generated codebase. The web app works with any workflow — describe what you built with Cursor, Lovable, Bolt, v0, ChatGPT, or any other tool and get tailored recommendations. Both adapt their guidance based on whether you used a service-based tool or a code-generation tool.',
+      'Vibe Check works with 9 AI coding tools: Claude Code, Cursor, Gemini CLI, Codex CLI, VS Code Copilot, Kiro, OpenCode, Antigravity, and Pi. Install once with "npx skills add kylerd/vibe-check" and it auto-detects your tool. The web app works with any workflow — describe what you built with any AI tool and get tailored recommendations.',
   },
   {
-    question: 'How is the CLI different from a linter or static analysis tool?',
+    question: 'How is Vibe Check different from a linter or static analysis tool?',
     answer:
-      'Traditional linters check code syntax and style. The Vibe Check CLI goes deeper — it evaluates architectural decisions, missing security patterns, production readiness gaps, and business logic risks that AI coding tools commonly miss. It provides actionable prompts you can paste directly into your AI tool to fix each issue.',
+      'Traditional linters check code syntax and style. Vibe Check goes deeper — it evaluates architectural decisions, missing security patterns, production readiness gaps, and business logic risks that AI coding tools commonly miss. It uses specialized agents to assess 12 domains in parallel and provides actionable fix instructions you can use directly in your AI tool.',
   },
   {
-    question: 'When should I use the web app vs the CLI?',
+    question: 'When should I use the web app vs the skills toolkit?',
     answer:
-      'Use the web app at vibe-check.cloud when planning your app or exploring what features you need — it gives personalized risk assessments and recommendations without requiring any code. Use the CLI plugin when you have an existing codebase and want a deep scan with specific, actionable findings tied to your actual code.',
+      'Use the web app at vibe-check.cloud when planning your app or exploring what features you need — it gives personalized risk assessments and recommendations without requiring any code. Use the skills toolkit when you have an existing codebase and want a deep scan with specific, actionable findings tied to your actual code.',
   },
   {
     question: 'Is vibe coded software safe for production?',
     answer:
-      'Vibe coded software can be production-ready, but it requires a systematic review first. AI coding tools like Cursor, Lovable, and Claude Code generate code that works in development but often misses security hardening, error handling, rate limiting, and compliance requirements. Vibe Check scans for these gaps automatically.',
+      'Vibe coded software can be production-ready, but it requires a systematic review first. AI coding tools like Cursor, Lovable, and Claude Code generate code that works in development but often misses security hardening, error handling, rate limiting, and compliance requirements. Vibe Check scans for these gaps automatically across 12 production domains.',
   },
   {
     question: 'What security risks does AI-generated code have?',
     answer:
-      'Common security gaps in AI-generated code include missing rate limiting on login attempts, non-expiring session tokens, predictable password reset links, unvalidated file uploads, exposed API keys, and missing input sanitization. These are exactly the patterns that Vibe Check scans for across your codebase.',
+      'Common security gaps in AI-generated code include missing rate limiting on login attempts, non-expiring session tokens, predictable password reset links, unvalidated file uploads, exposed API keys, missing input sanitization, insecure CORS configuration, and absent security headers. These are exactly the patterns that Vibe Check scans for across your codebase.',
   },
   {
     question: 'Can I use Cursor or Lovable to build a production app?',
@@ -255,11 +255,11 @@ export const HOME_FAQS = [
   {
     question: 'What does production readiness mean for AI-built apps?',
     answer:
-      'Production readiness means your app handles real-world conditions: authentication is secure, payments process correctly, errors are tracked, data is backed up, and you comply with privacy regulations. Vibe Check evaluates these across 6 domains — Security, Discoverability, Analytics, Platform, Reliability, and Legal.',
+      'Production readiness means your app handles real-world conditions: authentication is secure, payments process correctly, errors are tracked, data is backed up, and you comply with privacy regulations. Vibe Check evaluates these across 12 domains — Security, Performance, Accessibility, Testing, Monitoring, CI/CD, Discoverability, Analytics, Reliability, and Legal — and scores your app out of 100 across four bands: Production Ready (90-100), Launch Ready (75-89), Needs Work (60-74), and Early Stage (0-59).',
   },
   {
     question: 'How do I know if my vibe coded app is ready to launch?',
     answer:
-      'Run the Vibe Check CLI plugin with "/vibe-check:check" in Claude Code for a full codebase scan, or use the web app at vibe-check.cloud to get a feature-by-feature risk assessment. Both will identify critical issues that need fixing before you go live.',
+      'Run "/check" in your AI coding tool for a full codebase scan, or use the web app at vibe-check.cloud to get a feature-by-feature risk assessment. You\'ll get a score out of 100 with a clear band — Launch Ready (75+) means you\'re safe to put in front of early users. Use "/fix" to apply fixes and "/refresh" to track progress over time.',
   },
 ];
