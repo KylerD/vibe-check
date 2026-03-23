@@ -1,6 +1,6 @@
 # Vibe Check
 
-Production readiness toolkit for AI-built apps. Validate ideas, plan the build, and ship with confidence.
+Production readiness toolkit for AI-built apps. Ship with confidence.
 
 ## Install
 
@@ -14,8 +14,6 @@ Works with **Claude Code**, **Cursor**, **Gemini CLI**, **Codex CLI**, **VS Code
 
 | Skill | Description |
 |-------|-------------|
-| `/idea` | Validate your product idea with a founder perspective |
-| `/plan` | Plan your build — produces a detailed PROJECT-PLAN.md |
 | `/check` | Full production readiness assessment |
 | `/fix` | Review findings and apply fixes with approval |
 | `/refresh` | Re-run and compare with previous results |
