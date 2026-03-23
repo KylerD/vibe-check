@@ -58,23 +58,8 @@ Interactive conversation about your report. Ask questions, get clarification on 
 **/help**
 Show this command reference.
 
-## Planning Commands
-
-**/idea**
-Validate your product idea. Interactive conversation with an experienced founder perspective. Covers market fit, distribution, defensibility, timing. Produces an idea brief.
-
-**/plan**
-Plan your build. Interactive session that asks simple questions and produces a detailed PROJECT-PLAN.md optimized for AI coding tools. Works best after `/idea` but can be used standalone.
-
 ## Workflow
 
-### If starting fresh (no code yet):
-1. Run `/idea` to validate your idea
-2. Run `/plan` to produce a build spec
-3. Build your app using PROJECT-PLAN.md as context
-4. Run `/check` when you're ready to assess readiness
-
-### If you have existing code:
 1. Run `/check` to generate initial assessment
 2. Review `.vibe-check/summary.md` for overview
 3. Run `/fix` to auto-fix agent-doable items
