@@ -11,9 +11,9 @@
     \$$$   |   $$ \| $$    $$| $$     \       \$$    $$| $$  | $$| $$     \ \$$    $$| $$  \$$\
      \$     \$$$$$$ \$$$$$$$  \$$$$$$$$        \$$$$$$  \$$   \$$ \$$$$$$$$  \$$$$$$  \$$   \$$
 ```
-**Validate ideas. Plan the build. Ship with confidence.**
+**Ship with confidence.**
 
-**From "should I build this?" to "is it ready to ship?" — one toolkit for the entire vibe coder journey.**
+**Production readiness toolkit for AI-built apps.**
 
 [![npm version](https://img.shields.io/npm/v/vibe-check-cc?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/vibe-check-cc)
 [![npm downloads](https://img.shields.io/npm/dm/vibe-check-cc?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/vibe-check-cc)
@@ -35,16 +35,14 @@ Works with **Claude Code**, **Cursor**, **Gemini CLI**, **Codex CLI**, **VS Code
 
 We're in the vibe coding era. Building is cheap — AI collapsed the cost of shipping software from months to days. But the hard parts haven't changed: knowing *what* to build, and knowing when it's *ready* to ship.
 
-I keep running into founders who vibe-coded their way to a working prototype and hit two walls:
-1. **Before building:** They jumped straight to code without validating the idea or planning the scope
-2. **After building:** They have no idea if what they built is production-ready
+I keep running into founders who vibe-coded their way to a working prototype and have no idea if what they built is production-ready.
 
-Vibe Check covers the full journey:
+Vibe Check tells you:
 
-- **`/idea`** — Validate your idea with an experienced founder perspective. Is this worth building?
-- **`/plan`** — Plan the build. Easy questions in, detailed spec out — optimized for AI coding tools.
 - **`/check`** — Assess production readiness. Prioritized findings with plain-language fix instructions.
 - **`/fix`** — Review findings and apply fixes with your approval.
+- **`/discuss`** — Ask questions about your report.
+- **`/refresh`** — Re-run and compare with previous results.
 
 It's founder-focused. It knows the difference between "enterprise best practice" and "good enough to get in front of users."
 
@@ -52,30 +50,6 @@ It's founder-focused. It knows the difference between "enterprise best practice"
 ---
 
 ## How It Works
-
-### Starting Fresh? Validate → Plan → Build → Check
-
-#### 1. Validate Your Idea
-
-```
-/idea
-```
-
-Interactive conversation with an experienced founder perspective. Covers the questions that matter: Who has this problem? How will they find it? What stops someone from cloning it? Writes an idea brief to `.vibe-check/idea-brief.md`.
-
-#### 2. Plan the Build
-
-```
-/plan
-```
-
-Easy questions in, detailed spec out. Asks you what you're building and for whom, then produces a complete `PROJECT-PLAN.md` with tech stack, data model, pages, scope, and implementation order — optimized for AI coding tools. If you ran `/idea` first, it builds on that context.
-
-#### 3. Build Your App
-
-Use `PROJECT-PLAN.md` as context for Claude Code, Cursor, or your tool of choice.
-
-#### 4. Check Production Readiness
 
 ```
 /check
@@ -89,7 +63,7 @@ The system:
 
 You get a score out of 100 and a clear breakdown of what needs attention. Small codebases (<50 files) get a fast-path mapper that cuts assessment time significantly.
 
-### Already Have Code? Check → Fix → Discuss → Refresh
+### How to Use It
 
 #### Discuss the Findings
 
@@ -125,17 +99,6 @@ Re-runs the assessment and shows what improved or regressed since last check.
 
 ## What You Get
 
-After `/idea`:
-```
-.vibe-check/idea-brief.md    # Structured idea assessment
-```
-
-After `/plan`:
-```
-PROJECT-PLAN.md              # Detailed build spec in project root
-```
-
-After `/check`:
 ```
 .vibe-check/
 ├── summary.md           # 1-page executive overview
@@ -160,8 +123,6 @@ Each checklist item includes:
 
 | Skill | Description |
 |-------|-------------|
-| `/idea` | Validate your product idea with a founder perspective |
-| `/plan` | Plan your build — produces a detailed PROJECT-PLAN.md |
 | `/check` | Full production readiness assessment |
 | `/fix` | Review findings and apply fixes with approval |
 | `/refresh` | Re-run and compare with previous results |
