@@ -1,6 +1,6 @@
 {
   "name": "vibe-check-cc",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Migration helper for Vibe Check v2.0 — installs via npx skills add Hypership-Software/vibe-check",
   "author": {
     "name": "Kyle Davidson"
