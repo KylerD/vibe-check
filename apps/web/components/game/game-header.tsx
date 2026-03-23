@@ -70,7 +70,7 @@ export function SiteHeader({
 
       <div className="flex items-center gap-2">
         <a
-          href="https://github.com/KylerD/vibe-check"
+          href="https://github.com/Hypership-Software/vibe-check"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"

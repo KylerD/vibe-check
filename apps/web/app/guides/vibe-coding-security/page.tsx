@@ -368,7 +368,7 @@ export default function VibeCodingSecurityGuide() {
               <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Button asChild size="lg">
                   <a
-                    href="https://github.com/KylerD/vibe-check"
+                    href="https://github.com/Hypership-Software/vibe-check"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

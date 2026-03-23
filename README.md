@@ -17,11 +17,11 @@
 
 [![npm version](https://img.shields.io/npm/v/vibe-check-cc?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/vibe-check-cc)
 [![npm downloads](https://img.shields.io/npm/dm/vibe-check-cc?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/vibe-check-cc)
-[![GitHub stars](https://img.shields.io/github/stars/KylerD/vibe-check?style=for-the-badge&logo=github&color=181717)](https://github.com/KylerD/vibe-check)
+[![GitHub stars](https://img.shields.io/github/stars/Hypership-Software/vibe-check?style=for-the-badge&logo=github&color=181717)](https://github.com/Hypership-Software/vibe-check)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
 
 ```bash
-npx skills add kylerd/vibe-check
+npx skills add Hypership-Software/vibe-check
 ```
 
 Works with **Claude Code**, **Cursor**, **Gemini CLI**, **Codex CLI**, **VS Code Copilot**, **Kiro**, **OpenCode**, **Antigravity**, and **Pi**.
@@ -247,14 +247,14 @@ Domains and items that don't apply to your project (no database, no analytics, e
 ### Universal (all harnesses)
 
 ```bash
-npx skills add kylerd/vibe-check
+npx skills add Hypership-Software/vibe-check
 ```
 
 Auto-detects your AI coding tool and installs the right skill files. Works with Claude Code, Cursor, Gemini CLI, Codex CLI, VS Code Copilot, Kiro, OpenCode, Antigravity, and Pi.
 
 ### Manual download
 
-Download the [universal ZIP](https://github.com/KylerD/vibe-check/releases/latest/download/vibe-check-universal.zip), extract it, and copy the folder for your harness into your project root. See [vibe-check.cloud/download](https://vibe-check.cloud/download) for per-harness instructions.
+Download the [universal ZIP](https://github.com/Hypership-Software/vibe-check/releases/latest/download/vibe-check-universal.zip), extract it, and copy the folder for your harness into your project root. See [vibe-check.cloud/download](https://vibe-check.cloud/download) for per-harness instructions.
 
 ### Updating
 
@@ -316,7 +316,7 @@ The assessment output lives in `.vibe-check/` which you might commit. Here's how
 
 **Migrating from v1?**
 - Run `npx vibe-check-cc` — it will detect old files and offer to clean them up
-- Then install v2: `npx skills add kylerd/vibe-check`
+- Then install v2: `npx skills add Hypership-Software/vibe-check`
 
 ---
 
@@ -363,4 +363,4 @@ MIT
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=KylerD/vibe-check&type=date&legend=top-left)](https://www.star-history.com/#KylerD/vibe-check&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=Hypership-Software/vibe-check&type=date&legend=top-left)](https://www.star-history.com/#Hypership-Software/vibe-check&type=date&legend=top-left)

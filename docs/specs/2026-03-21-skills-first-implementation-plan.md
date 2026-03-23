@@ -850,7 +850,7 @@ The v2.0 installer does three things:
    ```
    Vibe Check v2.0 has moved to the universal skills format!
 
-   Install skills:  npx skills add kylerd/vibe-check
+   Install skills:  npx skills add Hypership-Software/vibe-check
    Update skills:   npx skills update
 
    Works with: Claude Code, Cursor, Gemini CLI, Codex CLI,
@@ -864,7 +864,7 @@ The v2.0 installer does three things:
 ```json
 {
   "version": "2.0.0",
-  "description": "Migration helper for Vibe Check v2.0 — installs via npx skills add kylerd/vibe-check",
+  "description": "Migration helper for Vibe Check v2.0 — installs via npx skills add Hypership-Software/vibe-check",
   "files": [
     "bin/",
     "README.md"
@@ -955,8 +955,8 @@ Build a horizontal logo bar component:
 - [ ] **Step 3: Create install-section component**
 
 Build a tabbed install section with 3 methods:
-- Tab 1 "CLI": `npx skills add kylerd/vibe-check` with copy button
-- Tab 2 "Claude Code": `/plugin marketplace add kylerd/vibe-check` with copy button
+- Tab 1 "CLI": `npx skills add Hypership-Software/vibe-check` with copy button
+- Tab 2 "Claude Code": `/plugin marketplace add Hypership-Software/vibe-check` with copy button
 - Tab 3 "Download": Link to `/download` page + brief instructions
 
 - [ ] **Step 4: Integrate into homepage**
@@ -1034,7 +1034,7 @@ ls .claude/skills/vibe-check/
 - [ ] **Step 2: Test with --list flag**
 
 ```bash
-npx skills add kylerd/vibe-check --list
+npx skills add Hypership-Software/vibe-check --list
 # Should show all 8 skills available
 ```
 

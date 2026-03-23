@@ -99,7 +99,7 @@ export function InstallSection() {
             <p className="mb-4 text-sm text-muted-foreground">
               Works with any AI coding harness. Adds vibe-check as a skills package.
             </p>
-            <CodeBlock command="npx skills add kylerd/vibe-check" />
+            <CodeBlock command="npx skills add Hypership-Software/vibe-check" />
             <p className="mt-4 text-sm text-muted-foreground">
               Then invoke with your harness-specific syntax. Cursor uses{' '}
               <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">@vibe-check check</code>,
@@ -117,7 +117,7 @@ export function InstallSection() {
             <p className="mb-4 text-sm text-muted-foreground">
               Installs vibe-check as native Claude Code skills with slash commands.
             </p>
-            <CodeBlock command="npx skills add kylerd/vibe-check" />
+            <CodeBlock command="npx skills add Hypership-Software/vibe-check" />
             <p className="mt-4 text-sm text-muted-foreground">
               After installation, use{' '}
               <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">/check</code>{' '}

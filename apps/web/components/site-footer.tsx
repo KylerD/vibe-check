@@ -14,7 +14,7 @@ export function SiteFooter() {
           {' · '}
           Free and open source.{' '}
           <a
-            href="https://github.com/KylerD/vibe-check"
+            href="https://github.com/Hypership-Software/vibe-check"
             target="_blank"
             rel="noopener noreferrer"
             className="underline underline-offset-4 transition-colors hover:text-foreground"

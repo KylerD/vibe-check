@@ -55,10 +55,10 @@ export function getSoftwareApplicationJsonLd() {
     author: {
       '@type': 'Organization',
       name: 'Vibe Check',
-      url: 'https://github.com/KylerD/vibe-check',
+      url: 'https://github.com/Hypership-Software/vibe-check',
     },
     softwareVersion: '1.3.0',
-    downloadUrl: 'https://github.com/KylerD/vibe-check',
+    downloadUrl: 'https://github.com/Hypership-Software/vibe-check',
     screenshot: `${BASE_URL}/vibe-check-og.png`,
   };
 }
@@ -210,7 +210,7 @@ export const HOME_FAQS = [
   {
     question: 'How do I install Vibe Check?',
     answer:
-      'Run "npx skills add kylerd/vibe-check" in your terminal. It auto-detects your AI coding tool and installs the right skill files. Then use "/check" to scan your codebase for production risks. You can also download the universal ZIP from GitHub releases for manual installation. No installation is needed for the web app — just visit vibe-check.cloud.',
+      'Run "npx skills add Hypership-Software/vibe-check" in your terminal. It auto-detects your AI coding tool and installs the right skill files. Then use "/check" to scan your codebase for production risks. You can also download the universal ZIP from GitHub releases for manual installation. No installation is needed for the web app — just visit vibe-check.cloud.',
   },
   {
     question: 'What does Vibe Check scan for?',
@@ -225,7 +225,7 @@ export const HOME_FAQS = [
   {
     question: 'What AI coding tools does Vibe Check support?',
     answer:
-      'Vibe Check works with 9 AI coding tools: Claude Code, Cursor, Gemini CLI, Codex CLI, VS Code Copilot, Kiro, OpenCode, Antigravity, and Pi. Install once with "npx skills add kylerd/vibe-check" and it auto-detects your tool. The web app works with any workflow — describe what you built with any AI tool and get tailored recommendations.',
+      'Vibe Check works with 9 AI coding tools: Claude Code, Cursor, Gemini CLI, Codex CLI, VS Code Copilot, Kiro, OpenCode, Antigravity, and Pi. Install once with "npx skills add Hypership-Software/vibe-check" and it auto-detects your tool. The web app works with any workflow — describe what you built with any AI tool and get tailored recommendations.',
   },
   {
     question: 'How is Vibe Check different from a linter or static analysis tool?',

@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator';
 const BASE_URL = 'https://vibe-check.cloud';
 const PAGE_URL = `${BASE_URL}/download`;
 const DOWNLOAD_URL =
-  'https://github.com/kylerd/vibe-check/releases/latest/download/vibe-check-universal.zip';
+  'https://github.com/Hypership-Software/vibe-check/releases/latest/download/vibe-check-universal.zip';
 
 export const metadata: Metadata = {
   title: 'Download Vibe Check — Universal ZIP for All AI Coding Tools',
@@ -186,7 +186,7 @@ export default function DownloadPage() {
               CLI. It automatically detects your harness and installs the correct folder.
             </p>
             <pre className="overflow-x-auto rounded bg-muted px-4 py-3 font-mono text-sm">
-              <code>npx skills add kylerd/vibe-check</code>
+              <code>npx skills add Hypership-Software/vibe-check</code>
             </pre>
           </section>
 

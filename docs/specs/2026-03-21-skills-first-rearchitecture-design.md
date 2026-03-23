@@ -209,7 +209,7 @@ These complement the existing founder-lens validation (market sizing, competitiv
 
 ### Four installation channels
 
-#### Channel 1: `npx skills add kylerd/vibe-check` (Primary)
+#### Channel 1: `npx skills add Hypership-Software/vibe-check` (Primary)
 
 The `skills` CLI auto-detects harnesses and installs skill folders.
 
@@ -219,7 +219,7 @@ The `skills` CLI auto-detects harnesses and installs skill folders.
 
 #### Channel 2: Claude Code Plugin Marketplace
 
-`/plugin marketplace add kylerd/vibe-check`
+`/plugin marketplace add Hypership-Software/vibe-check`
 
 - Only channel where hooks (secret scanner) install automatically
 - Discovered through Claude Code's built-in plugin browser
@@ -246,7 +246,7 @@ vibe-check-universal/
 Simplified to:
 1. Detect old install → offer cleanup
 2. Install secret scanner hook to `settings.json`
-3. Print guidance → "run `npx skills add kylerd/vibe-check`"
+3. Print guidance → "run `npx skills add Hypership-Software/vibe-check`"
 
 ### Transition plan (clean break)
 
@@ -277,12 +277,12 @@ Simplified to:
 
 **Tab 1: CLI (recommended)**
 ```bash
-npx skills add kylerd/vibe-check
+npx skills add Hypership-Software/vibe-check
 ```
 
 **Tab 2: Claude Code Plugin**
 ```
-/plugin marketplace add kylerd/vibe-check
+/plugin marketplace add Hypership-Software/vibe-check
 ```
 
 **Tab 3: Manual Download**
@@ -386,7 +386,7 @@ vibe-check/
 
 ### `npx skills add` compatibility
 
-The `skills` CLI discovers `skills/*/SKILL.md` at repo root. Running `npx skills add kylerd/vibe-check`:
+The `skills` CLI discovers `skills/*/SKILL.md` at repo root. Running `npx skills add Hypership-Software/vibe-check`:
 1. Clones/fetches from GitHub
 2. Finds all SKILL.md files
 3. Auto-detects local harnesses
@@ -402,11 +402,11 @@ The `skills` CLI discovers `skills/*/SKILL.md` at repo root. Running `npx skills
 2. v2.0 installer detects old install, offers cleanup
 3. Removes old `commands/vibe-check/`, `vibe-check/`, `agents/vibe-*.md`
 4. Installs secret scanner hook (if desired)
-5. Prompts: "Now run `npx skills add kylerd/vibe-check` to install skills"
+5. Prompts: "Now run `npx skills add Hypership-Software/vibe-check` to install skills"
 
 ### For new users
 
-1. `npx skills add kylerd/vibe-check` — done
+1. `npx skills add Hypership-Software/vibe-check` — done
 2. Optionally `npx vibe-check-cc` for the secret scanner hook (Claude Code only)
 
 ### `.vibe-check/` output directory
@@ -435,7 +435,7 @@ Unchanged. Assessment output still writes to `.vibe-check/` in the project root.
 
 ### Phase 3: Distribution
 - Update `packages/cli` to v2.0 (migration + hooks only)
-- Test `npx skills add kylerd/vibe-check` flow
+- Test `npx skills add Hypership-Software/vibe-check` flow
 - Register as Claude Code plugin marketplace entry
 - Set up GitHub Release with ZIP attachment
 
@@ -569,7 +569,7 @@ Extract scoring logic from `agents/vibe-assessor.md` into `skills/check/referenc
 
 1. **Plugin marketplace registration** — What's the exact process for registering a Claude Code plugin? Need to research the marketplace submission flow.
 
-2. **`skills` CLI namespace** — Does `kylerd/vibe-check` work as-is, or do we need a specific repo structure for the CLI to discover skills? Need to test.
+2. **`skills` CLI namespace** — Does `Hypership-Software/vibe-check` work as-is, or do we need a specific repo structure for the CLI to discover skills? Need to test.
 
 3. **Skill versioning** — Consider adding a `version` field to SKILL.md frontmatter or relying on git tags for `npx skills check` updates.
 

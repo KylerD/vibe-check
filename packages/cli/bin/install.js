@@ -181,7 +181,7 @@ function cleanup(isGlobal) {
 function printMigrationGuidance() {
   console.log(`  ${cyan}Vibe Check v2.0 has moved to the universal skills format!${reset}
 
-  ${yellow}Install skills:${reset}  npx skills add kylerd/vibe-check
+  ${yellow}Install skills:${reset}  npx skills add Hypership-Software/vibe-check
   ${yellow}Update skills:${reset}   npx skills update
 
   ${yellow}Works with:${reset} Claude Code, Cursor, Gemini CLI, Codex CLI,

@@ -14,7 +14,7 @@ const DOMAINS = [
 ];
 
 const TERMINAL_LINES = [
-  { type: 'command', text: '$ npx skills add kylerd/vibe-check' },
+  { type: 'command', text: '$ npx skills add Hypership-Software/vibe-check' },
   { type: 'info', text: 'Installed 8 skills to .claude/skills/vibe-check/' },
   { type: 'blank', text: '' },
   { type: 'command', text: '$ claude /check' },
