@@ -1,6 +1,6 @@
 # vibe-check.cloud
 
-The Vibe Check web app — a living field guide for vibe coders.
+The Vibe Check web app — a living field guide for vibe coders. Built by [Hypership](https://www.hypership.tech).
 
 ## Getting Started
 
