@@ -81,6 +81,26 @@ const FAQ_ITEMS = [
     answer:
       'Best practices for vibe coding include: always review AI-generated code before shipping, especially authentication and payment handling; run automated production readiness scans using tools like vibe-check; write explicit security requirements in your prompts rather than assuming the AI will include them; test edge cases and failure modes that the AI likely did not consider; audit dependencies the AI introduced for known vulnerabilities; use version control and review diffs rather than accepting wholesale changes; keep AI-generated code modular so problems can be isolated; and establish a pre-launch checklist covering security, performance, accessibility, and legal compliance.',
   },
+  {
+    question: 'What are the most common vibe coding failures?',
+    answer:
+      'The most common failures in AI-generated code are boundary condition errors, auth bypasses caused by default-allow patterns, missing idempotency on event handlers, and unintentional PII exposure through API responses. These happen because AI generates code that works on the happy path but lacks the defensive patterns that production systems require.',
+  },
+  {
+    question: 'What is the difference between vibe coding and traditional coding?',
+    answer:
+      'In traditional coding, a developer writes every line and understands the full context of their decisions. In vibe coding, a developer describes intent and an AI generates the implementation — often across entire files or features at once. The productivity gain is massive but the trade-off is that the developer may not fully understand every line the AI wrote, making code review and automated scanning more important, not less.',
+  },
+  {
+    question: 'How do you audit AI-generated code?',
+    answer:
+      'Audit AI-generated code by focusing on the areas where AI consistently makes mistakes: authentication and authorisation logic, data access patterns, error handling (fail open vs fail closed), and resource management (unbounded queries, missing pagination, no rate limiting). Use automated scanning tools to catch common patterns, then apply human review at the boundaries — anywhere your code touches auth, payments, external APIs, or user data.',
+  },
+  {
+    question: 'What tools check AI-generated code for security issues?',
+    answer:
+      'Several categories of tools help: static analysis tools (ESLint, SonarQube, Semgrep) catch code-level patterns, AI-powered reviewers (CodeRabbit, Sourcery) provide contextual analysis, security scanners (Snyk, npm audit, Dependabot) check dependencies, and production readiness scanners like vibe-check audit specifically for the patterns AI gets wrong. The best approach combines multiple layers: automated scanning in CI, security-focused tools on PR, and human review at architecture boundaries.',
+  },
 ];
 
 export default function LearnPage() {
@@ -479,6 +499,138 @@ export default function LearnPage() {
                   </CardContent>
                 </Card>
               </div>
+            </section>
+
+            <Separator />
+
+            <section>
+              <h2 className="mb-4 text-2xl font-semibold tracking-tight">
+                What are the most common vibe coding failures?
+              </h2>
+              <p className="mb-4 text-muted-foreground">
+                The most common failures in AI-generated code are boundary
+                condition errors, auth bypasses caused by default-allow patterns,
+                missing idempotency on event handlers, and unintentional PII
+                exposure through API responses. These happen because AI generates
+                code that works on the happy path but lacks the defensive
+                patterns that production systems require.
+              </p>
+              <p className="mb-4 text-muted-foreground">
+                In 2026, high-profile incidents included order processing
+                failures at exact pagination boundaries, auth middleware that
+                caught errors and fell through instead of rejecting, and
+                databases that grew 400x overnight from unguarded webhook
+                retries.
+              </p>
+              <p className="text-muted-foreground">
+                See the full breakdown in the{' '}
+                <Link
+                  href="/guides/vibe-coding-failures"
+                  className="text-primary underline underline-offset-4 hover:text-primary/80"
+                >
+                  vibe coding failures guide
+                </Link>
+                .
+              </p>
+            </section>
+
+            <Separator />
+
+            <section>
+              <h2 className="mb-4 text-2xl font-semibold tracking-tight">
+                What is the difference between vibe coding and traditional
+                coding?
+              </h2>
+              <p className="mb-4 text-muted-foreground">
+                In traditional coding, a developer writes every line and
+                understands the full context of their decisions. In vibe coding,
+                a developer describes intent and an AI generates the
+                implementation — often across entire files or features at once.
+              </p>
+              <p className="mb-4 text-muted-foreground">
+                The productivity gain is massive (10-100x for boilerplate), but
+                the trade-off is that the developer may not fully understand
+                every line the AI wrote. This makes code review, automated
+                scanning, and production readiness testing more important, not
+                less.
+              </p>
+              <p className="text-muted-foreground">
+                Vibe coding is not a shortcut — it is a different workflow that
+                needs different guardrails.
+              </p>
+            </section>
+
+            <Separator />
+
+            <section>
+              <h2 className="mb-4 text-2xl font-semibold tracking-tight">
+                How do you audit AI-generated code?
+              </h2>
+              <p className="mb-4 text-muted-foreground">
+                Audit AI-generated code by focusing on the areas where AI
+                consistently makes mistakes: authentication and authorisation
+                logic, data access patterns (especially what is exposed in API
+                responses), error handling (does it fail open or fail closed?),
+                and resource management (unbounded queries, missing pagination,
+                no rate limiting).
+              </p>
+              <p className="mb-4 text-muted-foreground">
+                Use automated scanning tools to catch common patterns, then
+                apply human review at the boundaries — anywhere your code
+                touches auth, payments, external APIs, or user data.
+                AI-generated tests often share the same blind spots as the code
+                they test, so write boundary-condition tests separately.
+              </p>
+              <p className="text-muted-foreground">
+                For detailed guidance, see the{' '}
+                <Link
+                  href="/guides/vibe-coding-security"
+                  className="text-primary underline underline-offset-4 hover:text-primary/80"
+                >
+                  vibe coding security guide
+                </Link>{' '}
+                and the{' '}
+                <Link
+                  href="/guides/ai-code-review-tools"
+                  className="text-primary underline underline-offset-4 hover:text-primary/80"
+                >
+                  AI code review tools guide
+                </Link>
+                .
+              </p>
+            </section>
+
+            <Separator />
+
+            <section>
+              <h2 className="mb-4 text-2xl font-semibold tracking-tight">
+                What tools check AI-generated code for security issues?
+              </h2>
+              <p className="mb-4 text-muted-foreground">
+                Several categories of tools help: static analysis tools (ESLint,
+                SonarQube, Semgrep) catch code-level patterns. AI-powered
+                reviewers (CodeRabbit, Sourcery) provide contextual analysis.
+                Security scanners (Snyk, npm audit, Dependabot) check
+                dependencies. Production readiness scanners like vibe-check
+                audit specifically for the patterns AI gets wrong — auth
+                fallthrough, missing idempotency, PII exposure, unbounded
+                queries.
+              </p>
+              <p className="mb-4 text-muted-foreground">
+                The best approach combines multiple layers: automated scanning
+                in CI, security-focused tools on PR, and human review at
+                architecture boundaries.
+              </p>
+              <p className="text-muted-foreground">
+                See the full comparison in the{' '}
+                <Link
+                  href="/guides/ai-code-review-tools"
+                  className="text-primary underline underline-offset-4 hover:text-primary/80"
+                >
+                  AI code review tools guide
+                </Link>
+                .
+              </p>
             </section>
 
             <Separator />
