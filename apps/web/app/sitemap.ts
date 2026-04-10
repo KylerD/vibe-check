@@ -58,6 +58,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/guides/lovable-production-ready`,
+      lastModified: contentDate,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/guides/bolt-production-ready`,
+      lastModified: contentDate,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/guides/v0-production-ready`,
+      lastModified: contentDate,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/learn`,
       lastModified: contentDate,
       changeFrequency: 'monthly',
