@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { SiteFooter } from '@/components/site-footer';
+import { RelatedGuides } from '@/components/related-guides';
 import { getGuideArticleJsonLd, getBreadcrumbJsonLd, safeJsonLd } from '@/lib/seo';
 
 const BASE_URL = 'https://vibe-check.cloud';
@@ -475,6 +476,8 @@ export default function VibeCodingFailuresGuide() {
               </div>
             </section>
           </div>
+
+          <RelatedGuides slug="vibe-coding-failures" />
         </article>
       </main>
 
